@@ -1,0 +1,40 @@
+package com.online.flowers.service;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.online.flowers.model.FlowersModel;
+import com.online.flowers.repo.FlowersRepo;
+
+@Service
+public class FlowersService {
+	
+	@Autowired
+	private FlowersRepo _repo;
+	
+	public FlowersModel saveImage(MultipartFile file, String category, String price, String description) {
+		FlowersModel flower = null;
+		try {
+			flower = new FlowersModel(file.getName(), file.getBytes(), category, price, description);
+			return _repo.save(flower);
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Optional<FlowersModel> getImage(Integer id) {
+		return _repo.findById(id);
+	}
+	
+	public List<FlowersModel> getImages() {
+		return _repo.findAll();
+	}
+
+}

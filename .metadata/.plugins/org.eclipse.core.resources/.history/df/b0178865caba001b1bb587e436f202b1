@@ -1,0 +1,7 @@
+package com.online.flowers.model;
+
+public class CustomerMode {
+	private String email;
+	
+
+}
