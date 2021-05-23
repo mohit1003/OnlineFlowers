@@ -8,6 +8,8 @@ import javax.persistence.Lob;
 
 @Entity
 public class FlowersModel {
+	
+	
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
 	private int id;
