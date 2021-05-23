@@ -11,11 +11,20 @@ export class FileService{
 
   constructor(private httpClient: HttpClient) {}
 
-  public postPhoto(flower: Flower){
+  public postPhoto(flowerData: FormData){
     // const headers = new HttpHeaders();
     // headers.append("Access-Control-Allow-Origin", "*");
     // headers.append("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS");
     // headers.append("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    return this.httpClient.post(this.SERVER_URL+'add', flower);
+    // let data = {
+    //   flowerInfo: flowerInfo,
+    //   flower: flowerData
+    // }
+    // console.log(flowerData.get('description'))
+    return this.httpClient.post(this.SERVER_URL+'add', flowerData);
+  }
+
+  public getAllPhotos() {
+    return this.httpClient.get(this.SERVER_URL +'getAllFlowers');
   }
 }

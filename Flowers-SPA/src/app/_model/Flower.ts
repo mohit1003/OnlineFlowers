@@ -1,6 +1,6 @@
 export interface Flower {
   description?: string;
-  image?: File;
+  photo?: any;
   category?: string;
   price?: string;
   name?: string;

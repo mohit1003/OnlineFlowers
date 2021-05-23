@@ -21,18 +21,21 @@ export class AddFlowerComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  onFileChanged(event:any) {
+    this.flowerImage = event.target.files[0];
+    console.log(this.flowerImage);
+  }
+
   addFlower() {
-    this.flower={
-      name:this.name,
-      image:this.flowerImage,
-      description:this.description,
-      category:this.category,
-      price:this.price
+    const flower = new FormData();
+    flower.append('flowerImage', this.flowerImage, this.flowerImage.name);
+    flower.append('description', this.description);
+    flower.append('category', this.category);
+    flower.append('price', this.price);
 
-    }
-    console.log(this.flower);
+    console.log(this.price);
 
-    this.fileService.postPhoto(this.flower).subscribe((data) =>{
+    this.fileService.postPhoto(flower).subscribe((data) =>{
       console.log(data);
     }, err=> {
       console.log(err);

@@ -29,7 +29,7 @@
      <hr>
      <div class="form-group mt-3">
        <label class="mr-2">Upload Image:</label>
-       <input [(ngModel)]="flowerImage" type="file" accept="image/*" name="file">
+       <input (change)="onFileChanged($event)" type="file" accept="image/*" name="file">
      </div>
      <hr>
      <button type="submit" class="btn btn-primary">Submit</button>

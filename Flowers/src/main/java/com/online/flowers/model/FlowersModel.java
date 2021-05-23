@@ -1,5 +1,6 @@
 package com.online.flowers.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,7 @@ public class FlowersModel {
 	
 	private String name;
 	
-	@Lob
+	@Column(length = 300000)
 	private byte[] photo;
 	
 	private String category;

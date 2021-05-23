@@ -1,1 +1,18 @@
-<p>view works!</p>
+<table>
+  <thead>
+    <tr>
+      <td>Image</td>
+      <td>Description</td>
+      <td>Price</td>
+      <td>Category</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let image of flowers">
+      <td><img [src]="image.photo"></td>
+      <td>{{image.description}}</td>
+      <td>{{image.price}}</td>
+      <td>{{image.category}}</td>
+    </tr>
+  </tbody>
+</table>
