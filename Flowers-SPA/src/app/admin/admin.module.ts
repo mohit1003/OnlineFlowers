@@ -11,6 +11,7 @@ import { FileService } from '../_service/FileService';
 import { AddFlowerComponent } from './add-flower/add-flower.component';
 import { ViewComponent } from './view/view.component';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
+import { EditViewComponent } from './edit-view/edit-view.component';
 
 
 
@@ -21,7 +22,8 @@ import { AdminNavComponent } from './admin-nav/admin-nav.component';
   declarations: [
     AddFlowerComponent,
     ViewComponent,
-    AdminNavComponent
+    AdminNavComponent,
+    EditViewComponent
   ],
   imports: [
     AppRoutingModule,

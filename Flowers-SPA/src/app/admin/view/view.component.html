@@ -1,18 +1,32 @@
-<table>
-  <thead>
-    <tr>
-      <td>Image</td>
-      <td>Description</td>
-      <td>Price</td>
-      <td>Category</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let image of flowers">
-      <td><img [src]="image.photo"></td>
-      <td>{{image.description}}</td>
-      <td>{{image.price}}</td>
-      <td>{{image.category}}</td>
-    </tr>
-  </tbody>
-</table>
+<app-admin-nav></app-admin-nav>
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" [routerLink]="['/editAdmin']" routerLinkActive="router-link-active" >Edit</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <table class="table table-stripped">
+    <thead>
+      <tr>
+        <td>Image</td>
+        <td>Description</td>
+        <td>Price</td>
+        <td>Category</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let image of flowers">
+        <td><img [src]="image.imageUrl" width="200" height="200" alt="flower"></td>
+        <td>{{image.description}}</td>
+        <td>{{image.price}}</td>
+        <td>{{image.category}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

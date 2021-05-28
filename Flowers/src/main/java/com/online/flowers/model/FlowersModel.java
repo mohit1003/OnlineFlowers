@@ -17,8 +17,11 @@ public class FlowersModel {
 	
 	private String name;
 	
-	@Column(length = 300000)
-	private byte[] photo;
+	private String imageUrl;
+	
+//	private byte[] photo;
+	
+	private String imageId;
 	
 	private String category;
 		
@@ -32,19 +35,32 @@ public class FlowersModel {
 	}
 	
 
-	public FlowersModel(String name, byte[] photo, String category, String price, String description) {
-		super();
-		this.name = name;
-		this.photo = photo;
-		this.category = category;
-		this.price = price;
-		this.description = description;
-	}
+//	public FlowersModel(String name, byte[] photo, String category, String price, String description) {
+//		super();
+//		this.name = name;
+//		this.photo = photo;
+//		this.category = category;
+//		this.price = price;
+//		this.description = description;
+//	}
+	
 	
 	
 
 	public String getName() {
 		return name;
+	}
+
+
+	public FlowersModel(String name, String imageUrl, String imageId, String category, String price,
+			String description) {
+		super();
+		this.name = name;
+		this.imageUrl = imageUrl;
+		this.imageId = imageId;
+		this.category = category;
+		this.price = price;
+		this.description = description;
 	}
 
 
@@ -63,13 +79,25 @@ public class FlowersModel {
 
 	
 
-	public byte[] getPhoto() {
-		return photo;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
+
+
+	public String getImageId() {
+		return imageId;
+	}
+
+
+	public void setImageId(String imageId) {
+		this.imageId = imageId;
+	}
+
 
 	public String getCategory() {
 		return category;

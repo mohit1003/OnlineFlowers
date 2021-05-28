@@ -1,6 +1,8 @@
 import { Flower } from './../../_model/Flower';
 import { Component, OnInit } from '@angular/core';
 import { FileService } from 'src/app/_service/FileService';
+import { DomSanitizer } from '@angular/platform-browser';
+import { DataService } from 'src/app/_service/dataService';
 
 @Component({
   selector: 'app-view',
@@ -9,7 +11,8 @@ import { FileService } from 'src/app/_service/FileService';
 })
 export class ViewComponent implements OnInit {
 
-  constructor(private fileService: FileService) { }
+  constructor(private fileService: FileService,
+    private sanitizer: DomSanitizer, private dataService: DataService) { }
 
   flowers: Flower[] = [];
   base64Data: any;
@@ -28,14 +31,13 @@ export class ViewComponent implements OnInit {
 
 
       console.log(this.flowers);
-       this.flowers.forEach((photo) => {
-        this.retrieveResonse = photo.photo;
-        reader.onload = (e) => photo.photo = e.target!.result;
-        // this.base64Data = this.retrieveResonse.picByte;
-        // this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-        // console.log(this.retrieveResonse.picByte);
-        // photo.photo = this.retrievedImage;
-      })
+      //  this.flowers.forEach((photo) => {
+      //   this.retrieveResonse = photo.photo;
+      //   // this.base64Data = this.retrieveResonse.picByte;
+      //   this.retrievedImage = 'data:image/jpeg;base64,' + this.retrieveResonse;
+      //   photo.photo = this.sanitizer.bypassSecurityTrustUrl(this.retrievedImage);
+      //   this.dataService.changeState(this.flowers);
+      // })
       // console.log(this.flowers);
     }, err => {
       console.log(err);

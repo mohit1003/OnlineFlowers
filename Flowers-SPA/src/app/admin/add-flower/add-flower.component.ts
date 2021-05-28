@@ -29,6 +29,7 @@ export class AddFlowerComponent implements OnInit {
   addFlower() {
     const flower = new FormData();
     flower.append('flowerImage', this.flowerImage, this.flowerImage.name);
+    flower.append('name', this.flowerImage.name);
     flower.append('description', this.description);
     flower.append('category', this.category);
     flower.append('price', this.price);

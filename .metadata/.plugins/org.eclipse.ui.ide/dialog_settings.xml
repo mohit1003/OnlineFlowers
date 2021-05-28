@@ -16,10 +16,8 @@
 		<item value="org.eclipse.jgit.http.apache:5.11.0.202103091610-r"/>
 		<item value="org.eclipse.jgit.lfs:5.11.0.202103091610-r"/>
 		<item value="org.eclipse.jgit.ssh.apache:5.11.0.202103091610-r"/>
-		<item value="org.eclipse.jgit.ssh.jsch:5.8.0.202006091008-r"/>
 		<item value="org.eclipse.jgit:5.11.0.202103091610-r"/>
 		<item value="org.eclipse.jst.common.fproj.enablement.jdt:3.21.0.v202101040919"/>
-		<item value="org.eclipse.jst.enterprise_ui.feature:3.18.0.v202003201241"/>
 		<item value="org.eclipse.m2e.feature:1.17.2.20210219-1922"/>
 		<item value="org.eclipse.m2e.logback.feature:1.17.0.20200924-1339"/>
 		<item value="org.eclipse.m2e.wtp.feature:1.4.4.20201128-1705"/>
@@ -35,7 +33,7 @@
 		<item value="org.eclipse.userstorage:1.2.0.v20210517-0327"/>
 		<item value="org.eclipse.wst.common.fproj:3.7.3.v202007142017"/>
 		<item value="org.eclipse.wst.jsdt.chromium.debug.feature:0.6.100.v201908270117"/>
-		<item value="org.eclipse.wst.jsdt.feature:2.2.0.v202005251709"/>
+		<item value="org.eclipse.wst.jsdt.feature:2.3.400.v202102101628"/>
 		<item value="org.eclipse.wst.json_ui.feature:1.1.9.v202101100033"/>
 		<item value="org.eclipse.wst.web_ui.feature:3.21.0.v202102251419"/>
 		<item value="org.eclipse.wst.xml_ui.feature:3.21.0.v202102222242"/>
