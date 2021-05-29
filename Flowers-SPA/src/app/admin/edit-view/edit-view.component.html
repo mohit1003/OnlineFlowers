@@ -14,13 +14,15 @@
       <tbody>
         <tr *ngFor="let image of flowers">
           <td><img [src]="image.imageUrl"  width="150" height="150" alt="flower"/></td>
-          <td><input [(ngModel)]="selectedflowers" name="photo  " type="file" class="btn btn-primary"></td>
-          <td><input type="text" value="{{image.description}}"></td>
-          <td><input type="text" value="{{image.price}}"></td>
-          <td><input type="text" value="{{image.category}}"></td>
+          <td><input name="photo" name="photo" type="file" class="btn btn-primary" ngModel></td>
+          <td><input type="text" name="description" value="{{image.description}}" ngModel></td>
+          <td><input type="text" name="price" value="{{image.price}}" ngModel></td>
+          <td><input type="text" name="category" value="{{image.category}}" ngModel></td>
         </tr>
       </tbody>
     </table>
+
+    <input type="submit" class="btn btn-primary" value="Submit">
   </form>
 </div>
 

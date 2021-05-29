@@ -27,20 +27,31 @@ export class ViewComponent implements OnInit {
     this.fileService.getAllPhotos().subscribe((data) => {
       this.flowers = Object.assign(data);
 
-      const reader = new FileReader();
 
+      this.dataService.changeState(this.flowers);
+      this.dataService.currentState.subscribe(flowers =>{
+       console.log(flowers);
+      })
 
-      console.log(this.flowers);
+      // console.log(this.flowers);
       //  this.flowers.forEach((photo) => {
       //   this.retrieveResonse = photo.photo;
       //   // this.base64Data = this.retrieveResonse.picByte;
       //   this.retrievedImage = 'data:image/jpeg;base64,' + this.retrieveResonse;
       //   photo.photo = this.sanitizer.bypassSecurityTrustUrl(this.retrievedImage);
-      //   this.dataService.changeState(this.flowers);
+      //
       // })
       // console.log(this.flowers);
     }, err => {
       console.log(err);
+    })
+  }
+
+  delete(id: string) {
+    this.fileService.delete(id).subscribe(data => {
+      console.log(data);
+    }, err => {
+      console.log(err); 
     })
   }
 

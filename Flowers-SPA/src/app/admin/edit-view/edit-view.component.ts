@@ -3,6 +3,7 @@ import { Flower } from './../../_model/Flower';
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-view',
@@ -32,8 +33,8 @@ export class EditViewComponent implements OnInit {
     }
   }
 
-  updateFormSubmit(updateForm:any) {
-    console.log(updateForm);
+  updateFormSubmit(updateForm:NgForm) {
+    console.log(updateForm.value);
   }
 
 

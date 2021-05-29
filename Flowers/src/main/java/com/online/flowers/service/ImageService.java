@@ -30,8 +30,8 @@ public class ImageService {
     	flowersRepo.save(imagen);
     }
 
-    public void delete(int id){
-    	flowersRepo.deleteById(id);
+    public void delete(String id){
+    	flowersRepo.deleteById(Integer.parseInt(id));
     }
 
     public boolean exists(int id){

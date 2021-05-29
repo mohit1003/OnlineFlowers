@@ -1,7 +1,6 @@
-import { Flower } from './../_model/Flower';
+
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,19 +11,23 @@ export class FileService{
   constructor(private httpClient: HttpClient) {}
 
   public postPhoto(flowerData: FormData){
-    // const headers = new HttpHeaders();
-    // headers.append("Access-Control-Allow-Origin", "*");
-    // headers.append("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS");
-    // headers.append("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    // let data = {
-    //   flowerInfo: flowerInfo,
-    //   flower: flowerData
-    // }
-    // console.log(flowerData.get('description'))
     return this.httpClient.post(this.SERVER_URL+'add', flowerData);
   }
 
   public getAllPhotos() {
     return this.httpClient.get(this.SERVER_URL +'getAllFlowers');
+  }
+
+  public delete(id: string) {
+    console.log(id);
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        id: id
+      },
+    };
+    return this.httpClient.delete(this.SERVER_URL+'delete', options);
   }
 }

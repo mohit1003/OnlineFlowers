@@ -69,6 +69,10 @@ public class FlowersService {
 		return "ok";
 	}
 	
+	public String getPublicIdById(String id) {
+		return flowersRepo.findPublicIdById(id);
+	}
+	
 	
 	
 //	public static byte[] compressBytes(byte[] data) {

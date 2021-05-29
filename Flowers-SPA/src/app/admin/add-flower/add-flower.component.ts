@@ -12,7 +12,7 @@ export class AddFlowerComponent implements OnInit {
 
   constructor(private fileService: FileService) { }
 
-  flower: Flower = {};
+  flower: Flower;
   name!: string;
   description!: any;
   category: any;
