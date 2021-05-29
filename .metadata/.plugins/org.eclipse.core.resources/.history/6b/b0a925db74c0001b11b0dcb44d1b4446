@@ -1,0 +1,5 @@
+package com.online.flowers.util;
+
+public class AuthRequest {
+
+}
