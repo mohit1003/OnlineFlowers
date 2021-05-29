@@ -65,9 +65,65 @@ public class FlowersService {
 							price, description);
 		
 		flowersRepo.save(flowerImage);
-		
 		return "ok";
 	}
+	
+	public String updateFlower(String id, MultipartFile file, String name, String category, String price, String description) {
+		BufferedImage bi = null;
+		try {
+			bi = ImageIO.read(file.getInputStream());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		if(bi == null) {
+			return "Image not valid";
+		}
+		String imageId = getPublicIdById(id);
+		
+		Optional.ofNullable(imageId).ifPresent(imageid -> {
+			try {
+				cloudinaryService.delete(imageId);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+			
+		Map result = null;
+		try {
+			result = cloudinaryService.upload(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return "File not exists";
+		}
+		
+		FlowersModel flowerRecord = new FlowersModel();
+		flowerRecord.setId(Integer.parseInt(id));
+		flowerRecord.setName((String)result.get("original_filename"));
+		flowerRecord.setImageUrl((String)result.get("url"));
+		flowerRecord.setImageId((String)result.get("public_id"));
+		flowerRecord.setCategory(category);
+		flowerRecord.setDescription(description);
+		flowerRecord.setPrice(price);
+							
+		flowersRepo.save(flowerRecord);
+		return "ok";
+	}
+	
+	public String updateFlowerWithoutImage(FlowersModel flower) {
+		
+//		Map result = null;
+		//cloudinaryService.delete(getPublicIdById(flowerId));
+		
+		
+		//FlowersModel flowerImage = new FlowersModel(Integer.parseInt(id), name, category, price, description);
+		
+		flowersRepo.save(flower);
+		return "ok";
+	}
+	
 	
 	public String getPublicIdById(String id) {
 		return flowersRepo.findPublicIdById(id);

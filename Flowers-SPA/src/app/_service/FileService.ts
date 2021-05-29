@@ -1,3 +1,4 @@
+import { Flower } from './../_model/Flower';
 
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -12,6 +13,14 @@ export class FileService{
 
   public postPhoto(flowerData: FormData){
     return this.httpClient.post(this.SERVER_URL+'add', flowerData);
+  }
+
+  public putPhotoWhthoutImage(flowerData: Flower) {
+    return this.httpClient.put(this.SERVER_URL+'updateWithoutImage', flowerData);
+  }
+
+  public putPhoto(flowerData: FormData){
+    return this.httpClient.put(this.SERVER_URL+'update', flowerData);
   }
 
   public getAllPhotos() {

@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 import { AppRoutingModule } from './../app-routing.module';
 
 import { FileService } from '../_service/FileService';
@@ -11,7 +13,6 @@ import { FileService } from '../_service/FileService';
 import { AddFlowerComponent } from './add-flower/add-flower.component';
 import { ViewComponent } from './view/view.component';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
-import { EditViewComponent } from './edit-view/edit-view.component';
 
 
 
@@ -22,8 +23,7 @@ import { EditViewComponent } from './edit-view/edit-view.component';
   declarations: [
     AddFlowerComponent,
     ViewComponent,
-    AdminNavComponent,
-    EditViewComponent
+    AdminNavComponent
   ],
   imports: [
     AppRoutingModule,
@@ -31,8 +31,10 @@ import { EditViewComponent } from './edit-view/edit-view.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ModalModule.forRoot()
   ],
   providers: [FileService]
+
 })
 export class AdminModule { }

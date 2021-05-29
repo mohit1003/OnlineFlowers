@@ -17,10 +17,52 @@
         <td>{{image.price}}</td>
         <td>{{image.category}}</td>
         <td>
-          <button class="btn btn-warning"> Update </button>
+          <button class="btn btn-warning" (click)="openEditModel(template, image.id)"> Update </button>
           <button class="btn btn-danger" (click)="delete(image.id)"> Delete </button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Update</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="updateFlower()" #addForm="ngForm">
+      <input type="hidden" name="id" [(ngModel)]="flowerToEdit.id">
+      <div class="form-group">
+        <label for="name"> Name</label>
+        <input type="text" [(ngModel)]="flowerToEdit.name" name="name" class="form-control" id="name" placeholder="Enter the Image file name" required>
+      </div>
+      <div class="form-group">
+       <label for="price"> Price</label>
+       <input type="text" [(ngModel)]="flowerToEdit.price"  name="price" class="form-control" id="price" placeholder="Enter the Image file name" required>
+       </div>
+      <div class="form-group">
+        <label for="description"  required="required">Description</label>
+        <input type="text" [(ngModel)]="flowerToEdit.description" name="description" class="form-control" id="description" placeholder="describe image">
+      </div>
+      <div class="form-group">
+        <label for="categoty">Category</label>
+        <select [(ngModel)]="flowerToEdit.category" class="form-control" id="categoty" name="categoty" required>
+         <option value="">Please select an option</option>
+          <option value="birthday">birthday</option>
+          <option value="grandOpening">grand-opening</option>
+          <option value="sympathy">sympathy</option>
+        </select>
+      </div>
+      <hr>
+      <div class="form-group mt-3">
+        <label class="mr-2">Upload Image:</label>
+        <input (change)="onFileChanged($event)" type="file" accept="image/*" name="file">
+      </div>
+      <hr>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</ng-template>

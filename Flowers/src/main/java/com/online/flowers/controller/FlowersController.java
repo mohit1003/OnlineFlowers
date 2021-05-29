@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,6 +58,39 @@ public class FlowersController {
 			return new ResponseEntity(new Message("Image is uploaded"), HttpStatus.CREATED);
 		}
 	}
+	
+	@PutMapping(value = "/update")
+	public ResponseEntity<?> updateFlower(
+			@RequestParam("id") String id,
+			@RequestParam("flowerImage") MultipartFile flower,
+			@RequestParam("name") String name,
+			@RequestParam("description") String description, 
+			@RequestParam("category") String category,
+			@RequestParam("price") String price) {
+		
+		String message = flowersService.updateFlower(id, flower, name, category, price, description);
+		if(message.equals("Image not valid")) {
+			return new ResponseEntity(new Message("Image not valid"), HttpStatus.CONFLICT);
+		}
+		else {
+			return new ResponseEntity(new Message("Image is uploaded"), HttpStatus.CREATED);
+		}
+	}
+	
+	@PutMapping(value = "/updateWithoutImage")
+	public ResponseEntity<?> updateFlowerWithoutImage(@RequestBody FlowersModel flower) {
+		String message = flowersService.updateFlowerWithoutImage(flower);
+		
+		if(message.equals("Image not valid")) {
+			return new ResponseEntity(new Message("Image not valid"), HttpStatus.CONFLICT);
+		}
+		else {
+			return new ResponseEntity(new Message("Image is uploaded/modified"), HttpStatus.OK);
+		}
+		
+	}
+	
+	
 	
 	@GetMapping(value = "/getAllFlowers")
     public ResponseEntity<List<FlowersModel>> list(){

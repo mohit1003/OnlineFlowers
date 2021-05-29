@@ -12,7 +12,7 @@ export class AddFlowerComponent implements OnInit {
 
   constructor(private fileService: FileService) { }
 
-  flower: Flower;
+  flower!: Flower;
   name!: string;
   description!: any;
   category: any;
@@ -23,7 +23,7 @@ export class AddFlowerComponent implements OnInit {
 
   onFileChanged(event:any) {
     this.flowerImage = event.target.files[0];
-    console.log(this.flowerImage);
+    // console.log(this.flowerImage);
   }
 
   addFlower() {
@@ -34,7 +34,7 @@ export class AddFlowerComponent implements OnInit {
     flower.append('category', this.category);
     flower.append('price', this.price);
 
-    console.log(this.price);
+    // console.log(this.price);
 
     this.fileService.postPhoto(flower).subscribe((data) =>{
       console.log(data);
