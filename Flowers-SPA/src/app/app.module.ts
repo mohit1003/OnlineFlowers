@@ -12,6 +12,8 @@ import { AdminModule } from './admin/admin.module';
 import { FileService } from './_service/FileService';
 
 import { AppComponent } from './app.component';
+import { CustomerModule } from './customer/customer.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -20,6 +22,7 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
+    CustomerModule,
     AdminModule,
     RouterModule,
     BrowserModule,
@@ -27,10 +30,10 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     ModalModule.forRoot()
 
   ],
-  providers: [FileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

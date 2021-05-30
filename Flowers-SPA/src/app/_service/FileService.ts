@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 })
 
 export class FileService{
-  SERVER_URL: string = "http://localhost:8080/";
+  SERVER_URL: string = "http://localhost:9191/";
 
   constructor(private httpClient: HttpClient) {}
 

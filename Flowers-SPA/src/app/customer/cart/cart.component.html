@@ -1,0 +1,49 @@
+<body>
+
+
+  <app-nav></app-nav>
+
+  <div class="container">
+    <h3 *ngIf="flowersAddedIncart.length === 0" class="p-md-5"> Quite loanly here!!</h3>
+    <table *ngIf="flowersAddedIncart.length > 0"class="table table-stripped" style="margin-bottom: 10%;">
+      <thead>
+        <tr>
+          <td>Image</td>
+          <td>Description</td>
+          <td>Price</td>
+          <td>Category</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let image of flowersAddedIncart">
+          <td><img [src]="image.imageUrl" width="100" height="100" alt="flower"></td>
+          <td>{{image.description}}</td>
+          <td>{{image.price}}</td>
+          <td>{{image.category}}</td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteFromCart(image)"> Delete </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand m-md-3">Your total --- Rs.  {{total}} </a>
+        <button class="navbar-toggler" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li>
+              <button class="btn btn-warning" style="margin-left: 100%"> Checkout</button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+
+  </body>
+

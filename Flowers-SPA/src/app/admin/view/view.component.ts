@@ -3,7 +3,7 @@ import { Flower } from './../../_model/Flower';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FileService } from 'src/app/_service/FileService';
 import { DomSanitizer } from '@angular/platform-browser';
-import { DataService } from 'src/app/_service/dataService';
+import { DataService } from 'src/app/_service/CartService';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -45,7 +45,7 @@ export class ViewComponent implements OnInit {
       this.flowers = Object.assign(data);
 
 
-      this.dataService.changeState(this.flowers);
+      // this.dataService.changeState(this.flowers);
       // this.dataService.currentState.subscribe(flowers =>{
       //  console.log(flowers);
       // })

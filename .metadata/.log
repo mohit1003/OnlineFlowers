@@ -3206,3 +3206,136 @@ Caused by: java.util.concurrent.TimeoutException
 
 !ENTRY CSP 2 0 2021-05-29 18:15:37.432
 !MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-29 23:03:49.579
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.ridQLRkE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-29 23:03:49.580
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.ridQLRkE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-29 23:03:49.581
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-29 23:03:49.581
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.ridQLRkE => OK
+!SESSION 2021-05-30 10:06:30.449 -----------------------------------------------
+eclipse.buildId=4.10.0.202103111225
+java.version=11.0.8
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_GB
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -keyring /Users/mohitkulkarni/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.springframework.boot.ide.branding.sts4 -keyring /Users/mohitkulkarni/.eclipse_keyring
+
+!ENTRY org.eclipse.jface 2 0 2021-05-30 10:08:17.822
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-05-30 10:08:17.822
+!MESSAGE A conflict occurred for COMMAND+SHIFT+T:
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1ee6434,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@71d78cac,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:21.255
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:21.257
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@16a78700[org.springframework.tooling.boot.ls:1.25.0.202103111026(id=1043)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:21.263
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:21.417
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:27.017
+!MESSAGE Boot LS startup time from start to initialized: 5696ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:27.680
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.mlrMHpGlisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:27.687
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:27.690
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:27.692
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:27.693
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:27.693
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.mlrMHpGl => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:27.701
+!MESSAGE classpath=115 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:27.702
+!MESSAGE buffering callback sts4.classpath.mlrMHpGl Flowers false 115
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:27.703
+!MESSAGE executing callback sts4.classpath.mlrMHpGl 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:08:28.894
+!MESSAGE executing callback sts4.classpath.mlrMHpGl SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:09:56.557
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:09:56.566
+!MESSAGE classpath=116 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:09:56.568
+!MESSAGE buffering callback sts4.classpath.mlrMHpGl Flowers false 116
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:09:56.568
+!MESSAGE executing callback sts4.classpath.mlrMHpGl 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:09:56.591
+!MESSAGE executing callback sts4.classpath.mlrMHpGl SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:10:01.832
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:10:01.837
+!MESSAGE classpath=116 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:10:01.839
+!MESSAGE buffering callback sts4.classpath.mlrMHpGl Flowers false 116
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:10:01.839
+!MESSAGE executing callback sts4.classpath.mlrMHpGl 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 10:10:01.865
+!MESSAGE executing callback sts4.classpath.mlrMHpGl SUCCESS [done]
+
+!ENTRY org.eclipse.ui 2 2 2021-05-30 10:21:38.141
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
+
+!ENTRY CSP 2 0 2021-05-30 10:36:54.638
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-30 10:37:16.155
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-30 10:37:36.465
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-30 10:37:48.877
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-30 10:38:18.328
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0

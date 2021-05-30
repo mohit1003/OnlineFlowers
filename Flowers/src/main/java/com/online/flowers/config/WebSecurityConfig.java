@@ -31,37 +31,37 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
     	http
         .csrf().disable().authorizeRequests()
-         .antMatchers("/h2-console/**").permitAll()
-         .antMatchers("/authenticate").permitAll()
-         .anyRequest()
-         .authenticated()
-         .and().exceptionHandling().and().sessionManagement()
-         .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-         
-    	http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
-    	http.headers().frameOptions().sameOrigin();
-//         /all requests are authenticated
+         .antMatchers("/h2-console/**").permitAll();
+//         .antMatchers("/authenticate").permitAll()
+//         .anyRequest()
+//         .authenticated()
+//         .and().exceptionHandling().and().sessionManagement()
+//         .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//         
+//    	http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+//
+//    	http.headers().frameOptions().sameOrigin();
+////         /all requests are authenticated
         
         http.cors();
     }
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(customUserDetailService);
-	}
-	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
-	}
-	
-	@Bean(name = BeanIds.AUTHENTICATION_MANAGER)
-	@Override
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
-    
+//	@Override
+//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//		auth.userDetailsService(customUserDetailService);
+//	}
+//	
+//	@Bean
+//	public PasswordEncoder passwordEncoder() {
+//		return NoOpPasswordEncoder.getInstance();
+//	}
+//	
+//	@Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+//	@Override
+//	public AuthenticationManager authenticationManagerBean() throws Exception {
+//		return super.authenticationManagerBean();
+//	}
+//    
     
     
     

@@ -1,0 +1,7 @@
+spring.datasource.url=jdbc:h2:mem:flowers
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=pass
+spring.jpa.database-platform=org.hibernate.dialect.MySQL5Dialect
+spring.h2.console.enabled=true
+
