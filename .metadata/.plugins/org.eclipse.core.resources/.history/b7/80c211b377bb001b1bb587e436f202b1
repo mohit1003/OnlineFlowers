@@ -1,5 +1,0 @@
-package com.online.flowers.config;
-
-public class WebSecurityConfig {
-
-}

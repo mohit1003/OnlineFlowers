@@ -3,12 +3,13 @@
 
   <app-nav></app-nav>
 
-  <div class="container">
+  <div class="container" *ngIf="!checkoutButtonClicked">
     <h3 *ngIf="flowersAddedIncart.length === 0" class="p-md-5"> Quite loanly here!!</h3>
     <table *ngIf="flowersAddedIncart.length > 0"class="table table-stripped" style="margin-bottom: 10%;">
       <thead>
         <tr>
           <td>Image</td>
+          <td>Name</td>
           <td>Description</td>
           <td>Price</td>
           <td>Category</td>
@@ -17,7 +18,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let image of flowersAddedIncart">
-          <td><img [src]="image.imageUrl" width="100" height="100" alt="flower"></td>
+          <td><img [src]="image.imageUrl" width="100" height="100" alt="flower"> <p *ngIf="image.count !== undefined">x {{image.count}}</p></td>
+          <td>{{image.name}}</td>
           <td>{{image.description}}</td>
           <td>{{image.price}}</td>
           <td>{{image.category}}</td>
@@ -36,12 +38,64 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li>
-              <button class="btn btn-warning" style="margin-left: 100%"> Checkout</button>
+              <button class="btn btn-warning" style="margin-left: 100%" (click)="proceedBuy()"> Checkout</button>
             </li>
           </ul>
         </div>
       </nav>
     </div>
+  </div>
+
+  <div class="container" *ngIf="checkoutButtonClicked">
+    <div class="row">
+      <div class="col-sm-6">
+        <table class="table table-stripped">
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Delivery Adress</td>
+              <td>City</td>
+              <td>Country</td>
+              <td>Contact</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{customer.name}}</td>
+              <td>{{customer.address}}</td>
+              <td>{{customer.city}}</td>
+              <td>{{customer.country}}</td>
+              <td>{{customer.contact}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-sm-6">
+        <table class="table table-stripped">
+          <thead>
+            <tr>
+              <td>Item name</td>
+              <td >Item Quantity</td>
+              <td>Item total Rs.</td>
+            </tr>
+          </thead>
+
+            <tbody>
+              <tr *ngFor="let flower of flowersAddedIncart">
+                <td>{{flower.name}}</td>
+                <td>{{flower.count === undefined ? 1 : flower.count}}</td>
+                <td>{{flower.price}}</td>
+              </tr>
+              <tr>
+                <td colspan="2">Total</td>
+                <td>{{total}}</td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+    <button class="btn btn-warning">Proceed to pay</button>
+    <button class="btn btn-secondary m-sm-5" (click)="resetCheckout()">Back</button>
   </div>
 
 

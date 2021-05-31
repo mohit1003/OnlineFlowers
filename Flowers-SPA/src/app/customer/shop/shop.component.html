@@ -1,7 +1,9 @@
 <body>
 
 
-<app-nav></app-nav>
+<app-nav
+  [shoppingCartCount] = "flowersInCart.length">
+</app-nav>
 
 <div class="wrapper d-flex align-items-stretch" style="height:100%;">
   <nav id="sidebar">
@@ -11,23 +13,26 @@
       <h1><a class="logo">Flowers</a></h1>
       <ul class="list-unstyled components mb-5">
         <li>
+          <a (click)="getAllFlowers()">All</a>
+        </li>
+        <li>
           <a (click)="getBirthdayFlowers()">Birthday</a>
         </li>
         <li>
-            <a href="#">Love</a>
+          <a (click)="getLoveFlowers()">Love</a>
         </li>
         <li>
-          <a href="#">Marriage</a>
+          <a (click)="getMarriageFlowers()">Marriage</a>
         </li>
         <li>
-          <a href="#">Grand Opening</a>
+          <a (click)="getGrandOpeningFlowers()">Grand Opening</a>
         </li>
         <li>
-          <a href="#">Sympathy</a>
+          <a (click)="getSympathyFlowers()">Sympathy</a>
         </li>
         <li>
-          <a href="#">Get well soon</a>
-          </li>
+          <a (click)="getSympathyFlowers()">Get well soon</a>
+        </li>
       </ul>
 
 
@@ -41,7 +46,7 @@
   </nav>
 
   <div class="row m-md-4">
-    <div class="col-sm-4" *ngFor="let flower of flowers">
+    <div class="col" *ngFor="let flower of flowersInCategory">
       <div class="card" style="margin-bottom:8%">
         <div class="card-body" >
           <img [src]="flower.imageUrl" alt="{{flower.name}}" width="200" height="200"/>

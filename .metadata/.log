@@ -3339,3 +3339,482 @@ Binding(COMMAND+SHIFT+T,
 
 !ENTRY CSP 2 0 2021-05-30 10:38:18.328
 !MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 23:11:16.820
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.mlrMHpGl
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 23:11:16.825
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.mlrMHpGl
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 23:11:16.826
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-30 23:11:16.827
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.mlrMHpGl => OK
+!SESSION 2021-05-31 09:17:26.043 -----------------------------------------------
+eclipse.buildId=4.10.0.202103111225
+java.version=11.0.8
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_GB
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -keyring /Users/mohitkulkarni/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.springframework.boot.ide.branding.sts4 -keyring /Users/mohitkulkarni/.eclipse_keyring
+
+!ENTRY org.eclipse.jface 2 0 2021-05-31 09:38:01.900
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-05-31 09:38:01.900
+!MESSAGE A conflict occurred for COMMAND+SHIFT+T:
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@550f522b,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1842dc39,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:05.499
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:05.501
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@6c427386[org.springframework.tooling.boot.ls:1.25.0.202103111026(id=1043)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:05.505
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:05.592
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:11.055
+!MESSAGE Boot LS startup time from start to initialized: 5488ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:11.524
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.VYQEQySdisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:11.537
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:11.543
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:11.544
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:11.545
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:11.545
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.VYQEQySd => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:11.593
+!MESSAGE classpath=116 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:11.595
+!MESSAGE buffering callback sts4.classpath.VYQEQySd Flowers false 116
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:11.595
+!MESSAGE executing callback sts4.classpath.VYQEQySd 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:38:12.534
+!MESSAGE executing callback sts4.classpath.VYQEQySd SUCCESS [done]
+
+!ENTRY org.eclipse.ui 2 2 2021-05-31 09:38:15.371
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:23.908
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.VYQEQySd
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:23.912
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.VYQEQySd
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:23.913
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:23.913
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.VYQEQySd => OK
+!SESSION 2021-05-31 09:44:30.685 -----------------------------------------------
+eclipse.buildId=4.10.0.202103111225
+java.version=11.0.8
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_GB
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -keyring /Users/mohitkulkarni/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.springframework.boot.ide.branding.sts4 -keyring /Users/mohitkulkarni/.eclipse_keyring
+
+!ENTRY org.eclipse.jface 2 0 2021-05-31 09:44:38.743
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-05-31 09:44:38.743
+!MESSAGE A conflict occurred for COMMAND+SHIFT+T:
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4a86be01,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@3cae4518,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:44.043
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:44.044
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@68bef3df[org.springframework.tooling.boot.ls:1.25.0.202103111026(id=1043)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:44.048
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:44.095
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:49.536
+!MESSAGE Boot LS startup time from start to initialized: 5464ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:49.834
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.ZvCaNkOdisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:49.837
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:49.840
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:49.841
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:49.841
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:49.841
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.ZvCaNkOd => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:49.848
+!MESSAGE classpath=116 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:49.850
+!MESSAGE buffering callback sts4.classpath.ZvCaNkOd Flowers false 116
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:49.850
+!MESSAGE executing callback sts4.classpath.ZvCaNkOd 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-05-31 09:44:50.330
+!MESSAGE executing callback sts4.classpath.ZvCaNkOd SUCCESS [done]
+
+!ENTRY org.eclipse.ui 2 2 2021-05-31 09:44:59.631
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
+
+!ENTRY CSP 2 0 2021-05-31 12:01:51.707
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 12:02:02.501
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 12:02:03.092
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 12:03:56.945
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 12:06:47.110
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 12:07:18.731
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 12:08:38.007
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 12:09:50.172
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 12:10:14.454
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 12:10:43.010
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 12:11:24.096
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 15:58:58.418
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 15:59:35.937
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 16:07:03.213
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 16:10:01.130
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 16:11:06.576
+!MESSAGE Timeout getting method completions for sorter. QualifiedClassName = java.util.Optional
+!STACK 0
+com.codota.common.completion.QueryTimeoutException
+	at com.codota.common.completion.CompletionGetterHelper.getCompletionsInner(CompletionGetterHelper.java:97)
+	at com.codota.common.completion.CompletionGetterHelper.getCompletions(CompletionGetterHelper.java:118)
+	at com.codota.common.completion.MethodCompletionGetter.getCompletions(MethodCompletionGetter.java:36)
+	at com.codota.eclipse.assistant.completion.method.MethodCompletionsListener.getMethodCompletions(MethodCompletionsListener.java:312)
+	at com.codota.eclipse.assistant.completion.method.MethodCompletionsListener.assistSessionStarted(MethodCompletionsListener.java:241)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.lambda$10(ContentAssistant.java:2439)
+	at java.base/java.util.Collections$SingletonSet.forEach(Collections.java:4797)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.fireSessionBeginEvent(ContentAssistant.java:2436)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.prepareToShowCompletions(ContentAssistant.java:1858)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.access$5(ContentAssistant.java:1849)
+	at org.eclipse.jface.text.contentassist.ContentAssistant$AutoAssistListener.lambda$0(ContentAssistant.java:369)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4179)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3839)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1157)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:644)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:551)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:156)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:653)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1461)
+Caused by: java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.CompletableFuture.timedGet(CompletableFuture.java:1886)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2021)
+	at com.codota.common.completion.CompletionGetterHelper.getCompletionsInner(CompletionGetterHelper.java:88)
+	... 35 more
+
+!ENTRY CSP 2 0 2021-05-31 16:12:31.072
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 16:12:33.263
+!MESSAGE Timeout getting method completions for sorter. QualifiedClassName = com.online.flowers.controller.FlowersController
+!STACK 0
+com.codota.common.completion.QueryTimeoutException
+	at com.codota.common.completion.CompletionGetterHelper.getCompletionsInner(CompletionGetterHelper.java:97)
+	at com.codota.common.completion.CompletionGetterHelper.getCompletions(CompletionGetterHelper.java:118)
+	at com.codota.common.completion.MethodCompletionGetter.getCompletions(MethodCompletionGetter.java:36)
+	at com.codota.eclipse.assistant.completion.method.MethodCompletionsListener.getMethodCompletions(MethodCompletionsListener.java:312)
+	at com.codota.eclipse.assistant.completion.method.MethodCompletionsListener.assistSessionStarted(MethodCompletionsListener.java:241)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.lambda$10(ContentAssistant.java:2439)
+	at java.base/java.util.Collections$SingletonSet.forEach(Collections.java:4797)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.fireSessionBeginEvent(ContentAssistant.java:2436)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.prepareToShowCompletions(ContentAssistant.java:1858)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.access$5(ContentAssistant.java:1849)
+	at org.eclipse.jface.text.contentassist.ContentAssistant$AutoAssistListener.lambda$0(ContentAssistant.java:369)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4179)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3839)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1157)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:644)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:551)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:156)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:653)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1461)
+Caused by: java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.CompletableFuture.timedGet(CompletableFuture.java:1886)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2021)
+	at com.codota.common.completion.CompletionGetterHelper.getCompletionsInner(CompletionGetterHelper.java:88)
+	... 35 more
+
+!ENTRY org.eclipse.lsp4e 2 0 2021-05-31 16:12:56.953
+!MESSAGE Javadoc unavailable. Failed to obtain it.
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:385)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at org.eclipse.lsp4e.jdt.LSJavaHoverProvider.getHoverInfo2(LSJavaHoverProvider.java:70)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY org.eclipse.lsp4e 2 0 2021-05-31 16:13:22.990
+!MESSAGE Javadoc unavailable. Failed to obtain it.
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:385)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at org.eclipse.lsp4e.jdt.LSJavaHoverProvider.getHoverInfo2(LSJavaHoverProvider.java:70)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY CSP 2 0 2021-05-31 16:13:30.544
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 16:14:03.035
+!MESSAGE Timeout getting method completions for sorter. QualifiedClassName = org.springframework.http.HttpStatus
+!STACK 0
+com.codota.common.completion.QueryTimeoutException
+	at com.codota.common.completion.CompletionGetterHelper.getCompletionsInner(CompletionGetterHelper.java:97)
+	at com.codota.common.completion.CompletionGetterHelper.getCompletions(CompletionGetterHelper.java:118)
+	at com.codota.common.completion.MethodCompletionGetter.getCompletions(MethodCompletionGetter.java:36)
+	at com.codota.eclipse.assistant.completion.method.MethodCompletionsListener.getMethodCompletions(MethodCompletionsListener.java:312)
+	at com.codota.eclipse.assistant.completion.method.MethodCompletionsListener.assistSessionStarted(MethodCompletionsListener.java:241)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.lambda$10(ContentAssistant.java:2439)
+	at java.base/java.util.Collections$SingletonSet.forEach(Collections.java:4797)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.fireSessionBeginEvent(ContentAssistant.java:2436)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.prepareToShowCompletions(ContentAssistant.java:1858)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.showPossibleCompletions(ContentAssistant.java:1826)
+	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor$AdaptedSourceViewer.doOperation(CompilationUnitEditor.java:188)
+	at org.eclipse.ui.texteditor.ContentAssistAction.lambda$0(ContentAssistAction.java:85)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:74)
+	at org.eclipse.ui.texteditor.ContentAssistAction.run(ContentAssistAction.java:84)
+	at org.eclipse.ui.texteditor.RetargetTextEditorAction.run(RetargetTextEditorAction.java:232)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:474)
+	at org.eclipse.jface.commands.ActionHandler.execute(ActionHandler.java:121)
+	at org.eclipse.ui.internal.handlers.E4HandlerProxy.execute(E4HandlerProxy.java:97)
+	at jdk.internal.reflect.GeneratedMethodAccessor83.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.invokeUsingClass(InjectorImpl.java:319)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.invoke(InjectorImpl.java:253)
+	at org.eclipse.e4.core.contexts.ContextInjectionFactory.invoke(ContextInjectionFactory.java:173)
+	at org.eclipse.e4.core.commands.internal.HandlerServiceHandler.execute(HandlerServiceHandler.java:156)
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:488)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:487)
+	at org.eclipse.e4.core.commands.internal.HandlerServiceImpl.executeHandler(HandlerServiceImpl.java:213)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher.executeCommand(KeyBindingDispatcher.java:308)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher.press(KeyBindingDispatcher.java:584)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher.processKeyEvent(KeyBindingDispatcher.java:653)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher.filterKeySequenceBindings(KeyBindingDispatcher.java:443)
+	at org.eclipse.e4.ui.bindings.keys.KeyBindingDispatcher$KeyDownFilter.handleEvent(KeyBindingDispatcher.java:96)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.filterEvent(Display.java:1108)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4436)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1512)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1535)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1520)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1549)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1545)
+	at org.eclipse.swt.widgets.Canvas.sendKeyEvent(Canvas.java:522)
+	at org.eclipse.swt.widgets.Control.doCommandBySelector(Control.java:1085)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:6251)
+	at org.eclipse.swt.internal.cocoa.OS.objc_msgSend(Native Method)
+	at org.eclipse.swt.internal.cocoa.NSResponder.interpretKeyEvents(NSResponder.java:59)
+	at org.eclipse.swt.widgets.Composite.keyDown(Composite.java:606)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:6083)
+	at org.eclipse.swt.internal.cocoa.OS.objc_msgSendSuper(Native Method)
+	at org.eclipse.swt.widgets.Widget.callSuper(Widget.java:235)
+	at org.eclipse.swt.widgets.Widget.windowSendEvent(Widget.java:2150)
+	at org.eclipse.swt.widgets.Shell.windowSendEvent(Shell.java:2487)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:6203)
+	at org.eclipse.swt.internal.cocoa.OS.objc_msgSendSuper(Native Method)
+	at org.eclipse.swt.widgets.Display.applicationSendEvent(Display.java:5442)
+	at org.eclipse.swt.widgets.Display.applicationProc(Display.java:5585)
+	at org.eclipse.swt.internal.cocoa.OS.objc_msgSend(Native Method)
+	at org.eclipse.swt.internal.cocoa.NSApplication.sendEvent(NSApplication.java:117)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3834)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1157)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:644)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:551)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:156)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:653)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1461)
+Caused by: java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.CompletableFuture.timedGet(CompletableFuture.java:1886)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2021)
+	at com.codota.common.completion.CompletionGetterHelper.getCompletionsInner(CompletionGetterHelper.java:88)
+	... 80 more
+
+!ENTRY org.eclipse.jface 2 0 2021-05-31 16:54:15.214
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-05-31 16:54:15.215
+!MESSAGE A conflict occurred for COMMAND+R:
+Binding(COMMAND+R,
+	ParameterizedCommand(Command(org.eclipse.debug.ui.commands.RunToLine,Run to Line,
+		Resume and break when execution reaches the current line,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5a1c1255,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.debugging,,,system)
+Binding(COMMAND+R,
+	ParameterizedCommand(Command(org.springframework.ide.eclipse.boot.restart.commands.restart,Trigger Restart,
+		Restart Spring Boot Application,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5fa509cc,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.console,,,system)
+
+!ENTRY CSP 2 0 2021-05-31 17:14:09.171
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 17:14:13.555
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY org.eclipse.lsp4e 2 0 2021-05-31 17:14:15.055
+!MESSAGE Javadoc unavailable. Failed to obtain it.
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:385)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at org.eclipse.lsp4e.jdt.LSJavaHoverProvider.getHoverInfo2(LSJavaHoverProvider.java:70)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY CSP 2 0 2021-05-31 17:37:32.724
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0
+
+!ENTRY CSP 2 0 2021-05-31 17:40:05.321
+!MESSAGE Problem getting expression completion focal java element. Expected 1 java element but found: 0

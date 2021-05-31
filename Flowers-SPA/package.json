@@ -24,6 +24,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@mdi/angular-material": "^5.9.55",
     "@ngrx/store": "^12.0.0",
+    "alertifyjs": "^1.13.1",
     "bootstrap": "^5.0.1",
     "cloudinary-core": "^2.11.4",
     "ngx-bootstrap": "^6.2.0",

@@ -1,3 +1,4 @@
+import { User } from './../../_model/User';
 import { CartModel } from './../../_model/CartModel';
 import { Observable } from 'rxjs/Observable';
 import { Flower } from './../../_model/Flower';
@@ -5,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as FlowerActions from '../../_actions/Flower.action';
 import { DataService } from 'src/app/_service/CartService';
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
 interface AppState {
   flower: Flower[];
@@ -22,6 +24,10 @@ export class CartComponent implements OnInit {
   filteredFlowersToAddCount:Flower[] = [];
   flowerToAdd: Flower;
 
+  checkoutButtonClicked: boolean = false;
+
+  customer: User;
+
   total: number = 0;
 
   constructor(private store:Store<AppState>, private dataService: DataService) {
@@ -36,10 +42,10 @@ export class CartComponent implements OnInit {
           this.cartModelForDuplicates = JSON.parse(localStorage.getItem(flower.id));
           this.cartModelForDuplicates.forEach(incrementFactorFlower => {
             if(incrementFactorFlower.id === flower.id) {
+              flower.count = incrementFactorFlower.count;
               this.flowerToAdd = Object.assign(flower);
 
               var price:number = incrementFactorFlower.origPrice;
-              console.log(incrementFactorFlower.count+ ' '+price)
               this.flowerToAdd.price = (incrementFactorFlower.count * price).toString();
               this.filteredFlowersToAddCount.push(this.flowerToAdd);
             }
@@ -51,7 +57,6 @@ export class CartComponent implements OnInit {
       })
     }
     this.calculateTotal();
-
   }
 
   calculateTotal() {
@@ -61,15 +66,32 @@ export class CartComponent implements OnInit {
   }
 
 
-  proceedBuy() {}
+  proceedBuy() {
+    this.checkoutButtonClicked = true;
+
+    this.customer = {
+      name: 'Mohit',
+      address: 'Pune 411041',
+      contact: 9921918100,
+      title: 'MR',
+      email: '1@2',
+      password:'qwerty',
+      city: 'Pune',
+      country: 'india'
+    }
+
+  }
+
+  resetCheckout(){
+    this.checkoutButtonClicked = false;
+  }
 
   deleteFromCart(flower: Flower){
     localStorage.removeItem(flower.id);
     this.flowersAddedIncart = this.flowersAddedIncart.filter(flowerToRemove => flowerToRemove.id !== flower.id);
+    this.total -= (+flower.price);
     this.dataService.changeState(this.flowersAddedIncart);
-    this.flowersAddedIncart.forEach(flowers => {
-      this.total -= (+flowers.price)
-    })
+
   }
 
 }

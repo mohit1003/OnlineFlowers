@@ -3,5 +3,8 @@ export interface User{
   name: string
   password: string;
   address: string;
-  dob: string;
+  city: string;
+  country: string;
+  title: string;
+  contact: number;
 }

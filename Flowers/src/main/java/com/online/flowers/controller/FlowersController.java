@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.online.flowers.dto.Message;
+import com.online.flowers.model.CustomerModel;
 import com.online.flowers.model.FlowersModel;
+import com.online.flowers.repo.CustomerRepo;
 import com.online.flowers.repo.FlowersRepo;
 import com.online.flowers.service.ClaudinaryService;
 import com.online.flowers.service.FlowersService;
@@ -41,6 +43,9 @@ public class FlowersController {
 
 	@Autowired
 	private FlowersRepo _repo;
+	
+	@Autowired
+	private CustomerRepo _custRepo;
 
 	@Autowired
 	private ClaudinaryService cloudinaryService;
@@ -48,25 +53,64 @@ public class FlowersController {
 	@Autowired
 	private JwtUtil jwtutil;
 
-//	@Autowired
-//	private AuthenticationManager authenticationManager;
-
-	@GetMapping(value = "/demo")
-	public String home() {
-		return "Hello home";
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
+	int registerFlag = 0;
+	
+	int loginFlag = 0;
+	
+	@PostMapping(value = "/register")
+	public ResponseEntity<?> registerUser(@RequestBody CustomerModel customer) {
+		Optional.ofNullable(customer).ifPresent(customerToSave -> {
+			if(_custRepo.existsById(customer.getEmail())) {
+				this.registerFlag = 2;
+			}
+			else {
+				_custRepo.save(customerToSave);
+				this.registerFlag = 1;
+			}
+		});
+		
+		if(registerFlag == 1) {
+			return new ResponseEntity(new Message("User is registered"), HttpStatus.CREATED);
+		}
+		else {
+			registerFlag = 0;
+			return new ResponseEntity(new Message("User not registered/ already exists"), HttpStatus.CONFLICT);
+		}
+		
+		
+	}
+	
+	@PostMapping(value = "/login")
+	public ResponseEntity<?> userLogin(@RequestBody CustomerModel customer) {
+		Optional.ofNullable(customer).ifPresent(customerToSave -> {
+			if(_custRepo.existsById(customer.getEmail())) {
+					this.loginFlag = 1;
+			}
+		});
+		
+		if(loginFlag == 1) {
+			return new ResponseEntity(new Message("user is logged in"), HttpStatus.OK);
+		}
+		loginFlag = 0;
+		return new ResponseEntity(new Message("Invalid Username or Password"), HttpStatus.CONFLICT);
 	}
 
-//	@PostMapping(value = "/authenticate")
-//	public String generateToken(@RequestBody AuthRequest authRequest) throws Exception {
-//		try {
-//			authenticationManager.authenticate(
-//					new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
-//		} catch (Exception e) {
-//			throw new Exception("Invalid username/password");
-//		}
-//
-//		return jwtutil.generateToken(authRequest.getEmail());
-//	}
+
+	@PostMapping(value = "/authenticate")
+	public String generateToken(@RequestBody AuthRequest authRequest) throws Exception {
+		try {
+			authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
+		} catch (Exception e) {
+			throw new Exception("Invalid username/password");
+		}
+
+		return jwtutil.generateToken(authRequest.getEmail());
+	}
+	
 
 	@PostMapping(value = "/add")
 	public ResponseEntity<?> saveFlowerImage(@RequestParam("flowerImage") MultipartFile flower,

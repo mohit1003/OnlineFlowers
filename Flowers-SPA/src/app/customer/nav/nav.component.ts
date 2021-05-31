@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+
+  @Input() shoppingCartCount: number;
 
   constructor() { }
 

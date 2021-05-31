@@ -43,12 +43,32 @@ export class ShopComponent implements OnInit {
   getBirthdayFlowers() {
     this.flowersInCategory = this.flowers;
     this.flowersInCategory = this.flowersInCategory.filter(flower => flower.category === 'birthday')
+  }
 
+  getGrandOpeningFlowers() {
+    this.flowersInCategory = this.flowers;
+    this.flowersInCategory = this.flowersInCategory.filter(flower => flower.category === 'grandOpening')
+  }
+
+  getSympathyFlowers() {
+    this.flowersInCategory = this.flowers;
+    this.flowersInCategory = this.flowersInCategory.filter(flower => flower.category === 'sympathy')
+  }
+
+  getLoveFlowers() {
+    this.flowersInCategory = this.flowers;
+    this.flowersInCategory = this.flowersInCategory.filter(flower => flower.category === 'love')
+  }
+
+  getMarriageFlowers() {
+    this.flowersInCategory = this.flowers;
+    this.flowersInCategory = this.flowersInCategory.filter(flower => flower.category === 'marriage')
   }
 
   getAllFlowers(){
     this.fileService.getAllPhotos().subscribe(data => {
       this.flowers = Object.assign(data);
+      this.flowersInCategory = this.flowers;
       // console.log(this.flowers);
     }, err =>{
       console.log(err);

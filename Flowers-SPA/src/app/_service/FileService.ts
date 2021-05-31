@@ -2,6 +2,7 @@ import { Flower } from './../_model/Flower';
 
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { User } from '../_model/User';
 @Injectable({
   providedIn: 'root'
 })
@@ -38,5 +39,17 @@ export class FileService{
       },
     };
     return this.httpClient.delete(this.SERVER_URL+'delete', options);
+  }
+
+  public registerUser(userToRegister: User){
+    return this.httpClient.post(this.SERVER_URL+'register', userToRegister);
+  }
+
+  public getToken(userToRegister: User) {
+    return this.httpClient.post(this.SERVER_URL+'authenticate', userToRegister, {responseType: 'text'})
+  }
+
+  public login(userToRegister: User) {
+    return this.httpClient.post(this.SERVER_URL+'login', userToRegister)
   }
 }

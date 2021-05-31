@@ -6,4 +6,5 @@ export interface Flower {
   category: string;
   price: string;
   name: string;
+  count: number;
 }

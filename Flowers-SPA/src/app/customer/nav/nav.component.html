@@ -22,7 +22,7 @@
             <a class="nav-link" [routerLink]="['/cust/shop']" routerLinkActive="router-link-active text-bold" >Shop</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/cust/cart']" routerLinkActive="router-link-active text-bold" >Cart</a>
+            <a class="nav-link" [routerLink]="['/cust/cart']" routerLinkActive="router-link-active text-bold" >Cart<a style="margin: 0px; padding: 0px" *ngIf="shoppingCartCount !== undefined"> ({{shoppingCartCount}})</a></a>
           </li>
       </ul>
       <!-- Left links -->

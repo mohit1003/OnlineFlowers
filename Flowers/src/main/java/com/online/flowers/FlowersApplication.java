@@ -26,8 +26,7 @@ public class FlowersApplication {
 	@PostConstruct
 	public void initUsers() {
 		List<CustomerModel> customers = Stream.of(
-			new CustomerModel( "1@2", "MR", "Mohit", "Pune city", "password", "1998/03/10"),
-			new CustomerModel( "1@1", "MRS", "Racheal", "NY city", "qwerty", "1998/03/10")
+			new CustomerModel("1@2", "MR", "Mohit", "Kulkarni", "123 Main street", "Pune city", "India", "password", "9921918100")
 				).collect(Collectors.toList());
 		customerRepo.saveAll(customers);
 	}

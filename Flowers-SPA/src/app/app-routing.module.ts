@@ -1,3 +1,4 @@
+import { HomeComponent } from './home/home.component';
 import { AddFlowerComponent } from './admin/add-flower/add-flower.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -9,12 +10,20 @@ import { FeedbackComponent } from './customer/feedback/feedback.component';
 import { CartComponent } from './customer/cart/cart.component';
 
 const routes: Routes = [
-  { path: 'add', component: AddFlowerComponent },
-  { path: 'view', component: ViewComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'locations', component: LocationsComponent },
   { path: 'feedback', component: FeedbackComponent },
 
+  {
+    path: 'admin',
+    runGuardsAndResolvers: 'always',
+    // canActivate: [AuthGuard],
+    children: [
+        { path: 'add', component: AddFlowerComponent },
+        { path: 'view', component: ViewComponent },
+    ]
+  },
   {
     path: 'cust',
     runGuardsAndResolvers: 'always',
@@ -22,8 +31,6 @@ const routes: Routes = [
     children: [
         { path: 'cart', component: CartComponent },
         { path: 'shop', component: ShopComponent },
-
-
     ]
   }
 ];

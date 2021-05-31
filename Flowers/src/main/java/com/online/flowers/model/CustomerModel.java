@@ -17,24 +17,41 @@ public class CustomerModel {
 	@Email
 	private String email;
 	
-	@NotEmpty
-	@Pattern(regexp = "(MR|MRS|MS)")
+	@NotEmpty(message = "Title cannot be empty")
+	@Pattern(regexp = "(MR|MRS|MS)", message = "Invalid title")
 	private String title;
 	
-	@NotEmpty
-	private String name;
+	@NotEmpty(message = "FirstName cannot be empty")
+	@Size(min = 2, max = 30, message = "Name count must be between 5 to 30")
+	private String firstName;
 	
-	@NotEmpty
-	@Size(min = 5, max = 45)
+	@NotEmpty(message = "LastName cannot be empty")
+	@Size(min = 2, max = 30, message = "Name count must be between 5 to 30")
+	private String lastName;
+	
+	@NotEmpty(message = "Address cannot be empty")
+	@Size(min = 5, max = 45, message = "Address count must be between 5 to 45")
 	private String address;
 	
-	@NotEmpty
-	@Size(min = 6, max = 18)
+	@NotEmpty(message = "City cannot be empty")
+	@Size(max = 30, message = "City cannot exceed 30")
+	private String city;
+	
+	@NotEmpty(message = "Country cannot be empty")
+	@Size( max = 30, message = "Country cannot exceed 30")
+	private String country;
+	
+	@NotEmpty(message = "Password cannot be empty")
+	@Size(min = 6, max = 18, message = "Password must be between 6 to 18")
 	private String password;
 	
-	@NotEmpty
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private String dob;
+//	@NotEmpty(message = "DOB cannot be empty")
+//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+//	private String dob;
+	
+	@NotEmpty(message = "contact cannot be empty")
+	@Size(min = 10, max = 10)
+	private String contact;
 	
 	
 
@@ -42,57 +59,147 @@ public class CustomerModel {
 		super();
 	}
 
-	public CustomerModel(@Email String email, @NotEmpty @Max(4) @Pattern(regexp = "(MR.|MRS.|MS.)$") String title,
-			@NotEmpty String name, @NotEmpty @Size(min = 5, max = 45) String address,
-			@NotEmpty @Size(min = 6, max = 18) String password, @NotEmpty String dob) {
+
+
+	public CustomerModel(@Email String email,
+			@NotEmpty(message = "Title cannot be empty") @Pattern(regexp = "(MR|MRS|MS)", message = "Invalid title") String title,
+			@NotEmpty(message = "FirstName cannot be empty") @Size(min = 5, max = 30, message = "Name count must be between 5 to 30") String firstName,
+			@NotEmpty(message = "LastName cannot be empty") @Size(min = 5, max = 30, message = "Name count must be between 5 to 30") String lastName,
+			@NotEmpty(message = "Address cannot be empty") @Size(min = 5, max = 45, message = "Address count must be between 5 to 45") String address,
+			@NotEmpty(message = "City cannot be empty") @Size(max = 30, message = "City cannot exceed 30") String city,
+			@NotEmpty(message = "Country cannot be empty") @Size(max = 30, message = "Country cannot exceed 30") String country,
+			@NotEmpty(message = "Password cannot be empty") @Size(min = 6, max = 18, message = "Password must be between 6 to 18") String password,
+			@NotEmpty(message = "contact cannot be empty") @Size(min = 10, max = 10) String contact) {
 		super();
 		this.email = email;
 		this.title = title;
-		this.name = name;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.address = address;
+		this.city = city;
+		this.country = country;
 		this.password = password;
-		this.dob = dob;
+		this.contact = contact;
 	}
+
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public String getName() {
-		return name;
+
+
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
+
+
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+
 
 	public String getAddress() {
 		return address;
 	}
 
+
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+
+
+	public String getCity() {
+		return city;
+	}
+
+
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
+
+	public String getCountry() {
+		return country;
+	}
+
+
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+
 
 	public String getPassword() {
 		return password;
 	}
 
+
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public String getDob() {
-		return dob;
+
+
+	public String getContact() {
+		return contact;
 	}
 
-	public void setDob(String dob) {
-		this.dob = dob;
+
+
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
+	
+	
+
+	
+
+	
+	
+	
+	
+	
+	
 	
 	
 	

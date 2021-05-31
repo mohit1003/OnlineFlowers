@@ -1,3 +1,4 @@
+import { CategoryFilter } from './../_pipes/categoryFilter.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccountComponent } from './account/account.component';
@@ -24,7 +25,8 @@ import { flowerReducer } from '../_reducers/Flower.reducer';
     LocationsComponent,
     FeedbackComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
+    CategoryFilter
   ],
   imports: [
     CommonModule,

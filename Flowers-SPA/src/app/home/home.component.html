@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <div class="container-fluid">
+    <div class="row content">
+      <div class="col-sm-3 sidenav">
+        <div class="col-md-12">
+          <div class="card-body">
+            <p class="login-card-description">
+            <h4 class="sr-only">Sign in</h4>
+            <form class="mt-4" [formGroup]="loginForm" (ngSubmit)="login()">
+              <div class="form-group mb-3">
+                <label for="email" class="sr-only">Email</label>
+                <input type="email"
+                formControlName="email"
+                [ngClass]="{'is-invalid':loginForm.get('email').errors && loginForm.get('email').touched}"
+                name="email"
+                id="email" class="form-control" placeholder="Email address">
+
+                <div class="invalid-feedback" style="background-color:azure"
+                    *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('required')">Email is
+                    required</div>
+                  <div class="invalid-feedback" style="background-color:azure" *ngIf="loginForm.get('email').hasError('pattern')">Email is Invalid
+                  </div>
+              </div>
+              <div class="form-group mb-4">
+                <label for="password" class="sr-only">Password</label>
+                <input
+                formControlName="password"
+                [ngClass]="{'is-invalid':loginForm.get('password').errors && loginForm.get('password').touched}"
+                type="password" name="password" id="password" class="form-control" placeholder="***********">
+
+                <div class="invalid-feedback" style="background-color:azure" *ngIf="loginForm.get('password').hasError('required')
+                  && loginForm.get('password').touched">Password is required</div>
+              </div>
+              <input name="login" id="login" class="btn btn-primary mb-3" [disabled]="!loginForm.valid" type="submit" value="Login">
+            </form>
+            <a class=" sr-only mt-3">Change password</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <h4><small>Online flowers</small></h4>
+        <hr>
+        <div class="container">
+          <div class="row">
+            <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+              <div class="form-row">
+                <div class="form-group col-md-12 m-2">
+                  <label for="inputEmail">Email</label>
+                  <input type="email" formControlName="email" class="form-control"
+                    [ngClass]="{'is-invalid':registerForm.get('email').errors && registerForm.get('email').touched}"
+                    id="inputEmail" placeholder="email">
+
+                  <div class="invalid-feedback"
+                    *ngIf="registerForm.get('email').touched && registerForm.get('email').hasError('required')">Email is
+                    required</div>
+                  <div class="invalid-feedback" *ngIf="registerForm.get('email').hasError('pattern')">Email is Invalid
+                  </div>
+
+                </div>
+
+                <div class="form-group col-md-12 m-2">
+                  <label for="inputPassword">First Name</label>
+                  <input type="text" formControlName="firstName" class="form-control"
+                    [ngClass]="{'is-invalid':registerForm.get('firstName').errors && registerForm.get('firstName').touched}"
+                    id="firstName" placeholder="First Name">
+
+                  <div class="invalid-feedback" *ngIf="registerForm.get('firstName').hasError('required')
+                    && registerForm.get('firstName').touched">First Name is required</div>
+
+                  <div class="invalid-feedback" *ngIf="registerForm.get('firstName').hasError('minlength')
+                      && registerForm.get('firstName').touched">First Name should be at least 2 characters
+                  </div>
+
+                  <div class="invalid-feedback" *ngIf="registerForm.get('firstName').hasError('maxlength')
+                      && registerForm.get('firstName').touched">First Name cannot exceed 30 characters</div>
+                </div>
+
+                <div class="form-group col-md-12 m-2">
+                  <label for="inputPassword">Last Name</label>
+                  <input type="text" formControlName="lastName" class="form-control"
+                    [ngClass]="{'is-invalid':registerForm.get('lastName').errors && registerForm.get('lastName').touched}"
+                    id="lastName" placeholder="Last Name">
+
+                  <div class="invalid-feedback" *ngIf="registerForm.get('lastName').hasError('required')
+                    && registerForm.get('lastName').touched">Last Name is required</div>
+
+                  <div class="invalid-feedback" *ngIf="registerForm.get('lastName').hasError('minlength')
+                      && registerForm.get('lastName').touched">Last Name should be at least 2 characters
+                  </div>
+
+                  <div class="invalid-feedback" *ngIf="registerForm.get('lastName').hasError('maxlength')
+                      && registerForm.get('lastName').touched">Last Name cannot exceed 30 characters</div>
+                </div>
+
+                <div class="form-group col-md-12 m-2">
+                  <label for="inputContact">Contact</label>
+                  <input type="text" formControlName="contact" class="form-control"
+                    [ngClass]="{'is-invalid':registerForm.get('contact').errors && registerForm.get('contact').touched}"
+                    id="inputContact" placeholder="contact">
+
+                  <div class="invalid-feedback"
+                    *ngIf="registerForm.get('contact').touched && registerForm.get('contact').hasError('required')">
+                    Contact is required</div>
+                  <div class="invalid-feedback" *ngIf="registerForm.get('contact').hasError('minlength')
+                    && registerForm.get('contact').touched">Contact must be of 10 numbers
+                  </div>
+
+                  <div class="invalid-feedback" *ngIf="registerForm.get('contact').hasError('maxlength')
+                    && registerForm.get('contact').touched">Contact must be of 10 numbers</div>
+                </div>
+              </div>
+              <div class="form-group col-md-12 m-2">
+                <label for="inputPassword">Password</label>
+                <input type="password" formControlName="password" class="form-control"
+                  [ngClass]="{'is-invalid':registerForm.get('password').errors && registerForm.get('password').touched}"
+                  id="inputPassword" placeholder="Password">
+
+                <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('required')
+                  && registerForm.get('password').touched">Password is required</div>
+
+                <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('minlength')
+                    && registerForm.get('password').touched">Password should be at least 6 characters
+                </div>
+
+                <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('maxlength')
+                    && registerForm.get('password').touched">Password cannot exceed 18 characters</div>
+              </div>
+
+              <div class="form-group col-md-12 m-2">
+                <label for="inputPasswordRetype">Re-type Password</label>
+                <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{'is-invalid': registerForm.get('confirmPassword').errors
+                    && registerForm.get('confirmPassword').touched
+                    || registerForm.get('confirmPassword').touched
+                    && registerForm.hasError('mismatch')}" id="inputPasswordRetype" placeholder="Password">
+
+                <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword').hasError('required')
+                    && registerForm.get('confirmPassword').touched">
+                  Password is required
+                </div>
+
+                <div class="invalid-feedback" *ngIf="registerForm.hasError('mismatch')
+                      && registerForm.get('confirmPassword').touched">
+                  Passwords must match
+                </div>
+              </div>
+              <div class="form-group m-2 col-md-12">
+                <label for="inputAddress">Address</label>
+                <textarea class="form-control" col="5" rows="4" id="inputAddress"
+                  [ngClass]="{'is-invalid':registerForm.get('address').errors && registerForm.get('address').touched}"
+                  formControlName="address" placeholder="1234 Main St city pincode">
+              </textarea>
+
+                <div class="invalid-feedback"
+                  *ngIf="registerForm.get('address').touched && registerForm.get('address').hasError('required')">
+                  Address is required</div>
+                <div class="invalid-feedback" *ngIf="registerForm.get('address').hasError('minlength')
+                    && registerForm.get('address').touched">Address cannot be less than 5</div>
+                <div class="invalid-feedback" *ngIf="registerForm.get('address').hasError('maxlength')
+                    && registerForm.get('address').touched">Address cannot exceed 45 characters</div>
+              </div>
+
+              <div class="form-group col-md-12 m-2">
+                <label for="inputCity">City</label>
+                <input type="email" formControlName="city" class="form-control"
+                  [ngClass]="{'is-invalid':registerForm.get('city').errors && registerForm.get('city').touched}"
+                  id="inputCity" placeholder="City">
+
+                <div class="invalid-feedback"
+                  *ngIf="registerForm.get('city').touched && registerForm.get('city').hasError('required')">City is
+                  required</div>
+                <div class="invalid-feedback"
+                  *ngIf="registerForm.get('city').touched && registerForm.get('city').hasError('maxlength')">City name
+                  exceeds max limit</div>
+              </div>
+
+              <div class="form-group col-md-12 m-2">
+                <label for="inputCountry">Country</label>
+                <input type="email" formControlName="country" class="form-control"
+                  [ngClass]="{'is-invalid':registerForm.get('country').errors && registerForm.get('country').touched}"
+                  id="inputCountry" placeholder="Country">
+
+                <div class="invalid-feedback"
+                  *ngIf="registerForm.get('country').touched && registerForm.get('country').hasError('required')">
+                  Country is
+                  required</div>
+                <div class="invalid-feedback"
+                  *ngIf="registerForm.get('country').touched && registerForm.get('country').hasError('maxlength')">
+                  Country name exceeds max limit</div>
+              </div>
+
+
+              <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+              <div class="col-sm-10 m-2">
+                <div class="form-check">
+                  <input class="form-check-input"
+                    [ngClass]="{'is-invalid':registerForm.get('title').errors && registerForm.get('title').touched}"
+                    formControlName="title" type="radio" name="title" id="gridRadios1" value="MR" checked>
+                  <label class="form-check-label" for="gridRadios1">
+                    Male
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                    [ngClass]="{'is-invalid':registerForm.get('title').errors && registerForm.get('title').touched}"
+                    formControlName="title" type="radio" name="title" id="gridRadios2" value="MRS">
+                  <label class="form-check-label" for="gridRadios2">
+                    Female
+                  </label>
+                  <div class="invalid-feedback"
+                    *ngIf="registerForm.get('title').touched && registerForm.get('title').hasError('required')">Please
+                    select your gender</div>
+                </div>
+                <!-- <div class="form-check">
+                <input
+                class="form-check-input"
+                [ngClass]="{'is-invalid':registerForm.get('gender').errors && registerForm.get('gender').touched}"
+                formControlName="gender"
+                type="radio"
+                name="gender"
+                id="gridRadios3"
+                value="MR">
+                <label class="form-check-label" for="gridRadios3">
+                  Other
+                </label>
+                <div class="invalid-feedback"  *ngIf="registerForm.get('gender').touched && registerForm.get('gender').hasError('required')">Please select your gender</div>
+              </div> -->
+              </div>
+
+              <button [disabled]="!registerForm.valid" type="submit" class="btn btn-primary m-4">Register</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3 m-5 p-5">
+        <svg width="200" height="200" viewBox="13 -4 461 455" xmlns="http://www.w3.org/2000/svg"
+          xmlns:bx="https://www.boxy-svg.com/bx">
+          <g>
+            <g transform="matrix(1.013029, -2.172449, 0.805123, 0.375435, -239.771591, 474.13916)">
+              <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                style="stroke: none; fill: rgba(222, 45, 94, 0.74902);" bx:origin="0.265 0.5" />
+              <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                style="stroke: none; fill: rgba(222, 45, 94, 0.74902);" bx:origin="0.729 0.5" />
+            </g>
+            <g transform="matrix(-1.013029, 2.172449, -0.805123, -0.375435, 723.009949, -31.281298)">
+              <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                style="stroke: none; fill: rgba(222, 44, 94, 0.74902);" bx:origin="0.265 0.5" />
+              <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                style="stroke: none; fill: rgba(222, 44, 94, 0.74902);" bx:origin="0.729 0.5" />
+            </g>
+            <g transform="matrix(-2.172449, 1.01303, -0.375434, -0.805124, 764.117188, 339.656342)">
+              <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                style="stroke: none; fill: rgba(105, 191, 237, 0.74902);" bx:origin="0.265 0.5" />
+              <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                style="stroke: none; fill: rgba(105, 191, 237, 0.74902);" bx:origin="0.729 0.5" />
+            </g>
+            <g transform="matrix(2.252473, -0.819834, 0.303835, 0.834781, -276.796417, 66.121117)">
+              <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                style="stroke: none; fill: rgba(105, 191, 237, 0.74902);" bx:origin="0.265 0.5" />
+              <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                style="stroke: none; fill: rgba(105, 191, 237, 0.74902);" bx:origin="0.729 0.5" />
+            </g>
+            <g transform="matrix(-0.819834, -2.252474, 0.834782, -0.303835, 84.025528, 743.653931)">
+              <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                style="stroke: none; fill: rgba(105, 191, 237, 0.74902);" bx:origin="0.265 0.5" />
+              <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                style="stroke: none; fill: rgba(105, 191, 237, 0.74902);" bx:origin="0.729 0.5" />
+            </g>
+            <g transform="matrix(0.819834, 2.252473, -0.834781, 0.303835, 405.30777, -296.224701)">
+              <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                style="stroke: none; fill: rgba(105, 191, 237, 0.74902);" bx:origin="0.265 0.5" />
+              <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                style="stroke: none; fill: rgba(105, 191, 237, 0.74902);" bx:origin="0.729 0.5" />
+            </g>
+            <g transform="matrix(-2.172449, -1.013029, 0.375435, -0.805123, 494.329376, 705.10553)">
+              <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                style="stroke: none; fill: rgba(168, 66, 171, 0.74902);" bx:origin="0.265 0.5" />
+              <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                style="stroke: none; fill: rgba(168, 66, 171, 0.74902);" bx:origin="0.729 0.5" />
+            </g>
+            <g transform="matrix(2.172449, 1.013029, -0.375435, 0.805123, -10.540039, -257.099365)">
+              <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                style="stroke: none; fill: rgba(168, 66, 171, 0.74902);" bx:origin="0.265 0.5" />
+              <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                style="stroke: none; fill: rgba(168, 66, 171, 0.74902);" bx:origin="0.729 0.5" />
+            </g>
+            <g>
+              <g transform="matrix(0.678571, 0, 0, 0.717326, 121.009552, -24.106068)">
+                <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.265 0.5" />
+                <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.729 0.5" />
+              </g>
+              <g transform="matrix(0, 0.678571, -0.717326, 0, 492.233185, 101.835365)">
+                <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.265 0.5" />
+                <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.729 0.5" />
+              </g>
+              <g transform="matrix(0, 0.678571, -0.717326, 0, 314.712097, 103.359146)">
+                <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.265 0.5" />
+                <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.729 0.5" />
+              </g>
+              <g transform="matrix(0.678571, 0, 0, 0.717326, 122.53334, 153.415024)">
+                <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.265 0.5" />
+                <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.729 0.5" />
+              </g>
+              <g transform="matrix(0.479822, 0.479822, -0.507226, 0.507226, 338.366028, -43.240444)">
+                <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.265 0.5" />
+                <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.729 0.5" />
+              </g>
+              <g transform="matrix(-0.479822, -0.479822, 0.507226, -0.507226, 148.681854, 489.907806)">
+                <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.265 0.5" />
+                <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.729 0.5" />
+              </g>
+              <g transform="matrix(0.479822, -0.479822, 0.507226, 0.507226, -23.812111, 129.253433)">
+                <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.265 0.5" />
+                <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.729 0.5" />
+              </g>
+              <g transform="matrix(-0.479822, 0.479822, -0.507226, -0.507226, 509.336121, 317.41394)">
+                <path d="M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.265 0.5" />
+                <path d="M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903"
+                  style="stroke: none; fill: rgb(229, 241, 50);" bx:origin="0.729 0.5" />
+              </g>
+              <ellipse style="fill: rgb(222, 141, 20);" cx="242.767" cy="223.713" rx="26.285" ry="25.904" />
+            </g>
+          </g>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="container-fluid">
+    <p>Footer Text</p>
+  </footer>
+
+</body>
+
+</html>
