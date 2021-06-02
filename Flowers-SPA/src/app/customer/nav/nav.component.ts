@@ -1,3 +1,4 @@
+import { FileService } from 'src/app/_service/FileService';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -10,9 +11,13 @@ export class NavComponent implements OnInit {
 
   @Input() shoppingCartCount: number;
 
-  constructor() { }
+  constructor(private fileService:FileService) { }
 
   ngOnInit(): void {
+  }
+
+  logout(){
+    this.fileService.logout();
   }
 
 }

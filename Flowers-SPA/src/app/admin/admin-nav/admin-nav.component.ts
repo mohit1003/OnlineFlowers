@@ -1,4 +1,6 @@
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Component, OnInit } from '@angular/core';
+import { FileService } from 'src/app/_service/FileService';
 
 @Component({
   selector: 'app-admin-nav',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-nav.component.css']
 })
 export class AdminNavComponent implements OnInit {
-
-  constructor() { }
+  modalRef!: BsModalRef;
+  constructor(private fileService: FileService) { }
 
   ngOnInit(): void {
+  }
+
+  logout(){
+    this.fileService.logout();
   }
 
 }

@@ -17,11 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.online.flowers.dto.Message;
 import com.online.flowers.model.FlowersModel;
+import com.online.flowers.model.ShopModel;
 import com.online.flowers.repo.FlowersRepo;
+import com.online.flowers.repo.ShopRepo;
 
 @Service
 public class FlowersService {
@@ -35,7 +38,7 @@ public class FlowersService {
 	@Autowired
 	private FlowersRepo flowersRepo;
 	
-	
+
 	public String saveImage(MultipartFile file, String name, String category, String price, String description) {
 		BufferedImage bi = null;
 		try {
@@ -58,7 +61,7 @@ public class FlowersService {
 		}
 		
 		FlowersModel flowerImage = new 
-				FlowersModel((String)result.get("original_filename"), 
+				FlowersModel(name, 
 							(String)result.get("url"),
 							(String)result.get("public_id"),
 							category, 
@@ -67,6 +70,7 @@ public class FlowersService {
 		flowersRepo.save(flowerImage);
 		return "ok";
 	}
+	
 	
 	public String updateFlower(String id, MultipartFile file, String name, String category, String price, String description) {
 		BufferedImage bi = null;
@@ -112,14 +116,8 @@ public class FlowersService {
 		return "ok";
 	}
 	
-	public String updateFlowerWithoutImage(FlowersModel flower) {
-		
-//		Map result = null;
-		//cloudinaryService.delete(getPublicIdById(flowerId));
-		
-		
-		//FlowersModel flowerImage = new FlowersModel(Integer.parseInt(id), name, category, price, description);
-		
+	public String updateFlowerWithoutImage(FlowersModel flower) {	
+
 		flowersRepo.save(flower);
 		return "ok";
 	}
@@ -130,40 +128,15 @@ public class FlowersService {
 	}
 	
 	
+	public List<FlowersModel> list(){
+        return flowersRepo.findByOrderById();
+    }
 	
-//	public static byte[] compressBytes(byte[] data) {
-//		Deflater deflater = new Deflater();
-//		deflater.setInput(data);
-//		deflater.finish();
-//		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
-//		byte[] buffer = new byte[2048];
-//		while (!deflater.finished()) {
-//			int count = deflater.deflate(buffer);
-//			outputStream.write(buffer, 0, count);
-//		}
-//		try {
-//			outputStream.close();
-//		} catch (IOException e) {
-//		}
-//		System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
-//		return outputStream.toByteArray();
-//	}
-//	
-//	public static byte[] decompressBytes(byte[] data) {
-//		Inflater inflater = new Inflater();
-//		inflater.setInput(data);
-//		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
-//		byte[] buffer = new byte[1024];
-//		try {
-//			while (!inflater.finished()) {
-//				int count = inflater.inflate(buffer);
-//				outputStream.write(buffer, 0, count);
-//			}
-//			outputStream.close();
-//		} catch (IOException ioe) {
-//		} catch (DataFormatException e) {
-//		}
-//		return outputStream.toByteArray();
-//	}
+	public void deleteFlower(String id){
+    	flowersRepo.deleteById(Integer.parseInt(id));
+    }
+	
+	
+	
 
 }

@@ -23,11 +23,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.online.flowers.dto.Message;
 import com.online.flowers.model.CustomerModel;
 import com.online.flowers.model.FlowersModel;
+import com.online.flowers.model.ShopModel;
 import com.online.flowers.repo.CustomerRepo;
 import com.online.flowers.repo.FlowersRepo;
+import com.online.flowers.repo.ShopRepo;
 import com.online.flowers.service.ClaudinaryService;
 import com.online.flowers.service.FlowersService;
 import com.online.flowers.service.ImageService;
+import com.online.flowers.service.ShopService;
 import com.online.flowers.util.AuthRequest;
 import com.online.flowers.util.JwtUtil;
 
@@ -37,15 +40,18 @@ public class FlowersController {
 
 	@Autowired
 	private FlowersService flowersService;
-
+	
 	@Autowired
-	private ImageService imageService;
+	private ShopService shopService;
 
 	@Autowired
 	private FlowersRepo _repo;
 	
 	@Autowired
 	private CustomerRepo _custRepo;
+	
+	@Autowired
+	private ShopRepo _shoprepo;
 
 	@Autowired
 	private ClaudinaryService cloudinaryService;
@@ -153,17 +159,17 @@ public class FlowersController {
 
 	@GetMapping(value = "/getAllFlowers")
 	public ResponseEntity<List<FlowersModel>> list() {
-		List<FlowersModel> list = imageService.list();
+		List<FlowersModel> list = flowersService.list();
 		return new ResponseEntity<List<FlowersModel>>(list, HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "delete")
-	public ResponseEntity<String> delete(@RequestBody Map<String, String> id) {
+	public ResponseEntity<?> delete(@RequestBody Map<String, String> id) {
 		String flowerId = id.get("id");
 		if (!id.get("id").isEmpty()) {
 			try {
 				cloudinaryService.delete(flowersService.getPublicIdById(flowerId));
-				imageService.delete(flowerId);
+				flowersService.deleteFlower(flowerId);
 				return new ResponseEntity(new Message("Image deleted"), HttpStatus.OK);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -176,6 +182,26 @@ public class FlowersController {
 
 	public Optional<FlowersModel> getImage(Integer id) {
 		return _repo.findById(id);
+	}
+	
+	
+	
+	@PostMapping(value = "/addShop")
+	public ResponseEntity<?> addShop(@RequestParam("shopImage") MultipartFile shopImage, 
+			@RequestParam("shopName") String shopName, @RequestParam("shopCity") String shopCity,
+			@RequestParam("shopCountry") String shopCountry, @RequestParam("shopAddress") String shopAddress,
+			@RequestParam("isOpen") String isOpen, @RequestParam("shopContact") String shopContact){
+		String message = shopService.saveShop(shopImage, shopName, shopCity, shopCountry, shopAddress, isOpen, shopContact);
+		if (message.equals("Image not valid")) {
+			return new ResponseEntity(new Message("Shop not added"), HttpStatus.CONFLICT);
+		} else {
+			return new ResponseEntity(new Message("Shop added successfully"), HttpStatus.CREATED);
+		}		
+	}
+	
+	@GetMapping(value = "/getAllShops")
+	public List<ShopModel> getShop(){
+		return _shoprepo.findAll();
 	}
 
 }

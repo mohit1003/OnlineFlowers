@@ -8,19 +8,22 @@
    <form (ngSubmit)="addFlower()" #addForm="ngForm">
      <div class="form-group">
        <label for="name"> Name</label>
-       <input type="text" [(ngModel)]="name" name="name" class="form-control" id="name" placeholder="Enter the Image file name" required>
+       <input type="text" [(ngModel)]="name" #nameFeild="ngModel" name="name" class="form-control" id="name" placeholder="Enter the Image file name" required>
+        <small *ngIf="nameFeild.touched && !nameFeild.valid"> Enter Image name</small>
      </div>
      <div class="form-group">
       <label for="price"> Price</label>
-      <input type="text" [(ngModel)]="price"  name="price" class="form-control" id="price" placeholder="Enter the Image file name" required>
+      <input type="text" [(ngModel)]="price" #priceFeild="ngModel" name="price" class="form-control" id="price" placeholder="Enter the Image file name" required>
+      <small *ngIf="priceFeild.touched && !priceFeild.valid"> Enter amount</small>
       </div>
      <div class="form-group">
        <label for="description"  required="required">Description</label>
-       <input type="text" [(ngModel)]="description" name="description" class="form-control" id="description" placeholder="describe image">
+       <input type="text" [(ngModel)]="description" #descriptionFeild="ngModel" name="description" class="form-control" id="description" placeholder="describe image" required>
+       <small *ngIf="descriptionFeild.touched && !descriptionFeild.valid"> Enter description</small>
      </div>
      <div class="form-group">
        <label for="categoty">Category</label>
-       <select [(ngModel)]="category" class="form-control" id="categoty" name="categoty" required>
+       <select [(ngModel)]="category" #categoryFeild="ngModel" class="form-control" id="categoty" name="categoty" required>
         <option value="">Please select an option</option>
          <option value="birthday">Birthday</option>
          <option value="love">Love</option>
@@ -28,6 +31,7 @@
          <option value="grandOpening">Grand-opening</option>
          <option value="sympathy">Sympathy</option>
        </select>
+       <small *ngIf="categoryFeild.touched && !categoryFeild.valid"> Enter category</small>
      </div>
      <hr>
      <div class="form-group mt-3">
@@ -35,7 +39,7 @@
        <input (change)="onFileChanged($event)" type="file" accept="image/*" name="file">
      </div>
      <hr>
-     <button type="submit" class="btn btn-primary">Submit</button>
+     <button [disabled]="!addForm.valid" type="submit" class="btn btn-primary">Submit</button>
    </form>
 </div>
 

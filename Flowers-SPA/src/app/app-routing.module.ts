@@ -1,3 +1,4 @@
+import { LoginGuard } from './_guards/loginGuard.service';
 import { HomeComponent } from './home/home.component';
 import { AddFlowerComponent } from './admin/add-flower/add-flower.component';
 import { NgModule } from '@angular/core';
@@ -8,6 +9,7 @@ import { ContactComponent } from './customer/contact/contact.component';
 import { LocationsComponent } from './customer/locations/locations.component';
 import { FeedbackComponent } from './customer/feedback/feedback.component';
 import { CartComponent } from './customer/cart/cart.component';
+import { ShopsComponent } from './admin/shops/shops.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,10 +20,11 @@ const routes: Routes = [
   {
     path: 'admin',
     runGuardsAndResolvers: 'always',
-    // canActivate: [AuthGuard],
+    canActivate: [ LoginGuard ],
     children: [
         { path: 'add', component: AddFlowerComponent },
         { path: 'view', component: ViewComponent },
+        { path: 'shops', component: ShopsComponent }
     ]
   },
   {
@@ -29,7 +32,7 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     // canActivate: [AuthGuard],
     children: [
-        { path: 'cart', component: CartComponent },
+        { path: 'cart', component: CartComponent, canActivate: [LoginGuard] },
         { path: 'shop', component: ShopComponent },
     ]
   }

@@ -2,6 +2,9 @@ import { Flower } from './../../_model/Flower';
 
 import { FileService } from './../../_service/FileService';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import * as alertify from 'alertifyjs';
 
 @Component({
   selector: 'app-add-flower',
@@ -10,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddFlowerComponent implements OnInit {
 
-  constructor(private fileService: FileService) { }
+  constructor(private fileService: FileService, private fb: FormBuilder) { }
 
   flower!: Flower;
   name!: string;
@@ -19,11 +22,25 @@ export class AddFlowerComponent implements OnInit {
   flowerImage!:File
   price!: string;
 
-  ngOnInit(): void {}
+  addForm: FormGroup;
+
+  ngOnInit(): void {
+    // this.createAddForm();
+  }
+
+  // createAddForm() {
+  //   this.addForm  = this.fb.group({
+  //     name: ['',[ Validators.required]],
+  //     price: ['', [ Validators.required]],
+  //     description: ['', [ Validators.required]],
+  //     category: ['', [ Validators.required]],
+  //     image: ['' ,[ Validators.required]]
+  //   })
+  // }
+
 
   onFileChanged(event:any) {
     this.flowerImage = event.target.files[0];
-    // console.log(this.flowerImage);
   }
 
   addFlower() {
@@ -37,9 +54,9 @@ export class AddFlowerComponent implements OnInit {
     // console.log(this.price);
 
     this.fileService.postPhoto(flower).subscribe((data) =>{
-      console.log(data);
+      alertify.success('Uploaded successfully');
     }, err=> {
-      console.log(err);
+      alertify.error('Error uploading image');
     })
   }
 

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FileService } from '../_service/FileService';
 
 import * as alertify from 'alertifyjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
   token: string;
 
 
-  constructor(private fb: FormBuilder, private fileService: FileService) {
+  constructor(private fb: FormBuilder, private fileService: FileService,
+    private router: Router) {
     this.initializeRegisterForm();
     this.initializeLoginForm();
 
@@ -66,7 +68,10 @@ export class HomeComponent implements OnInit {
     this.user = Object.assign({}, this.loginForm.value);
     // console.log(this.user);
     this.fileService.getToken(this.user).subscribe(token => {
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', JSON.stringify(token));
+      if(this.fileService.redirectUrl !== undefined) {
+        this.router.navigateByUrl(this.fileService.redirectUrl);
+      }
       alertify.success('Login success')
     }, error =>{
       console.log(error);

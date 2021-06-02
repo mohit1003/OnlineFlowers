@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FileService } from 'src/app/_service/FileService';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fileService:FileService) { }
 
   ngOnInit(): void {
+  }
+
+  logout(){
+    this.fileService.logout();
   }
 
 }

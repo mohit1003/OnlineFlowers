@@ -25,6 +25,11 @@
             <a class="nav-link" [routerLink]="['/cust/cart']" routerLinkActive="router-link-active text-bold" >Cart<a style="margin: 0px; padding: 0px" *ngIf="shoppingCartCount !== undefined"> ({{shoppingCartCount}})</a></a>
           </li>
       </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" (click)="logout()">Logout</a>
+        </li>
+      </ul>
       <!-- Left links -->
     </div>
     <!-- Collapsible wrapper -->
