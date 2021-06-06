@@ -18,6 +18,7 @@ export class ViewComponent implements OnInit {
     private modalService: BsModalService, private router: Router) { }
 
   flowers: Flower[] = [];
+  flowersCopy: Flower[] = [];
   flowerToEdit!: Flower;
   flowerImage!:File
   category!: string;
@@ -101,10 +102,32 @@ export class ViewComponent implements OnInit {
     }
   }
 
-  openEditModel(template: TemplateRef<any>, id:string){
+  openEditModel(template: TemplateRef<any>, id:string): void{
     this.flowerToEdit = Object.assign(this.flowers.filter(flower => flower.id === id));
     this.flowerToEdit = this.flowerToEdit[0];
     this.modalRef = this.modalService.show(template);
   }
+
+  sort(key: string): void{
+    this.flowersCopy = this.flowers;
+    if(key === 'price') {
+      this.flowers = this.flowersCopy.sort(this.sortByPrice);
+    }
+
+    if(key === 'category') {
+      this.flowers = this.flowersCopy.sort(this.sortByCategory);
+    }
+  }
+
+  sortByPrice(flower1: Flower, flower2: Flower): number {
+    return parseInt(flower1.price) - parseInt(flower2.price);
+  }
+
+  sortByCategory(flower1: Flower, flower2: Flower) :number {
+    if(flower1.category > flower2.category) return 1;
+    else if(flower1.category === flower2.category) return 0;
+    else return -1;
+  }
+
 
 }

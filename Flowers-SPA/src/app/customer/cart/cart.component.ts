@@ -30,7 +30,7 @@ export class CartComponent implements OnInit {
 
   sales: Transaction;
 
-  checkoutButtonClicked: boolean = false;
+  checkoutButtonClicked: boolean
 
   customer: User;
 
@@ -65,6 +65,7 @@ export class CartComponent implements OnInit {
     }
     this.calculateTotal();
     this.proceedBuy();
+    this.checkoutButtonClicked = false;
   }
 
   calculateTotal() {

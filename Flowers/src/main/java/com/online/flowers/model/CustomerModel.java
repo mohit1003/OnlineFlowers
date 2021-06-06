@@ -1,7 +1,14 @@
 package com.online.flowers.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -53,6 +60,8 @@ public class CustomerModel {
 	@Size(min = 10, max = 10)
 	private String contact;
 	
+	
+		
 	
 
 	public CustomerModel() {
@@ -189,6 +198,9 @@ public class CustomerModel {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
+
+
+	
 	
 	
 

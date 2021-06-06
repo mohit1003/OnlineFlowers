@@ -9,18 +9,19 @@ import * as alertify from 'alertifyjs';
 @Component({
   selector: 'app-add-flower',
   templateUrl: './add-flower.component.html',
-  styleUrls: ['./add-flower.component.css']
+  styleUrls: ['./add-flower.component.css'],
 })
 export class AddFlowerComponent implements OnInit {
-
-  constructor(private fileService: FileService, private fb: FormBuilder) { }
+  constructor(private fileService: FileService, private fb: FormBuilder) {}
 
   flower!: Flower;
   name!: string;
   description!: any;
   category: any;
-  flowerImage!:File
+  flowerImage!: File;
   price!: string;
+
+  fileAttached: boolean = false;
 
   addForm: FormGroup;
 
@@ -38,26 +39,36 @@ export class AddFlowerComponent implements OnInit {
   //   })
   // }
 
-
-  onFileChanged(event:any) {
-    this.flowerImage = event.target.files[0];
+  onFileChanged(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      this.flowerImage = event.target.files[0];
+      this.fileAttached = true;
+    } else {
+      this.fileAttached = false;
+    }
   }
 
   addFlower() {
-    const flower = new FormData();
-    flower.append('flowerImage', this.flowerImage, this.flowerImage.name);
-    flower.append('name', this.flowerImage.name);
-    flower.append('description', this.description);
-    flower.append('category', this.category);
-    flower.append('price', this.price);
+    if (this.fileAttached) {
+      const flower = new FormData();
+      flower.append('flowerImage', this.flowerImage, this.flowerImage.name);
+      flower.append('name', this.flowerImage.name);
+      flower.append('description', this.description);
+      flower.append('category', this.category);
+      flower.append('price', this.price);
 
-    // console.log(this.price);
+      // console.log(this.price);
 
-    this.fileService.postPhoto(flower).subscribe((data) =>{
-      alertify.success('Uploaded successfully');
-    }, err=> {
-      alertify.error('Error uploading image');
-    })
+      this.fileService.postPhoto(flower).subscribe(
+        (data) => {
+          alertify.success('Uploaded successfully');
+        },
+        (err) => {
+          alertify.error('Error uploading image');
+        }
+      );
+    } else {
+      alertify.error('All fields are required');
+    }
   }
-
 }

@@ -13,7 +13,7 @@
      </div>
      <div class="form-group">
       <label for="price"> Price</label>
-      <input type="text" [(ngModel)]="price" #priceFeild="ngModel" name="price" class="form-control" id="price" placeholder="Enter the Image file name" required>
+      <input type="number" [(ngModel)]="price" #priceFeild="ngModel" name="price" class="form-control" id="price" placeholder="Enter the Image file name" required>
       <small *ngIf="priceFeild.touched && !priceFeild.valid"> Enter amount</small>
       </div>
      <div class="form-group">

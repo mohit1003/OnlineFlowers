@@ -1,5 +1,0 @@
-package com.online.flowers.filters;
-
-public class JwtFilter {
-
-}

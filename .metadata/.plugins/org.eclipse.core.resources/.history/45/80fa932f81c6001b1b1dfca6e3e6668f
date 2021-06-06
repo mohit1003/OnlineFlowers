@@ -1,0 +1,26 @@
+package com.online.flowers.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.online.flowers.dto.Sales;
+import com.online.flowers.model.SalesModel;
+import com.online.flowers.repo.SalesRepo;
+
+@Service
+public class SalesService {
+	
+	@Autowired
+	private SalesRepo _salesRepo;
+	
+	public String recordTransaction(Sales flowersPaymentDone) {
+		Optional.ofNullable(flowersPaymentDone).ifPresent(flowers -> {
+			SalesModel transaction = new SalesModel();
+			transaction.
+		});
+		
+	}
+
+}

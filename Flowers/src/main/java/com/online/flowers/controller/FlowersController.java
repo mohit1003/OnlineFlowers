@@ -1,6 +1,7 @@
 package com.online.flowers.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -20,16 +21,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.online.flowers.dto.Customer;
 import com.online.flowers.dto.Message;
+import com.online.flowers.dto.Sales;
 import com.online.flowers.model.CustomerModel;
 import com.online.flowers.model.FlowersModel;
+import com.online.flowers.model.SalesModel;
 import com.online.flowers.model.ShopModel;
 import com.online.flowers.repo.CustomerRepo;
 import com.online.flowers.repo.FlowersRepo;
+import com.online.flowers.repo.SalesRepo;
 import com.online.flowers.repo.ShopRepo;
 import com.online.flowers.service.ClaudinaryService;
+import com.online.flowers.service.CustomerService;
 import com.online.flowers.service.FlowersService;
 import com.online.flowers.service.ImageService;
+import com.online.flowers.service.SalesService;
 import com.online.flowers.service.ShopService;
 import com.online.flowers.util.AuthRequest;
 import com.online.flowers.util.JwtUtil;
@@ -43,6 +50,9 @@ public class FlowersController {
 	
 	@Autowired
 	private ShopService shopService;
+	
+	@Autowired
+	private SalesService _salesService;
 
 	@Autowired
 	private FlowersRepo _repo;
@@ -61,6 +71,12 @@ public class FlowersController {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private CustomerService _customerService;
+	
+	@Autowired
+	private SalesRepo _salesRepo;
 	
 	int registerFlag = 0;
 	
@@ -117,6 +133,10 @@ public class FlowersController {
 		return jwtutil.generateToken(authRequest.getEmail());
 	}
 	
+	@PostMapping(value = "/getUserByEmail")
+	public Optional<ResponseEntity<Customer>> getCustomerByEmail(@RequestBody String email) {
+		return Optional.ofNullable(new ResponseEntity<Customer>(_customerService.ConvertToCustomerDtoAndSend(email), HttpStatus.OK));
+	} 
 
 	@PostMapping(value = "/add")
 	public ResponseEntity<?> saveFlowerImage(@RequestParam("flowerImage") MultipartFile flower,
@@ -203,5 +223,23 @@ public class FlowersController {
 	public List<ShopModel> getShop(){
 		return _shoprepo.findAll();
 	}
+	
+	@PostMapping(value = "/pay")
+	public ResponseEntity<?> maketransaction(@RequestBody Sales flowersPaymentDone) {
+		try {
+			_salesService.recordTransaction(flowersPaymentDone);
+			return new ResponseEntity(new Message("Payment Success"), HttpStatus.CREATED);
+		} catch (SQLException e) {
+			return new ResponseEntity(new Message("Payment falied"), HttpStatus.CONFLICT);
+		} catch( Exception ex ) {
+			return new ResponseEntity(new Message("Payment falied"), HttpStatus.CONFLICT);
+		}
+		
+	}
+	
+//	@PostMapping(value = "/pay")
+//	public ResponseEntity<?> pay(@RequestBody FlowersModel flowers){
+//		
+//	}
 
 }

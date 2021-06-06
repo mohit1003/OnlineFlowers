@@ -1,0 +1,5 @@
+package com.online.flowers.repo;
+
+public interface SalesRepo {
+
+}

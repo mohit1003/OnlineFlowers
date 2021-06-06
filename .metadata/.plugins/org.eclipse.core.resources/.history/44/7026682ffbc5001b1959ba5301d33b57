@@ -1,0 +1,29 @@
+package com.online.flowers.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.online.flowers.dto.Customer;
+import com.online.flowers.model.CustomerModel;
+import com.online.flowers.repo.CustomerRepo;
+
+@Service
+public class CustomerService {
+	
+	@Autowired
+	private CustomerRepo _customerRepo;
+	
+	@Autowired
+	private DtoMapperService _mapper;
+	
+	
+	
+	
+	public Customer ConvertToCustomerDtoAndSend(String customerEmail){
+		CustomerModel customerFromDB = _customerRepo.findByEmail(customerEmail);
+		
+		return _mapper.convertToCustomerDto(customerFromDB);
+	}
+	
+	
+}

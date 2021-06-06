@@ -1,6 +1,7 @@
 <app-admin-nav></app-admin-nav>
 <div class="row">
-  <div class="col-sm-3 m-3">
+  <h2 style="margin-left:7%; margin-top: 2%;">Add a shop</h2>
+  <div class="col-sm-3 m-5">
     <form (ngSubmit)="onShopManageClicked()" #addShopForm="ngForm">
       <div class="form-group">
         <label for="name"> Name</label>
@@ -33,8 +34,8 @@
 
       <div class="form-group">
         <label for="categoty">Is shop open</label>
-        <select [(ngModel)]="isOpen" #isOpenFeild="ngModel" class="form-control" id="isOpen" name="isOpen" required>
-         <option value="">Please select an option</option>
+        <select [(ngModel)]="isOpen" #isOpenFeild="ngModel" placeholder="select" class="form-control" id="isOpen" name="isOpen" required>
+         <option value="">Please select if shop is Open</option>
           <option value="open">Open</option>
           <option value="closed">Closed</option>
         </select>
