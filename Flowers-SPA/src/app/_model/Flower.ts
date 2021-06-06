@@ -7,4 +7,5 @@ export interface Flower {
   price: string;
   name: string;
   count: number;
+  userEmail: string
 }

@@ -61,7 +61,7 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{customer.name}}</td>
+              <td>{{customer.firstName}}</td>
               <td>{{customer.address}}</td>
               <td>{{customer.city}}</td>
               <td>{{customer.country}}</td>
@@ -94,7 +94,7 @@
         </table>
       </div>
     </div>
-    <button class="btn btn-warning">Proceed to pay</button>
+    <button class="btn btn-success" (click)="pay()">Proceed to pay</button>
     <button class="btn btn-secondary m-sm-5" (click)="resetCheckout()">Back</button>
   </div>
 

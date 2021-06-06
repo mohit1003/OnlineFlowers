@@ -51,22 +51,21 @@
 
   <div class="col-md-7 mt-5">
     <div class="row">
-    <div class="col " *ngFor="let shop of shops">
-      <div class="card mb-3" style="width: 18rem;" >
-        <img class="card-img-top" width="150" height="250"
-          [src]="shop.imageUrl" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title"> {{shop.shopName}}</h5>
-          <p class="card-text">{{shop.shopAddress}}</p>
-          <p class="card-text">{{shop.shopCity}}</p>
-        </div>
-        <div class="card-body">
-          <a href="#" class="card-link">8838482328</a>
+      <div class="col " *ngFor="let shop of shops">
+        <div class="card mb-3" style="width: 18rem;" >
+          <img class="card-img-top" width="150" height="250"
+            [src]="shop.imageUrl" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"> {{shop.shopName}}</h5>
+            <p class="card-text">{{shop.shopAddress}}</p>
+            <p class="card-text">{{shop.shopCity}}</p>
+          </div>
+          <div class="card-body">
+            <a href="#" class="card-link">{{shop.shopContact}}</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
   </div>
 
 </div>

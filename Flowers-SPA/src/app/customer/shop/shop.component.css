@@ -8140,17 +8140,6 @@ body {
   background: #fafafa;
   color: gray; }
 
-a {
-  -webkit-transition: .3s all ease;
-  -o-transition: .3s all ease;
-  transition: .3s all ease;
-  color: #866ec7; }
-  a:hover, a:focus {
-    text-decoration: none !important;
-    outline: none !important;
-    -webkit-box-shadow: none;
-    box-shadow: none; }
-
 button {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
@@ -8168,25 +8157,12 @@ h1, h2, h3, h4, h5,
   font-family: "Poppins", Arial, sans-serif;
   color: #000; }
 
-.ftco-section {
-  padding: 7em 0; }
-
-.ftco-no-pt {
-  padding-top: 0; }
-
-.ftco-no-pb {
-  padding-bottom: 0; }
-
 .heading-section {
   font-size: 28px;
   color: #000; }
   .heading-section small {
     font-size: 18px; }
 
-.img {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center; }
 
 .navbar {
   padding: 15px 10px;
@@ -8277,17 +8253,7 @@ h1, h2, h3, h4, h5,
           background: #6749b9 !important;
           border-color: #6749b9 !important; }
 
-a[data-toggle="collapse"] {
-  position: relative; }
 
-.dropdown-toggle::after {
-  display: block;
-  position: absolute;
-  top: 50%;
-  right: 0;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%); }
 
 @media (max-width: 991.98px) {
   #sidebarCollapse span {
@@ -8336,3 +8302,9 @@ a[data-toggle="collapse"] {
     color: rgba(0, 0, 0, 0.3); }
 
     html,body { height:100%; }
+
+    .card-img-top {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+  }

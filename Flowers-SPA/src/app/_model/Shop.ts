@@ -6,5 +6,5 @@ export interface Shop {
   shopCountry: string;
   isOpen: boolean;
   imageUrl: string;
-  contact: string;
+  shopContact: string;
 }

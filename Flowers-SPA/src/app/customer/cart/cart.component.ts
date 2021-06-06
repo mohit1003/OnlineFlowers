@@ -1,3 +1,4 @@
+import { Transaction } from './../../_model/Transaction';
 import { User } from './../../_model/User';
 import { CartModel } from './../../_model/CartModel';
 import { Observable } from 'rxjs/Observable';
@@ -7,6 +8,9 @@ import { Store } from '@ngrx/store';
 import * as FlowerActions from '../../_actions/Flower.action';
 import { DataService } from 'src/app/_service/CartService';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { FileService } from 'src/app/_service/FileService';
+import { HttpResponse } from '@angular/common/http';
+import * as alertify from 'alertifyjs';
 
 interface AppState {
   flower: Flower[];
@@ -24,13 +28,16 @@ export class CartComponent implements OnInit {
   filteredFlowersToAddCount:Flower[] = [];
   flowerToAdd: Flower;
 
+  sales: Transaction;
+
   checkoutButtonClicked: boolean = false;
 
   customer: User;
 
   total: number = 0;
 
-  constructor(private store:Store<AppState>, private dataService: DataService) {
+  constructor(private store:Store<AppState>, private dataService: DataService,
+    private fileService: FileService) {
     // this.flower = store.select('flower');
    }
 
@@ -57,6 +64,7 @@ export class CartComponent implements OnInit {
       })
     }
     this.calculateTotal();
+    this.proceedBuy();
   }
 
   calculateTotal() {
@@ -68,19 +76,37 @@ export class CartComponent implements OnInit {
 
   proceedBuy() {
     this.checkoutButtonClicked = true;
-
-    this.customer = {
-      name: 'Mohit',
-      address: 'Pune 411041',
-      contact: 9921918100,
-      title: 'MR',
-      email: '1@2',
-      password:'qwerty',
-      city: 'Pune',
-      country: 'india'
-    }
-
+    let userEmail = this.fileService.getEmailFromToken();
+    this.fileService.getUserByEmail(JSON.parse(userEmail)).subscribe((customer:HttpResponse<any>) => {
+      this.customer = Object.assign(customer.body)
+    })
   }
+
+
+
+  pay(){
+    if(this.fileService.isLoggedIn()) {
+
+      this.buildTransaction();
+      this.fileService.makeTransaction(this.sales).subscribe(data =>{
+        alertify.success('Payment Successful')
+      }, err=> {
+        alertify.error('Error making transaction');
+      })
+
+
+    }
+  }
+
+  buildTransaction(){
+    this.sales = new Transaction();
+    this.sales.customerModel = this.customer;
+    this.sales.flowersModel = this.flowersAddedIncart;
+
+    console.log(this.sales)
+  }
+
+
 
   resetCheckout(){
     this.checkoutButtonClicked = false;
