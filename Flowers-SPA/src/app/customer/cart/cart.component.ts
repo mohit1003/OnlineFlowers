@@ -91,6 +91,9 @@ export class CartComponent implements OnInit {
       this.buildTransaction();
       this.fileService.makeTransaction(this.sales).subscribe(data =>{
         alertify.success('Payment Successful')
+        this.flowersAddedIncart.forEach(flower => {
+          this.deleteFromCart(flower);
+        })
       }, err=> {
         alertify.error('Error making transaction');
       })

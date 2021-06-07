@@ -1,0 +1,162 @@
+package com.online.flowers.service;
+
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.online.flowers.dto.MaxMinSoldFlower;
+import com.online.flowers.dto.ReportingForChart;
+import com.online.flowers.dto.Sales;
+import com.online.flowers.model.CustomerModel;
+import com.online.flowers.model.DWMReportsModel;
+import com.online.flowers.model.FlowersModel;
+import com.online.flowers.model.ReportsModel;
+import com.online.flowers.model.SalesModel;
+import com.online.flowers.repo.CustomerRepo;
+import com.online.flowers.repo.DWMReportRepo;
+import com.online.flowers.repo.ReportRepo;
+import com.online.flowers.repo.SalesRepo;
+
+@Service
+public class SalesService {
+
+	@Autowired
+	private SalesRepo _salesRepo;
+
+	@Autowired
+	private CustomerRepo _customerRepo;
+
+	@Autowired
+	private ReportRepo _reportRepo;
+	
+	@Autowired
+	private DWMReportRepo _dwmReportRepo;
+
+	public void recordTransaction(Sales flowersPaymentDone) throws SQLException {
+		// Record individual transaction
+		List<Integer> listToAdd = new ArrayList<>();
+		flowersPaymentDone.getFlowersModel().forEach(flower -> {
+			SalesModel transaction = new SalesModel();
+			transaction.setDate(LocalDate.now());
+			transaction.setTime(LocalTime.now());
+			transaction.setPrice(flower.getPrice());
+			CustomerModel customer = _customerRepo.findByEmail(flowersPaymentDone.getCustomerModel().getEmail());
+			transaction.setCustomer(customer);
+			transaction.setQuantity(flower.getCount());
+			transaction.setFlower(flower);
+			_salesRepo.save(transaction);
+
+		});
+
+		//Record product sales
+		flowersPaymentDone.getFlowersModel().forEach(flower -> {
+			ReportsModel reportsModel = new ReportsModel();
+			reportsModel = _reportRepo.findByFlowerId(flower.getId());
+			if (reportsModel != null) {
+				int quantity = reportsModel.getQuantity() + flower.getCount();
+				int price = Integer.parseInt(reportsModel.getPrice()) + Integer.parseInt(reportsModel.getPrice());
+				reportsModel.setQuantity(quantity);
+				reportsModel.setPrice(String.valueOf(price));
+
+				_reportRepo.save(reportsModel);
+				reportsModel = null;
+			} else {
+				reportsModel = new ReportsModel();
+				reportsModel.setFlower(flower);
+				reportsModel.setPrice(flower.getPrice());
+				reportsModel.setQuantity(flower.getCount());
+				_reportRepo.save(reportsModel);
+				reportsModel = null;
+			}
+		});
+		
+		//Record products per day wise for report generation
+		flowersPaymentDone.getFlowersModel().forEach(flower -> {
+			DWMReportsModel dwmeportsModel = new DWMReportsModel();
+			dwmeportsModel = _dwmReportRepo.findByFlowerId(flower.getId());
+			if (dwmeportsModel != null) {
+				int quantity = dwmeportsModel.getQuantity() + flower.getCount();
+				int price = Integer.parseInt(dwmeportsModel.getPrice()) + Integer.parseInt(dwmeportsModel.getPrice());
+				dwmeportsModel.setQuantity(quantity);
+				dwmeportsModel.setPrice(String.valueOf(price));
+
+				_dwmReportRepo.save(dwmeportsModel);
+				dwmeportsModel = null;
+			} else {
+				reportsModel = new ReportsModel();
+				reportsModel.setFlower(flower);
+				reportsModel.setPrice(flower.getPrice());
+				reportsModel.setQuantity(flower.getCount());
+				_reportRepo.save(reportsModel);
+				reportsModel = null;
+			}
+		});
+
+	}
+
+	public MaxMinSoldFlower getMostSoldFlower() throws SQLException {
+
+		MaxMinSoldFlower maxMinSoldFlower = new MaxMinSoldFlower();
+
+		ReportsModel salesMostSold = _reportRepo.findMostSoldProduct();
+		maxMinSoldFlower.setPrice(salesMostSold.getPrice());
+		maxMinSoldFlower.setQuantity(salesMostSold.getQuantity());
+		maxMinSoldFlower.setName(salesMostSold.getFlower().getName());
+		maxMinSoldFlower.setCategory(salesMostSold.getFlower().getCategory());
+		maxMinSoldFlower.setDescription(salesMostSold.getFlower().getDescription());
+		maxMinSoldFlower.setImageUrl(salesMostSold.getFlower().getImageUrl());
+		maxMinSoldFlower.setId(salesMostSold.getFlower().getId());
+
+		return maxMinSoldFlower;
+
+	}
+	
+	public MaxMinSoldFlower getLeastSoldFlower() throws SQLException {
+
+		MaxMinSoldFlower maxMinSoldFlower = new MaxMinSoldFlower();
+
+		ReportsModel salesMostSold = _reportRepo.findLeastSoldProduct();
+		maxMinSoldFlower.setPrice(salesMostSold.getPrice());
+		maxMinSoldFlower.setQuantity(salesMostSold.getQuantity());
+		maxMinSoldFlower.setName(salesMostSold.getFlower().getName());
+		maxMinSoldFlower.setCategory(salesMostSold.getFlower().getCategory());
+		maxMinSoldFlower.setDescription(salesMostSold.getFlower().getDescription());
+		maxMinSoldFlower.setImageUrl(salesMostSold.getFlower().getImageUrl());
+		maxMinSoldFlower.setId(salesMostSold.getFlower().getId());
+
+		return maxMinSoldFlower;
+
+	}
+	
+	public List<ReportingForChart> getDailyReport() {
+		List<SalesModel> todaysSales = _salesRepo.getByDate(LocalDate.now());
+		if(todaysSales != null) {
+			List<ReportingForChart> todaysSale = new ArrayList<>();
+			todaysSales.forEach(flower -> {
+				ReportingForChart reportingForTodayChart = new ReportingForChart();
+				reportingForTodayChart.setId(flower.getFlower().getId());
+				reportingForTodayChart.setName(flower.getFlower().getName());
+				reportingForTodayChart.setQuantity(flower.getQuantity());
+				reportingForTodayChart.setPrice(flower.getPrice());
+				todaysSale.add(reportingForTodayChart);
+				reportingForTodayChart = null;
+			});
+			
+			return todaysSale;
+		}
+		return null;
+		
+	}
+	
+	
+	
+	
+	
+
+}

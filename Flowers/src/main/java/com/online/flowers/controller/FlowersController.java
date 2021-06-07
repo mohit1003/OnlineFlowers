@@ -22,7 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.online.flowers.dto.Customer;
+import com.online.flowers.dto.FlowerCategoryWiseReport;
+import com.online.flowers.dto.MaxMinSoldFlower;
 import com.online.flowers.dto.Message;
+import com.online.flowers.dto.ReportingForChart;
 import com.online.flowers.dto.Sales;
 import com.online.flowers.model.CustomerModel;
 import com.online.flowers.model.FlowersModel;
@@ -75,8 +78,8 @@ public class FlowersController {
 	@Autowired
 	private CustomerService _customerService;
 	
-	@Autowired
-	private SalesRepo _salesRepo;
+	
+	
 	
 	int registerFlag = 0;
 	
@@ -225,7 +228,7 @@ public class FlowersController {
 	}
 	
 	@PostMapping(value = "/pay")
-	public ResponseEntity<?> maketransaction(@RequestBody Sales flowersPaymentDone) {
+	public ResponseEntity<?> makeTransaction(@RequestBody Sales flowersPaymentDone) {
 		try {
 			_salesService.recordTransaction(flowersPaymentDone);
 			return new ResponseEntity(new Message("Payment Success"), HttpStatus.CREATED);
@@ -237,9 +240,87 @@ public class FlowersController {
 		
 	}
 	
-//	@PostMapping(value = "/pay")
-//	public ResponseEntity<?> pay(@RequestBody FlowersModel flowers){
-//		
-//	}
+	@GetMapping(value = "/getMostSoldProduct")
+	public ResponseEntity<?> getMostSoldProduct() {
+		MaxMinSoldFlower maxSoldFlower;
+		try {
+			maxSoldFlower = _salesService.getMostSoldFlower();
+			if(maxSoldFlower != null) {
+				return new ResponseEntity<MaxMinSoldFlower>(maxSoldFlower, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<String>("Error", HttpStatus.CONFLICT);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return new ResponseEntity<String>("Error", HttpStatus.CONFLICT);
+		}
+		
+	}
+	
+	@GetMapping(value = "/getLeastSoldProduct")
+	public ResponseEntity<?> getLeastSoldProduct() {
+		MaxMinSoldFlower minSoldFlower;
+		try {
+			minSoldFlower = _salesService.getLeastSoldFlower();
+			if(minSoldFlower != null) {
+				return new ResponseEntity<MaxMinSoldFlower>(minSoldFlower, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<String>("Error", HttpStatus.CONFLICT);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return new ResponseEntity<String>("Error", HttpStatus.CONFLICT);
+		}
+		
+	}
+	
+	@GetMapping(value = "/getTodaysSalesReport")
+	public ResponseEntity<?> getTodaysSalesReport() {
+		List<ReportingForChart> reportingForChartToday = _salesService.getDailyReport();
+		if(reportingForChartToday != null) {
+			return new ResponseEntity<List<ReportingForChart>>(reportingForChartToday, HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<String>("Error generating daily chart", HttpStatus.CONFLICT);
+		}
+	}
+	
+	@GetMapping(value = "/getLastWeekSalesReport")
+	public ResponseEntity<?> getLastWeekSalesReport() {
+		List<ReportingForChart> reportingForChartToday = _salesService.getWeeklyReport();
+		if(reportingForChartToday != null) {
+			return new ResponseEntity<List<ReportingForChart>>(reportingForChartToday, HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<String>("Error generating Weekly chart", HttpStatus.CONFLICT);
+		}
+	}
+	
+	@GetMapping(value = "/getMonthlySalesReport")
+	public ResponseEntity<?> getMonthlySalesReport() {
+		List<ReportingForChart> reportingForChartToday = _salesService.getMonthlyReport();
+		if(reportingForChartToday != null) {
+			return new ResponseEntity<List<ReportingForChart>>(reportingForChartToday, HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<String>("Error generating Monthly chart", HttpStatus.CONFLICT);
+		}
+	}
+	
+	@GetMapping(value = "/getFlowerCategoryWiseReport")
+	public ResponseEntity<?> getFlowerCategoryWiseReport() {
+		List<FlowerCategoryWiseReport> categoryWisereport = _salesService.getCategoryWiseReport();
+		if(categoryWisereport != null) {
+			return new ResponseEntity<List<FlowerCategoryWiseReport>>(categoryWisereport, HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<String>("Error generating category-wise chart", HttpStatus.CONFLICT);
+		}
+	}
+	
+	
+
 
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -14,6 +14,7 @@ import { AddFlowerComponent } from './add-flower/add-flower.component';
 import { ViewComponent } from './view/view.component';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { ShopsComponent } from './shops/shops.component';
+import { ReportsComponent } from './reports/reports.component';
 
 
 
@@ -25,7 +26,8 @@ import { ShopsComponent } from './shops/shops.component';
     AddFlowerComponent,
     ViewComponent,
     AdminNavComponent,
-    ShopsComponent
+    ShopsComponent,
+    ReportsComponent
   ],
   imports: [
     AppRoutingModule,
@@ -36,7 +38,7 @@ import { ShopsComponent } from './shops/shops.component';
     HttpClientModule,
     ModalModule.forRoot()
   ],
-  providers: [FileService]
+  providers: [FileService,  DatePipe]
 
 })
 export class AdminModule { }

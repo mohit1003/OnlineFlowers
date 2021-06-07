@@ -1,4 +1,3 @@
-
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,8 +17,6 @@ import { CategoryFilter } from './_pipes/categoryFilter.pipe';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './customer/nav/nav.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +32,7 @@ import { NavComponent } from './customer/nav/nav.component';
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
 
   ],
   bootstrap: [AppComponent]

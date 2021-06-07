@@ -3,6 +3,8 @@ package com.online.flowers.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+//To send customer details to angular client
+
 public class Customer {
 	@JsonProperty
 	private String email;

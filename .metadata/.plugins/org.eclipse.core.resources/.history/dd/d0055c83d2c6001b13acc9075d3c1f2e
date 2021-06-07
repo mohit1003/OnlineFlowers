@@ -1,0 +1,15 @@
+package com.online.flowers.repo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.online.flowers.model.SalesModel;
+
+public interface SalesRepo extends JpaRepository<SalesModel, Integer>{
+	
+	@Query(value = "SELECT * , SUM(quantity) AS total "
+			+ "FROM reports_model "
+			+ "GROUP BY id "
+			+ "ORDER BY total DESC LIMIT 1 ", nativeQuery = true)
+	public SalesModel findMostSoldProduct();
+}

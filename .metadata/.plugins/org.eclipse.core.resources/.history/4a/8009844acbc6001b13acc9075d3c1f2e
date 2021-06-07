@@ -1,0 +1,88 @@
+package com.online.flowers.service;
+
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.online.flowers.dto.MaxMinSoldFlower;
+import com.online.flowers.dto.Sales;
+import com.online.flowers.model.CustomerModel;
+import com.online.flowers.model.FlowersModel;
+import com.online.flowers.model.ReportsModel;
+import com.online.flowers.model.SalesModel;
+import com.online.flowers.repo.CustomerRepo;
+import com.online.flowers.repo.ReportRepo;
+import com.online.flowers.repo.SalesRepo;
+
+@Service
+public class SalesService {
+
+	@Autowired
+	private SalesRepo _salesRepo;
+
+	@Autowired
+	private CustomerRepo _customerRepo;
+
+	@Autowired
+	private ReportRepo _reportRepo;
+
+	public void recordTransaction(Sales flowersPaymentDone) throws SQLException {
+
+		List<Integer> listToAdd = new ArrayList<>();
+		flowersPaymentDone.getFlowersModel().forEach(flower -> {
+			SalesModel transaction = new SalesModel();
+			transaction.setDate(LocalDate.now());
+			transaction.setTime(LocalTime.now());
+			transaction.setPrice(flower.getPrice());
+			CustomerModel customer = _customerRepo.findByEmail(flowersPaymentDone.getCustomerModel().getEmail());
+			transaction.setCustomer(customer);
+			transaction.setQuantity(flower.getCount());
+			transaction.setFlower(flower);
+			_salesRepo.save(transaction);
+
+		});
+
+		flowersPaymentDone.getFlowersModel().forEach(flower -> {
+			ReportsModel reportsModel = new ReportsModel();
+			reportsModel = _reportRepo.findByFlowerId(flower.getId());
+			if (reportsModel != null) {
+				int quantity = Integer.parseInt(reportsModel.getQuantity() + flower.getCount());
+				int price = Integer.parseInt(reportsModel.getPrice() + flower.getPrice());
+				reportsModel.setQuantity(String.valueOf(quantity));
+				reportsModel.setPrice(String.valueOf(price));
+
+				_reportRepo.save(reportsModel);
+			} else {
+				reportsModel.setFlower(flower);
+				reportsModel.setPrice(flower.getPrice());
+				reportsModel.setQuantity(String.valueOf(flower.getCount()));
+				_reportRepo.save(reportsModel);
+			}
+		});
+
+	}
+
+	public MaxMinSoldFlower getMostSoldFlower() throws SQLException {
+
+		MaxMinSoldFlower maxMinSoldFlower = new MaxMinSoldFlower();
+
+		SalesModel salesMostSold = _salesRepo.findMostSoldProduct();
+		maxMinSoldFlower.setPrice(salesMostSold.getPrice());
+		maxMinSoldFlower.setQuantity(salesMostSold.getQuantity());
+		maxMinSoldFlower.setName(salesMostSold.getFlower().getName());
+		maxMinSoldFlower.setCategory(salesMostSold.getFlower().getCategory());
+		maxMinSoldFlower.setDescription(salesMostSold.getFlower().getDescription());
+		maxMinSoldFlower.setImageUrl(salesMostSold.getFlower().getImageUrl());
+		maxMinSoldFlower.setId(salesMostSold.getFlower().getId());
+
+		return maxMinSoldFlower;
+
+	}
+
+}

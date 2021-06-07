@@ -1,0 +1,12 @@
+package com.online.flowers.repo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.online.flowers.model.DWMReportsModel;
+import com.online.flowers.model.ReportsModel;
+
+public interface DWMReportRepo extends JpaRepository<DWMReportRepo, Integer> {
+	@Query(value = "SELECT * FROM reports_model WHERE flower_id_fk = ?1", nativeQuery = true)
+	public DWMReportsModel findByFlowerId(int flowerId);
+}

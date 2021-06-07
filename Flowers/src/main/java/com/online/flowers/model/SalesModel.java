@@ -29,6 +29,8 @@ public class SalesModel {
 	
 	private LocalTime time;
 	
+	private String price;
+	
 	@OneToOne(targetEntity = CustomerModel.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "custSales_fk", referencedColumnName = "email")
 	private CustomerModel customer;
@@ -65,6 +67,15 @@ public class SalesModel {
 	public LocalTime getTime() {
 		return time;
 	}
+	
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	
 
 	public void setTime(LocalTime time) {
 		this.time = time;
@@ -85,6 +96,9 @@ public class SalesModel {
 	public void setFlower(FlowersModel flower) {
 		this.flower = flower;
 	}
+
+	
+	
 
 	
 

@@ -62,17 +62,14 @@ export class FileService {
   }
 
   public getAllPhotos(): Observable<Object> {
-    if (this.isLoggedIn()) {
       return this.httpClient.get(this.SERVER_URL + 'getAllFlowers');
-    }
-    return null;
+
   }
 
   public getAllShops(): Observable<Object> {
-    if (this.isLoggedIn()) {
+
       return this.httpClient.get(this.SERVER_URL + 'getAllShops');
-    }
-    return null;
+
   }
 
   public delete(id: string): Observable<Object> {
@@ -131,6 +128,84 @@ export class FileService {
     }
     return null;
   }
+
+  public generateReportMostSoldFlower(): Observable<Object> {
+    if (this.isLoggedIn()) {
+      let header = new HttpHeaders();
+      let token = JSON.parse(localStorage.getItem('token'));
+      header = header.append('Authorization', 'Bearer ' + token);
+      return this.httpClient.get(this.SERVER_URL + 'getMostSoldProduct', {
+        headers: header,
+      });
+    }
+    return null;
+  }
+
+  public generateReportLeastSoldFlower(): Observable<Object> {
+    if (this.isLoggedIn()) {
+      let header = new HttpHeaders();
+      let token = JSON.parse(localStorage.getItem('token'));
+      header = header.append('Authorization', 'Bearer ' + token);
+      return this.httpClient.get(this.SERVER_URL + 'getLeastSoldProduct', {
+        headers: header,
+      });
+    }
+    return null;
+  }
+
+
+  public generateDailyReport(): Observable<Object> {
+    if (this.isLoggedIn()) {
+      let header = new HttpHeaders();
+      let token = JSON.parse(localStorage.getItem('token'));
+      header = header.append('Authorization', 'Bearer ' + token);
+      return this.httpClient.get(this.SERVER_URL + 'getTodaysSalesReport', {
+        headers: header,
+      });
+    }
+    return null;
+  }
+
+  public generateLastWeeksReport(): Observable<Object> {
+    if (this.isLoggedIn()) {
+      let header = new HttpHeaders();
+      let token = JSON.parse(localStorage.getItem('token'));
+      header = header.append('Authorization', 'Bearer ' + token);
+      return this.httpClient.get(this.SERVER_URL + 'getLastWeekSalesReport', {
+        headers: header,
+      });
+    }
+    return null;
+  }
+
+  public generateMonthlyReport(): Observable<Object> {
+    if (this.isLoggedIn()) {
+      let header = new HttpHeaders();
+      let token = JSON.parse(localStorage.getItem('token'));
+      header = header.append('Authorization', 'Bearer ' + token);
+      return this.httpClient.get(this.SERVER_URL + 'getMonthlySalesReport', {
+        headers: header,
+      });
+    }
+    return null;
+  }
+
+  public generateCategoryWiseReport(): Observable<Object> {
+    if (this.isLoggedIn()) {
+      let header = new HttpHeaders();
+      let token = JSON.parse(localStorage.getItem('token'));
+      header = header.append('Authorization', 'Bearer ' + token);
+      return this.httpClient.get(this.SERVER_URL + 'getFlowerCategoryWiseReport', {
+        headers: header,
+      });
+    }
+    return null;
+  }
+
+
+
+
+  //getLeastSoldProduct
 
   public isLoggedIn(): boolean {
     let token = null;

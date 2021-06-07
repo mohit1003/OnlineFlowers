@@ -10,6 +10,7 @@ import { LocationsComponent } from './customer/locations/locations.component';
 import { FeedbackComponent } from './customer/feedback/feedback.component';
 import { CartComponent } from './customer/cart/cart.component';
 import { ShopsComponent } from './admin/shops/shops.component';
+import { ReportsComponent } from './admin/reports/reports.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -20,26 +21,27 @@ const routes: Routes = [
   {
     path: 'admin',
     runGuardsAndResolvers: 'always',
-    canActivate: [ LoginGuard ],
+    canActivate: [LoginGuard],
     children: [
-        { path: 'add', component: AddFlowerComponent },
-        { path: 'view', component: ViewComponent },
-        { path: 'shops', component: ShopsComponent }
-    ]
+      { path: 'add', component: AddFlowerComponent },
+      { path: 'view', component: ViewComponent },
+      { path: 'shops', component: ShopsComponent },
+      { path: 'reports', component: ReportsComponent },
+    ],
   },
   {
     path: 'cust',
     runGuardsAndResolvers: 'always',
     // canActivate: [AuthGuard],
     children: [
-        { path: 'cart', component: CartComponent, canActivate: [LoginGuard] },
-        { path: 'shop', component: ShopComponent },
-    ]
-  }
+      { path: 'cart', component: CartComponent, canActivate: [LoginGuard] },
+      { path: 'shop', component: ShopComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
