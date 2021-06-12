@@ -1,8 +1,14 @@
 <body>
 
 
-  <app-nav [shoppingCartCount]="flowersInCart.length">
+  <app-nav [shoppingCartCount]="cartCount">
   </app-nav>
+
+  <div *ngIf="showLoader" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status" >
+      <span class="sr-only" id="loading"></span>
+    </div>
+  </div>
 
   <div class="wrapper d-flex align-items-stretch" style="height:100%;">
     <nav id="sidebar">
@@ -78,6 +84,8 @@
 
 
   </div>
+
+
 
 </body>
 <app-footer></app-footer>

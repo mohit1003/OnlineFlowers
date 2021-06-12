@@ -19,6 +19,8 @@ interface AppState {
   styleUrls: ['./shop.component.css'],
 })
 export class ShopComponent implements OnInit {
+  showLoader: boolean = false;
+
   flowers: Flower[];
   flowersInCategory: Flower[];
   flowersInCart: Flower[] = [];
@@ -26,6 +28,8 @@ export class ShopComponent implements OnInit {
 
   cartModelForDuplicates: CartModel[] = [];
   cartModelItem: CartModel;
+
+  cartCount: number = 0;
 
   flower: Observable<Flower[]>;
 
@@ -40,6 +44,7 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.getItem('cartTotal') ? this.cartCount = +localStorage.getItem('cartTotal') : this.cartCount = 0;
     this.getAllFlowers();
   }
 
@@ -92,13 +97,14 @@ export class ShopComponent implements OnInit {
   }
 
   addToCart(flower: Flower) {
+    this.showLoader = true;
+
     if (!this.fileService.isLoggedIn()) {
       this.router.navigateByUrl('cust/cart');
     }
-    this.dataService.currentState.subscribe((data) => {
-      this.flowersInCart = Object.assign(data);
-    });
-    this.flowersInCart = Object.assign([], this.flowersInCart);
+    if(localStorage.getItem('cartItem')){
+      this.flowersInCart = Object.assign([], JSON.parse(localStorage.getItem('cartItem')))
+    }
     this.filteredFlowersForDuplicateCheck = this.flowersInCart.filter(
       (cartFlower) => cartFlower.id == flower.id
     );
@@ -109,36 +115,46 @@ export class ShopComponent implements OnInit {
           this.cartModelItem = new CartModel();
           this.cartModelItem.id = filteredFlower.id;
           this.cartModelItem.count = 2;
+          this.cartCount += 1;
           this.cartModelItem.origPrice = +flower.price;
           this.cartModelForDuplicates.push(this.cartModelItem);
           localStorage.setItem(
             flower.id,
             JSON.stringify(this.cartModelForDuplicates)
           );
+
         } else if (localStorage.getItem(filteredFlower.id) !== null) {
           this.cartModelItem = null;
           this.cartModelItem = new CartModel();
-          this.cartModelItem = JSON.parse(
+          this.cartModelItem = Object.assign(JSON.parse(
             localStorage.getItem(filteredFlower.id)
-          );
-          this.cartModelItem[0].id = filteredFlower.id;
+          ));
           this.cartModelItem[0].count += 1;
+          this.cartCount += 1;
           this.cartModelItem[0].origPrice = +flower.price;
-          this.cartModelForDuplicates.push(this.cartModelItem[0]);
+          this.cartModelForDuplicates.push(this.cartModelItem);
           localStorage.setItem(
             filteredFlower.id,
-            JSON.stringify(this.cartModelForDuplicates)
+            JSON.stringify(this.cartModelForDuplicates[0])
           );
+
         } else {
           alertify.error('Error in cart data');
         }
       });
     } else {
+      this.cartCount += 1;
       this.flowersInCart.push(flower);
     }
 
-    // localStorage.setItem('cartItem', JSON.stringify(this.flowersInCart));
-    this.dataService.changeState(this.flowersInCart);
+    localStorage.setItem('cartItem', JSON.stringify(this.flowersInCart));
+    // this.dataService.changeState(this.flowersInCart);
+    alertify.success("Added to cart")
+    setTimeout(() => {
+      this.showLoader = false;
+    }, 1500);
+
     //this.store.dispatch(new FlowerActions.AddtoCart(this.flowersInCart));
-  }
+    }
+
 }

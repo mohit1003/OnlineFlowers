@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javax.validation.constraints.Max"/>
-    <fullyQualifiedTypeName name="javax.validation.constraints.Pattern"/>
-    <fullyQualifiedTypeName name="javax.validation.constraints.Size"/>
-    <fullyQualifiedTypeName name="com.online.flowers.service.ShopService"/>
-    <fullyQualifiedTypeName name="com.online.flowers.repo.ShopRepo"/>
-    <fullyQualifiedTypeName name="javax.validation.constraints.NotNull"/>
     <fullyQualifiedTypeName name="javax.validation.constraints.NotEmpty"/>
     <fullyQualifiedTypeName name="com.online.flowers.model.ShopModel"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
@@ -20,13 +14,11 @@
     <fullyQualifiedTypeName name="com.online.flowers.service.CustomerService"/>
     <fullyQualifiedTypeName name="org.modelmapper.ModelMapper"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
-    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
     <fullyQualifiedTypeName name="com.online.flowers.dto.Sales"/>
     <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="com.online.flowers.repo.SalesRepo"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
-    <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Value"/>
     <fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
     <fullyQualifiedTypeName name="com.online.flowers.service.SalesService"/>
@@ -40,8 +32,6 @@
     <fullyQualifiedTypeName name="java.sql.SQLException"/>
     <fullyQualifiedTypeName name="com.online.flowers.dto.MaxMinSoldFlower"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonProperty"/>
-    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
-    <fullyQualifiedTypeName name="javax.persistence.Id"/>
     <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
     <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
     <fullyQualifiedTypeName name="javax.persistence.OneToOne"/>
@@ -51,13 +41,23 @@
     <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="com.online.flowers.model.Reports"/>
     <fullyQualifiedTypeName name="com.online.flowers.repo.ReportRepo"/>
-    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
-    <fullyQualifiedTypeName name="com.online.flowers.model.ReportsModel"/>
     <fullyQualifiedTypeName name="com.online.flowers.model.SalesModel"/>
     <fullyQualifiedTypeName name="com.online.flowers.dto.ReportingForChart"/>
     <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
     <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="com.online.flowers.repo.DWMReportRepo"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="com.online.flowers.model.DWMReportsModel"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
+    <fullyQualifiedTypeName name="java.time.temporal.ChronoUnit"/>
+    <fullyQualifiedTypeName name="com.online.flowers.dto.FlowerCategoryWiseReport"/>
+    <fullyQualifiedTypeName name="com.online.flowers.model.ReportsModel"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="javax.persistence.Id"/>
+    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
+    <fullyQualifiedTypeName name="com.online.flowers.repo.CategoryWiseReportsRepo"/>
+    <fullyQualifiedTypeName name="com.online.flowers.model.CategoryWiseReportModel"/>
 </qualifiedTypeNameHistroy>

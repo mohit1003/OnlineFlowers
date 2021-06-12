@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FileService } from '../_service/FileService';
 
 import * as alertify from 'alertifyjs';
+import * as sha from 'sha.js';
 import { Router } from '@angular/router';
 
 @Component({
@@ -115,7 +116,9 @@ export class HomeComponent implements OnInit {
 
   registerUser() {
     this.user = Object.assign({}, this.registerForm.value);
-    // console.log(this.user);
+    let password = this.user.password;
+    // this.user.password  = sha('sha256').update({password}).digest('hex')
+    // console.log( this.user.password);
     this.fileService.registerUser(this.user).subscribe(
       (userRegistered) => {
         alertify.success('User is registered successfully');
@@ -126,7 +129,7 @@ export class HomeComponent implements OnInit {
         alertify.error('User registration failed' + error.message);
       }
     );
-  } 
+  }
 
   login() {
     if (this.fileService.isLoggedIn()) {

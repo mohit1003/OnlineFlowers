@@ -7,5 +7,6 @@ export interface User{
   country: string;
   title: string;
   contact: number;
-
+  count: number;
+  password: string;
 }

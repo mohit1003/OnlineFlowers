@@ -23,16 +23,16 @@ export class ReportsComponent implements OnInit {
   monthlyReport;
   categoryWiseChart;
 
-  labelsForDailyReport: number[] = [];
+  labelsForDailyReport: string[] = [];
   dataserForDailyReport: number[] = [];
 
-  labelsForWeeklyReport: number[] = [];
+  labelsForWeeklyReport: string[] = [];
   dataserForweeklyReport: number[] = [];
 
-  labelsForMonthlyReport: number[] = [];
+  labelsForMonthlyReport: string[] = [];
   dataserForMonthlyReport: number[] = [];
 
-  labelsForCategoryWiseReport: number[] = [];
+  labelsForCategoryWiseReport: string[] = [];
   dataserForCategoryWiseReport: number[] = [];
 
   todaysDate: string;
@@ -79,7 +79,7 @@ export class ReportsComponent implements OnInit {
         this.dailyReportChartValue = Object.assign(dailyreport);
 
         this.dailyReportChartValue.filter((flower) => {
-          this.labelsForDailyReport.push(parseInt(flower.id));
+          this.labelsForDailyReport.push(flower.name);
         });
 
         this.dailyReportChartValue.filter((flower) => {
@@ -99,7 +99,7 @@ export class ReportsComponent implements OnInit {
         this.weeklyReportChartValue = Object.assign(weeklyReport);
 
         this.weeklyReportChartValue.filter((flower) => {
-          this.labelsForWeeklyReport.push(parseInt(flower.id));
+          this.labelsForWeeklyReport.push(flower.name);
         });
 
         this.weeklyReportChartValue.filter((flower) => {
@@ -119,7 +119,7 @@ export class ReportsComponent implements OnInit {
         this.monthlyReportChartValue = Object.assign(monthlyReport);
 
         this.monthlyReportChartValue.filter((flower) => {
-          this.labelsForMonthlyReport.push(parseInt(flower.id));
+          this.labelsForMonthlyReport.push(flower.name);
         });
 
         this.monthlyReportChartValue.filter((flower) => {
@@ -139,7 +139,7 @@ export class ReportsComponent implements OnInit {
         this.categoryWiseChartValue = Object.assign(categoryWiseChart);
         console.log(this.categoryWiseChartValue);
         this.categoryWiseChartValue.filter((flower) => {
-          this.labelsForCategoryWiseReport.push(parseInt(flower.id));
+          this.labelsForCategoryWiseReport.push(flower.name);
         });
 
         this.categoryWiseChartValue.filter((flower) => {
@@ -182,11 +182,11 @@ export class ReportsComponent implements OnInit {
           },
           x: {
             grid: {
-              offset: true
+              offset: true,
             },
             title: {
               display: true,
-              text: 'Flower ID',
+              text: 'Flower Name',
             },
             beginAtZero: true,
             ticks: {
@@ -228,7 +228,7 @@ export class ReportsComponent implements OnInit {
           x: {
             title: {
               display: true,
-              text: 'Flower ID',
+              text: 'Flower Name',
             },
           },
         },
@@ -266,7 +266,7 @@ export class ReportsComponent implements OnInit {
           x: {
             title: {
               display: true,
-              text: 'Flower ID',
+              text: 'Flower Name',
             },
           },
         },
@@ -297,19 +297,18 @@ export class ReportsComponent implements OnInit {
               precision: 0,
             },
           },
-          x: {
-          },
+          x: {},
         },
       },
     });
   }
 
-   getRandomColor() {
+  getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-}
+  }
 }

@@ -28,6 +28,8 @@ export class CartComponent implements OnInit {
   filteredFlowersToAddCount:Flower[] = [];
   flowerToAdd: Flower;
 
+  cartTotal: number = 0;
+
   sales: Transaction;
 
   checkoutButtonClicked: boolean
@@ -71,7 +73,9 @@ export class CartComponent implements OnInit {
   calculateTotal() {
     this.flowersAddedIncart.forEach(flowers => {
       this.total += (+flowers.price)
+      this.cartTotal += flowers.count;
     })
+    localStorage.setItem('cartTotal', this.cartTotal.toString());
   }
 
 

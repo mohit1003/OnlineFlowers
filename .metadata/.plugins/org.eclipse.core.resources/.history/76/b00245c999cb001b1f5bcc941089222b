@@ -1,0 +1,31 @@
+package com.online.flowers.dto;
+
+/**
+ * 
+ * @author mohitkulkarni
+ * 
+ * This DTO is for region wise customer charts
+ *
+ */
+
+public class CustomerRegionWiseReport {
+	
+	private String city;
+	private String userCount;
+	
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getUserCount() {
+		return userCount;
+	}
+	public void setUserCount(String userCount) {
+		this.userCount = userCount;
+	}
+	
+	
+
+}

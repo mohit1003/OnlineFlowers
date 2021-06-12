@@ -22,23 +22,22 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.online.flowers.dto.Customer;
+import com.online.flowers.dto.CustomerDto;
+import com.online.flowers.dto.CustomerRegionWiseReport;
 import com.online.flowers.dto.FlowerCategoryWiseReport;
 import com.online.flowers.dto.MaxMinSoldFlower;
-import com.online.flowers.dto.Message;
 import com.online.flowers.dto.ReportingForChart;
 import com.online.flowers.dto.Sales;
 import com.online.flowers.model.CustomerModel;
 import com.online.flowers.model.FlowersModel;
-import com.online.flowers.model.SalesModel;
 import com.online.flowers.model.ShopModel;
 import com.online.flowers.repo.CustomerRepo;
 import com.online.flowers.repo.FlowersRepo;
-import com.online.flowers.repo.SalesRepo;
 import com.online.flowers.repo.ShopRepo;
 import com.online.flowers.service.ClaudinaryService;
 import com.online.flowers.service.CustomerService;
 import com.online.flowers.service.FlowersService;
-import com.online.flowers.service.ImageService;
+
 import com.online.flowers.service.SalesService;
 import com.online.flowers.service.ShopService;
 import com.online.flowers.util.AuthRequest;
@@ -50,19 +49,19 @@ public class FlowersController {
 
 	@Autowired
 	private FlowersService flowersService;
-	
+
 	@Autowired
 	private ShopService shopService;
-	
+
 	@Autowired
 	private SalesService _salesService;
 
 	@Autowired
 	private FlowersRepo _repo;
-	
+
 	@Autowired
 	private CustomerRepo _custRepo;
-	
+
 	@Autowired
 	private ShopRepo _shoprepo;
 
@@ -74,55 +73,48 @@ public class FlowersController {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
-	
+
 	@Autowired
 	private CustomerService _customerService;
-	
-	
-	
-	
+
 	int registerFlag = 0;
-	
+
 	int loginFlag = 0;
-	
+
 	@PostMapping(value = "/register")
 	public ResponseEntity<?> registerUser(@RequestBody CustomerModel customer) {
 		Optional.ofNullable(customer).ifPresent(customerToSave -> {
-			if(_custRepo.existsById(customer.getEmail())) {
+			if (_custRepo.existsById(customer.getEmail())) {
 				this.registerFlag = 2;
-			}
-			else {
+			} else {
 				_custRepo.save(customerToSave);
 				this.registerFlag = 1;
 			}
 		});
-		
-		if(registerFlag == 1) {
-			return new ResponseEntity(new Message("User is registered"), HttpStatus.CREATED);
-		}
-		else {
+
+		if (registerFlag == 1) {
+			return new ResponseEntity<String>("User is registered", HttpStatus.CREATED);
+		} else {
 			registerFlag = 0;
-			return new ResponseEntity(new Message("User not registered/ already exists"), HttpStatus.CONFLICT);
+			return new ResponseEntity<String>("User not registered/ already exists", HttpStatus.CONFLICT);
 		}
-		
-		
+
 	}
-	
+
 	@PostMapping(value = "/login")
 	public ResponseEntity<?> userLogin(@RequestBody CustomerModel customer) {
 		Optional.ofNullable(customer).ifPresent(customerToSave -> {
-			if(_custRepo.existsById(customer.getEmail())) {
-					this.loginFlag = 1;
+			if (_custRepo.existsById(customer.getEmail())) {
+				this.loginFlag = 1;
 			}
 		});
-		
-		if(loginFlag == 1) {
-			return new ResponseEntity(new Message("user is logged in"), HttpStatus.OK);
+
+		if (loginFlag == 1) {
+			return new ResponseEntity<String>("user is logged in", HttpStatus.OK);
 		}
 		loginFlag = 0;
-		return new ResponseEntity(new Message("Invalid Username or Password"), HttpStatus.CONFLICT);
+		return new ResponseEntity<String>("Invalid Username or Password", HttpStatus.CONFLICT);
 	}
-
 
 	@PostMapping(value = "/authenticate")
 	public String generateToken(@RequestBody AuthRequest authRequest) throws Exception {
@@ -135,11 +127,12 @@ public class FlowersController {
 
 		return jwtutil.generateToken(authRequest.getEmail());
 	}
-	
+
 	@PostMapping(value = "/getUserByEmail")
 	public Optional<ResponseEntity<Customer>> getCustomerByEmail(@RequestBody String email) {
-		return Optional.ofNullable(new ResponseEntity<Customer>(_customerService.ConvertToCustomerDtoAndSend(email), HttpStatus.OK));
-	} 
+		return Optional.ofNullable(
+				new ResponseEntity<Customer>(_customerService.ConvertToCustomerDtoAndSend(email), HttpStatus.OK));
+	}
 
 	@PostMapping(value = "/add")
 	public ResponseEntity<?> saveFlowerImage(@RequestParam("flowerImage") MultipartFile flower,
@@ -148,9 +141,9 @@ public class FlowersController {
 
 		String message = flowersService.saveImage(flower, name, category, price, description);
 		if (message.equals("Image not valid")) {
-			return new ResponseEntity(new Message("Image not valid"), HttpStatus.CONFLICT);
+			return new ResponseEntity<String>("Image not valid", HttpStatus.CONFLICT);
 		} else {
-			return new ResponseEntity(new Message("Image is uploaded"), HttpStatus.CREATED);
+			return new ResponseEntity<String>("Image is uploaded", HttpStatus.CREATED);
 		}
 	}
 
@@ -162,9 +155,9 @@ public class FlowersController {
 
 		String message = flowersService.updateFlower(id, flower, name, category, price, description);
 		if (message.equals("Image not valid")) {
-			return new ResponseEntity(new Message("Image not valid"), HttpStatus.CONFLICT);
+			return new ResponseEntity<String>("Image not valid", HttpStatus.CONFLICT);
 		} else {
-			return new ResponseEntity(new Message("Image is uploaded"), HttpStatus.CREATED);
+			return new ResponseEntity<String>("Image is uploaded", HttpStatus.CREATED);
 		}
 	}
 
@@ -173,16 +166,19 @@ public class FlowersController {
 		String message = flowersService.updateFlowerWithoutImage(flower);
 
 		if (message.equals("Image not valid")) {
-			return new ResponseEntity(new Message("Image not valid"), HttpStatus.CONFLICT);
+			return new ResponseEntity<String>("Image not valid", HttpStatus.CONFLICT);
 		} else {
-			return new ResponseEntity(new Message("Image is uploaded/modified"), HttpStatus.OK);
+			return new ResponseEntity<String>("Image is uploaded/modified", HttpStatus.OK);
 		}
 
 	}
 
 	@GetMapping(value = "/getAllFlowers")
-	public ResponseEntity<List<FlowersModel>> list() {
+	public ResponseEntity<?> list() {
 		List<FlowersModel> list = flowersService.list();
+		if (list.isEmpty()) {
+			return new ResponseEntity<String>("No flowers returned", HttpStatus.CONFLICT);
+		}
 		return new ResponseEntity<List<FlowersModel>>(list, HttpStatus.OK);
 	}
 
@@ -193,134 +189,147 @@ public class FlowersController {
 			try {
 				cloudinaryService.delete(flowersService.getPublicIdById(flowerId));
 				flowersService.deleteFlower(flowerId);
-				return new ResponseEntity(new Message("Image deleted"), HttpStatus.OK);
+				return new ResponseEntity<String>("Image deleted", HttpStatus.OK);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		return new ResponseEntity(new Message("Error deleting image"), HttpStatus.CONFLICT);
+		return new ResponseEntity<String>("Error deleting image", HttpStatus.CONFLICT);
 
 	}
 
 	public Optional<FlowersModel> getImage(Integer id) {
 		return _repo.findById(id);
 	}
-	
-	
-	
+
 	@PostMapping(value = "/addShop")
-	public ResponseEntity<?> addShop(@RequestParam("shopImage") MultipartFile shopImage, 
+	public ResponseEntity<?> addShop(@RequestParam("shopImage") MultipartFile shopImage,
 			@RequestParam("shopName") String shopName, @RequestParam("shopCity") String shopCity,
 			@RequestParam("shopCountry") String shopCountry, @RequestParam("shopAddress") String shopAddress,
-			@RequestParam("isOpen") String isOpen, @RequestParam("shopContact") String shopContact){
-		String message = shopService.saveShop(shopImage, shopName, shopCity, shopCountry, shopAddress, isOpen, shopContact);
+			@RequestParam("isOpen") String isOpen, @RequestParam("shopContact") String shopContact) {
+		String message = shopService.saveShop(shopImage, shopName, shopCity, shopCountry, shopAddress, isOpen,
+				shopContact);
 		if (message.equals("Image not valid")) {
-			return new ResponseEntity(new Message("Shop not added"), HttpStatus.CONFLICT);
+			return new ResponseEntity<String>("Shop not added", HttpStatus.CONFLICT);
 		} else {
-			return new ResponseEntity(new Message("Shop added successfully"), HttpStatus.CREATED);
-		}		
+			return new ResponseEntity<String>("Shop added successfully", HttpStatus.CREATED);
+		}
 	}
-	
+
 	@GetMapping(value = "/getAllShops")
-	public List<ShopModel> getShop(){
+	public List<ShopModel> getShop() {
 		return _shoprepo.findAll();
 	}
-	
+
+	@GetMapping(value = "/getAllCustomers")
+	public ResponseEntity<?> getAllCustomers() {
+		List<CustomerDto> customers = _customerService.getAllCustomers();
+
+		if (customers.isEmpty()) {
+			return new ResponseEntity<String>("No customers returned", HttpStatus.CONFLICT);
+		}
+
+		return new ResponseEntity<List<CustomerDto>>(customers, HttpStatus.OK);
+
+	}
+
 	@PostMapping(value = "/pay")
-	public ResponseEntity<?> makeTransaction(@RequestBody Sales flowersPaymentDone) {
+	public ResponseEntity<String> makeTransaction(@RequestBody Sales flowersPaymentDone) {
 		try {
 			_salesService.recordTransaction(flowersPaymentDone);
-			return new ResponseEntity(new Message("Payment Success"), HttpStatus.CREATED);
+			return new ResponseEntity<String>("Payment Success", HttpStatus.CREATED);
 		} catch (SQLException e) {
-			return new ResponseEntity(new Message("Payment falied"), HttpStatus.CONFLICT);
-		} catch( Exception ex ) {
-			return new ResponseEntity(new Message("Payment falied"), HttpStatus.CONFLICT);
+			return new ResponseEntity<String>("Payment falied", HttpStatus.CONFLICT);
+		} catch (Exception ex) {
+			return new ResponseEntity<String>("Payment falied", HttpStatus.CONFLICT);
 		}
-		
+
 	}
-	
+
 	@GetMapping(value = "/getMostSoldProduct")
 	public ResponseEntity<?> getMostSoldProduct() {
 		MaxMinSoldFlower maxSoldFlower;
 		try {
 			maxSoldFlower = _salesService.getMostSoldFlower();
-			if(maxSoldFlower != null) {
+			if (maxSoldFlower != null) {
 				return new ResponseEntity<MaxMinSoldFlower>(maxSoldFlower, HttpStatus.OK);
-			}
-			else {
+			} else {
 				return new ResponseEntity<String>("Error", HttpStatus.CONFLICT);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			return new ResponseEntity<String>("Error", HttpStatus.CONFLICT);
 		}
-		
+
 	}
-	
+
 	@GetMapping(value = "/getLeastSoldProduct")
 	public ResponseEntity<?> getLeastSoldProduct() {
 		MaxMinSoldFlower minSoldFlower;
 		try {
 			minSoldFlower = _salesService.getLeastSoldFlower();
-			if(minSoldFlower != null) {
+			if (minSoldFlower != null) {
 				return new ResponseEntity<MaxMinSoldFlower>(minSoldFlower, HttpStatus.OK);
-			}
-			else {
+			} else {
 				return new ResponseEntity<String>("Error", HttpStatus.CONFLICT);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			return new ResponseEntity<String>("Error", HttpStatus.CONFLICT);
 		}
-		
+
 	}
-	
+
 	@GetMapping(value = "/getTodaysSalesReport")
 	public ResponseEntity<?> getTodaysSalesReport() {
 		List<ReportingForChart> reportingForChartToday = _salesService.getDailyReport();
-		if(reportingForChartToday != null) {
+		if (reportingForChartToday != null) {
 			return new ResponseEntity<List<ReportingForChart>>(reportingForChartToday, HttpStatus.OK);
-		}
-		else {
+		} else {
 			return new ResponseEntity<String>("Error generating daily chart", HttpStatus.CONFLICT);
 		}
 	}
-	
+
 	@GetMapping(value = "/getLastWeekSalesReport")
 	public ResponseEntity<?> getLastWeekSalesReport() {
 		List<ReportingForChart> reportingForChartToday = _salesService.getWeeklyReport();
-		if(reportingForChartToday != null) {
+		if (reportingForChartToday != null) {
 			return new ResponseEntity<List<ReportingForChart>>(reportingForChartToday, HttpStatus.OK);
-		}
-		else {
+		} else {
 			return new ResponseEntity<String>("Error generating Weekly chart", HttpStatus.CONFLICT);
 		}
 	}
-	
+
 	@GetMapping(value = "/getMonthlySalesReport")
 	public ResponseEntity<?> getMonthlySalesReport() {
 		List<ReportingForChart> reportingForChartToday = _salesService.getMonthlyReport();
-		if(reportingForChartToday != null) {
+		if (reportingForChartToday != null) {
 			return new ResponseEntity<List<ReportingForChart>>(reportingForChartToday, HttpStatus.OK);
-		}
-		else {
+		} else {
 			return new ResponseEntity<String>("Error generating Monthly chart", HttpStatus.CONFLICT);
 		}
 	}
-	
+
 	@GetMapping(value = "/getFlowerCategoryWiseReport")
 	public ResponseEntity<?> getFlowerCategoryWiseReport() {
 		List<FlowerCategoryWiseReport> categoryWisereport = _salesService.getCategoryWiseReport();
-		if(categoryWisereport != null) {
+		if (categoryWisereport != null) {
 			return new ResponseEntity<List<FlowerCategoryWiseReport>>(categoryWisereport, HttpStatus.OK);
-		}
-		else {
+		} else {
 			return new ResponseEntity<String>("Error generating category-wise chart", HttpStatus.CONFLICT);
 		}
 	}
-	
-	
 
+	@GetMapping(value = "/getCustomersCityWise")
+	public ResponseEntity<?> getCustomerRegionWiseData() {
+		List<CustomerRegionWiseReport> customersCityWise = _customerService.getCustomerRegionWiseData();
 
+		if (!customersCityWise.isEmpty()) {
+			return new ResponseEntity<List<CustomerRegionWiseReport>>(customersCityWise, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<String>("No customer data returned", HttpStatus.CONFLICT);
+
+		}
+	}
 }

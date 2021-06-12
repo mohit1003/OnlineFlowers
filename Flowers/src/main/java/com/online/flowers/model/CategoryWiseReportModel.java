@@ -15,7 +15,7 @@ public class CategoryWiseReportModel {
 	
 	private String price;
 	
-	@OneToOne(targetEntity = FlowersModel.class, cascade = CascadeType.MERGE)
+	@OneToOne(targetEntity = FlowersModel.class)
 	@JoinColumn(name = "flower_id_fk")
 	private FlowersModel flower;
 

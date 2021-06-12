@@ -11,6 +11,7 @@ import { FeedbackComponent } from './customer/feedback/feedback.component';
 import { CartComponent } from './customer/cart/cart.component';
 import { ShopsComponent } from './admin/shops/shops.component';
 import { ReportsComponent } from './admin/reports/reports.component';
+import { CustomerReportsComponent } from './admin/customer-reports/customer-reports.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -27,6 +28,8 @@ const routes: Routes = [
       { path: 'view', component: ViewComponent },
       { path: 'shops', component: ShopsComponent },
       { path: 'reports', component: ReportsComponent },
+      { path: 'custReports', component: CustomerReportsComponent }
+
     ],
   },
   {

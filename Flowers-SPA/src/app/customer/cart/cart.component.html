@@ -1,7 +1,7 @@
 <body>
 
 
-  <app-nav></app-nav>
+  <app-nav [shoppingCartCount]="cartTotal"></app-nav>
 
   <div class="container" *ngIf="!checkoutButtonClicked">
     <h3 *ngIf="flowersAddedIncart.length === 0" class="p-md-5"> Quite loanly here!!</h3>
@@ -97,7 +97,6 @@
     <button class="btn btn-success" (click)="pay()">Proceed to pay</button>
     <button class="btn btn-secondary m-sm-5" (click)="resetCheckout()">Back</button>
   </div>
-
 
   </body>
 

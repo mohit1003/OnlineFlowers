@@ -44,29 +44,10 @@ public class FlowersModel {
 	@Transient
 	private Integer count = 1;
 	
-//	@OneToOne(targetEntity = SalesModel.class, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "flowerSales_fk", referencedColumnName = "id")
-//	private SalesModel sales;
-//	
-	
-//	@OneToMany(targetEntity= SalesModel.class, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "flower_sales_fk", referencedColumnName = "id")
-//	private List<FlowersModel> flowersPurchased;
 	
 	public FlowersModel() {
 		super();
 	}
-	
-
-//	public FlowersModel(String name, byte[] photo, String category, String price, String description) {
-//		super();
-//		this.name = name;
-//		this.photo = photo;
-//		this.category = category;
-//		this.price = price;
-//		this.description = description;
-//	}
-	
 	
 	
 

@@ -62,14 +62,11 @@ export class FileService {
   }
 
   public getAllPhotos(): Observable<Object> {
-      return this.httpClient.get(this.SERVER_URL + 'getAllFlowers');
-
+    return this.httpClient.get(this.SERVER_URL + 'getAllFlowers');
   }
 
   public getAllShops(): Observable<Object> {
-
-      return this.httpClient.get(this.SERVER_URL + 'getAllShops');
-
+    return this.httpClient.get(this.SERVER_URL + 'getAllShops');
   }
 
   public delete(id: string): Observable<Object> {
@@ -153,7 +150,6 @@ export class FileService {
     return null;
   }
 
-
   public generateDailyReport(): Observable<Object> {
     if (this.isLoggedIn()) {
       let header = new HttpHeaders();
@@ -195,21 +191,44 @@ export class FileService {
       let header = new HttpHeaders();
       let token = JSON.parse(localStorage.getItem('token'));
       header = header.append('Authorization', 'Bearer ' + token);
-      return this.httpClient.get(this.SERVER_URL + 'getFlowerCategoryWiseReport', {
+      return this.httpClient.get(
+        this.SERVER_URL + 'getFlowerCategoryWiseReport',
+        {
+          headers: header,
+        }
+      );
+    }
+    return null;
+  }
+
+  public getAllCustomers(): Observable<Object> {
+    if (this.isLoggedIn()) {
+      let header = new HttpHeaders();
+      let token = JSON.parse(localStorage.getItem('token'));
+      header = header.append('Authorization', 'Bearer ' + token);
+      return this.httpClient.get(this.SERVER_URL + 'getAllCustomers', {
         headers: header,
       });
     }
     return null;
   }
 
-
-
+  public getCustomersCityWise(): Observable<Object> {
+    if (this.isLoggedIn()) {
+      let header = new HttpHeaders();
+      let token = JSON.parse(localStorage.getItem('token'));
+      header = header.append('Authorization', 'Bearer ' + token);
+      return this.httpClient.get(this.SERVER_URL + 'getCustomersCityWise', {
+        headers: header,
+      });
+    }
+    return null;
+  }
 
   //getLeastSoldProduct
 
   public isLoggedIn(): boolean {
-    let token = null;
-    token = localStorage.getItem('token');
+    let token = localStorage.getItem('token');
     if (token === undefined || token === null) {
       return false;
     } else {
@@ -222,14 +241,12 @@ export class FileService {
   }
 
   public logout() {
-    if (!this.isLoggedIn()) {
-      localStorage.removeItem('token');
-      this.router.navigateByUrl('/home');
-      alertify.success('Logout successful');
-    }
+    localStorage.getItem('token')? localStorage.removeItem('token'): localStorage.removeItem('');
+    this.router.navigateByUrl('/home');
+    alertify.success('Logout successful');
   }
 
-  private tokenExpired(token: string): boolean {
+  public tokenExpired(token: string): boolean {
     const expiry = JSON.parse(atob(token.split('.')[1])).exp;
     return Math.floor(new Date().getTime() / 1000) >= expiry;
   }

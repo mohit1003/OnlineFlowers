@@ -15,6 +15,7 @@ import { ViewComponent } from './view/view.component';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { ShopsComponent } from './shops/shops.component';
 import { ReportsComponent } from './reports/reports.component';
+import { CustomerReportsComponent } from './customer-reports/customer-reports.component';
 
 
 
@@ -27,7 +28,8 @@ import { ReportsComponent } from './reports/reports.component';
     ViewComponent,
     AdminNavComponent,
     ShopsComponent,
-    ReportsComponent
+    ReportsComponent,
+    CustomerReportsComponent
   ],
   imports: [
     AppRoutingModule,

@@ -23,7 +23,7 @@ public class DWMReportsModel {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@OneToOne(targetEntity = FlowersModel.class, cascade = CascadeType.MERGE)
+	@OneToOne(targetEntity = FlowersModel.class)
 	@JoinColumn(name = "flower_id_fk")
 	private FlowersModel flower; 
 	

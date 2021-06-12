@@ -35,8 +35,8 @@ public class SalesModel {
 	@JoinColumn(name = "custSales_fk", referencedColumnName = "email")
 	private CustomerModel customer;
 	
-	@OneToOne(targetEntity = FlowersModel.class, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "flowerSales_fk", referencedColumnName = "id")
+	@OneToOne(targetEntity = FlowersModel.class)
+	@JoinColumn(name = "flowerSales_fk")
 	private FlowersModel flower;	
 	
 

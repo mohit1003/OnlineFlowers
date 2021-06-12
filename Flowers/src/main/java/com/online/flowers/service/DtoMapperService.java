@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.online.flowers.dto.Customer;
+import com.online.flowers.dto.CustomerDto;
+import com.online.flowers.dto.CustomerRegionWiseReport;
 import com.online.flowers.model.CustomerModel;
 
 @Component
@@ -22,5 +24,10 @@ public class DtoMapperService {
 		return customerToSend;
 	}
 	
+	public CustomerDto convertToCustomerDtoList(CustomerModel customer) {
+		return _mapper.map(customer, CustomerDto.class);
+	}
+	
+
 
 }
