@@ -5,6 +5,7 @@ import { FileService } from 'src/app/_service/FileService';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DataService } from 'src/app/_service/CartService';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import * as alertify from 'alertifyjs';
 
 @Component({
   selector: 'app-view',
@@ -26,6 +27,8 @@ export class ViewComponent implements OnInit {
   price!:string;
   name!:string;
   id!:string;
+
+  imageToBeDeletedId: string;
 
   flagUpdateWithoutImage: boolean = true;
 
@@ -55,12 +58,29 @@ export class ViewComponent implements OnInit {
     })
   }
 
-  delete(id: string) {
-    this.fileService.delete(id).subscribe(data => {
-      console.log(data);
-    }, err => {
-      console.log(err);
-    })
+  confirmDelete(id: string) {
+
+      this.fileService.delete(id).subscribe(data => {
+        window.location.reload();
+        alertify.success('Deleted successfully');
+      }, err => {
+        if(err.status === 200){
+          alertify.success('Deleted successfully');
+          window.location.reload();
+          console.log(err);
+
+        }
+        else{
+          alertify.error('Error deleting flower');
+          console.log(err);
+        }
+      })
+
+      this.modalRef.hide();
+  }
+
+  declineDelete(): void {
+    this.modalRef.hide();
   }
 
   updateFlower() {
@@ -107,6 +127,14 @@ export class ViewComponent implements OnInit {
     this.flowerToEdit = this.flowerToEdit[0];
     this.modalRef = this.modalService.show(template);
   }
+
+  openDeleteModal(template: TemplateRef<any>, imageId:string) {
+    this.imageToBeDeletedId = null;
+    this.imageToBeDeletedId =imageId;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+
 
   sort(key: string): void{
     this.flowersCopy = this.flowers;

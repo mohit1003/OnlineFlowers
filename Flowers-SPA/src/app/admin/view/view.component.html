@@ -18,7 +18,7 @@
         <td>{{image.category}}</td>
         <td>
           <button class="btn btn-warning" (click)="openEditModel(template, image.id)"> Update </button>
-          <button class="btn btn-danger" (click)="delete(image.id)"> Delete </button>
+          <button class="btn btn-danger" (click)="openDeleteModal(deleteTemplate, image.id)"> Delete </button>
         </td>
       </tr>
     </tbody>
@@ -69,5 +69,21 @@
       <hr>
       <button [disabled]="!addForm.valid" type="submit" class="btn btn-primary">Submit</button>
     </form>
+  </div>
+</ng-template>
+
+
+<ng-template #deleteTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Delete?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Are you sure to delete? It will also delete all sales data associated with the flower!!
+    <br><hr>
+    <button type="button" class="btn btn-default" (click)="confirmDelete(imageToBeDeletedId)" >Yes</button>
+    <button type="button" class="btn btn-primary" (click)="declineDelete()" >No</button>
   </div>
 </ng-template>

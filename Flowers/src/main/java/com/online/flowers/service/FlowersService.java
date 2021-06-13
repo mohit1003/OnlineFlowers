@@ -23,7 +23,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.online.flowers.dto.Message;
 import com.online.flowers.model.FlowersModel;
 import com.online.flowers.model.ShopModel;
+import com.online.flowers.repo.CategoryWiseReportsRepo;
+import com.online.flowers.repo.CustomerRepo;
+import com.online.flowers.repo.DWMReportRepo;
 import com.online.flowers.repo.FlowersRepo;
+import com.online.flowers.repo.ReportRepo;
+import com.online.flowers.repo.SalesRepo;
 import com.online.flowers.repo.ShopRepo;
 
 @Service
@@ -31,6 +36,19 @@ public class FlowersService {
 	
 	@Autowired
 	private FlowersRepo _repo;
+	
+	@Autowired
+	private SalesRepo _salesRepo;
+
+	@Autowired
+	private ReportRepo _reportRepo;
+	
+	@Autowired
+	private DWMReportRepo _dwmReportRepo;
+	
+	@Autowired
+	private CategoryWiseReportsRepo _categoryWiseReportsRepo;
+
 	
 	@Autowired
 	private ClaudinaryService cloudinaryService;

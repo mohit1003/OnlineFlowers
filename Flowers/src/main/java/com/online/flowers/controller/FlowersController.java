@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,6 @@ import com.online.flowers.repo.ShopRepo;
 import com.online.flowers.service.ClaudinaryService;
 import com.online.flowers.service.CustomerService;
 import com.online.flowers.service.FlowersService;
-
 import com.online.flowers.service.SalesService;
 import com.online.flowers.service.ShopService;
 import com.online.flowers.util.AuthRequest;
@@ -77,6 +77,8 @@ public class FlowersController {
 	@Autowired
 	private CustomerService _customerService;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	int registerFlag = 0;
 
 	int loginFlag = 0;
@@ -87,6 +89,7 @@ public class FlowersController {
 			if (_custRepo.existsById(customer.getEmail())) {
 				this.registerFlag = 2;
 			} else {
+				customerToSave.setPassword(passwordEncoder.encode(customerToSave.getPassword()));
 				_custRepo.save(customerToSave);
 				this.registerFlag = 1;
 			}
@@ -182,7 +185,7 @@ public class FlowersController {
 		return new ResponseEntity<List<FlowersModel>>(list, HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "delete")
+	@DeleteMapping(value = "/delete")
 	public ResponseEntity<?> delete(@RequestBody Map<String, String> id) {
 		String flowerId = id.get("id");
 		if (!id.get("id").isEmpty()) {
@@ -235,7 +238,7 @@ public class FlowersController {
 	}
 
 	@PostMapping(value = "/pay")
-	public ResponseEntity<String> makeTransaction(@RequestBody Sales flowersPaymentDone) {
+	public ResponseEntity<?> makeTransaction(@RequestBody Sales flowersPaymentDone) {
 		try {
 			_salesService.recordTransaction(flowersPaymentDone);
 			return new ResponseEntity<String>("Payment Success", HttpStatus.CREATED);

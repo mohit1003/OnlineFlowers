@@ -26,6 +26,7 @@ export class FileService {
       console.log(header);
       return this.httpClient.post(this.SERVER_URL + 'add', flowerData, {
         headers: header,
+        responseType: 'text',
       });
     }
     return null;
@@ -38,6 +39,7 @@ export class FileService {
       header = header.append('Authorization', 'Bearer ' + token);
       return this.httpClient.post(this.SERVER_URL + 'addShop', shop, {
         headers: header,
+        responseType: 'text',
       });
     }
 
@@ -46,9 +48,13 @@ export class FileService {
 
   public putPhotoWhthoutImage(flowerData: Flower): Observable<Object> {
     if (this.isLoggedIn()) {
+      let header = new HttpHeaders();
+      let token = JSON.parse(localStorage.getItem('token'));
+      header = header.append('Authorization', 'Bearer ' + token);
       return this.httpClient.put(
         this.SERVER_URL + 'updateWithoutImage',
-        flowerData
+        flowerData,
+        { headers: header, responseType: 'text' }
       );
     }
     return null;
@@ -56,7 +62,13 @@ export class FileService {
 
   public putPhoto(flowerData: FormData): Observable<Object> {
     if (this.isLoggedIn()) {
-      return this.httpClient.put(this.SERVER_URL + 'update', flowerData);
+      let header = new HttpHeaders();
+      let token = JSON.parse(localStorage.getItem('token'));
+      header = header.append('Authorization', 'Bearer ' + token);
+      return this.httpClient.put(this.SERVER_URL + 'update', flowerData, {
+        headers: header,
+        responseType: 'text',
+      });
     }
     return null;
   }
@@ -68,12 +80,15 @@ export class FileService {
   public getAllShops(): Observable<Object> {
     return this.httpClient.get(this.SERVER_URL + 'getAllShops');
   }
-
+  // delete flower
   public delete(id: string): Observable<Object> {
     if (this.isLoggedIn()) {
+      let token = JSON.parse(localStorage.getItem('token'));
       const options = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+token,
+          responseType: 'json',
         }),
         body: {
           id: id,
@@ -85,10 +100,13 @@ export class FileService {
   }
 
   public registerUser(userToRegister: User): Observable<Object> {
-    return this.httpClient.post(this.SERVER_URL + 'register', userToRegister);
+    return this.httpClient.post(this.SERVER_URL + 'register', userToRegister, {
+      responseType: 'text',
+    });
   }
 
   public getToken(userToRegister: User): Observable<Object> {
+    console.log(userToRegister);
     return this.httpClient.post(
       this.SERVER_URL + 'authenticate',
       userToRegister,
@@ -97,7 +115,9 @@ export class FileService {
   }
 
   public login(userToRegister: User): Observable<Object> {
-    return this.httpClient.post(this.SERVER_URL + 'login', userToRegister);
+    return this.httpClient.post(this.SERVER_URL + 'login', userToRegister, {
+      responseType: 'text',
+    });
   }
 
   public getUserByEmail(email: string): Observable<Object> {
@@ -120,7 +140,7 @@ export class FileService {
       header = header.append('Authorization', 'Bearer ' + token);
       return this.httpClient.post(this.SERVER_URL + 'pay', transaction, {
         headers: header,
-        responseType: 'json',
+        responseType: 'text',
       });
     }
     return null;
@@ -241,7 +261,9 @@ export class FileService {
   }
 
   public logout() {
-    localStorage.getItem('token')? localStorage.removeItem('token'): localStorage.removeItem('');
+    localStorage.getItem('token')
+      ? localStorage.removeItem('token')
+      : localStorage.removeItem('');
     this.router.navigateByUrl('/home');
     alertify.success('Logout successful');
   }
@@ -254,7 +276,8 @@ export class FileService {
   public getEmailFromToken(): string {
     if (this.isLoggedIn()) {
       const token = JSON.parse(localStorage.getItem('token'));
-      return atob(token.split('.')[1]).split(':')[1].split(',')[0];
+      console.log(atob(token.split('.')[1]).split(':')[1].split(',')[0]);
+      return JSON.parse(atob(token.split('.')[1]).split(':')[1].split(',')[0]);
     }
     this.logout();
     alertify.errror('Invalid user Session!!');

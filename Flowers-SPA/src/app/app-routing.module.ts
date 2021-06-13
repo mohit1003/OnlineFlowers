@@ -25,7 +25,7 @@ const routes: Routes = [
     canActivate: [LoginGuard],
     children: [
       { path: 'add', component: AddFlowerComponent },
-      { path: 'view', component: ViewComponent },
+      { path: 'view', component: ViewComponent},
       { path: 'shops', component: ShopsComponent },
       { path: 'reports', component: ReportsComponent },
       { path: 'custReports', component: CustomerReportsComponent }

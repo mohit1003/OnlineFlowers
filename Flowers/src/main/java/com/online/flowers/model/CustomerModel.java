@@ -1,22 +1,12 @@
 package com.online.flowers.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class CustomerModel {
@@ -51,11 +41,7 @@ public class CustomerModel {
 	@NotEmpty(message = "Password cannot be empty")
 	@Column(columnDefinition="LONGTEXT")
 	private String password;
-	
-//	@NotEmpty(message = "DOB cannot be empty")
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
-//	private String dob;
-	
+
 	@NotEmpty(message = "contact cannot be empty")
 	@Size(min = 10, max = 10)
 	private String contact;

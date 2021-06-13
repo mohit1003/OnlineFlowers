@@ -12,8 +12,8 @@ import { FileService } from 'src/app/_service/FileService';
 export class CustomerReportsComponent implements OnInit {
 
   users: User[] = [];
-  allCustomersreport: boolean = false;
-  customerReportRegionWise: boolean = true;
+  allCustomersreport: boolean = true;
+  customerReportRegionWise: boolean = false;
 
   regionWiseChart;
   cityWiseUsers: CityWiseUsers[] = [];

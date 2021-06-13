@@ -18,7 +18,6 @@ import com.online.flowers.dto.Sales;
 import com.online.flowers.model.CategoryWiseReportModel;
 import com.online.flowers.model.CustomerModel;
 import com.online.flowers.model.DWMReportsModel;
-import com.online.flowers.model.FlowersModel;
 import com.online.flowers.model.ReportsModel;
 import com.online.flowers.model.SalesModel;
 import com.online.flowers.repo.CategoryWiseReportsRepo;
@@ -58,7 +57,8 @@ public class SalesService {
 			transaction.setQuantity(flower.getCount());
 			transaction.setFlower(flower);
 			_salesRepo.save(transaction);
-
+			transaction = null;
+			
 		});
 
 		//Record product sales

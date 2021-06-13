@@ -2,19 +2,15 @@ package com.online.flowers.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class SalesModel {
@@ -31,11 +27,11 @@ public class SalesModel {
 	
 	private String price;
 	
-	@OneToOne(targetEntity = CustomerModel.class, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity = CustomerModel.class)
 	@JoinColumn(name = "custSales_fk", referencedColumnName = "email")
 	private CustomerModel customer;
 	
-	@OneToOne(targetEntity = FlowersModel.class)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "flowerSales_fk")
 	private FlowersModel flower;	
 	

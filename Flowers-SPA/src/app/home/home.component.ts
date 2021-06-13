@@ -117,18 +117,18 @@ export class HomeComponent implements OnInit {
   registerUser() {
     this.user = Object.assign({}, this.registerForm.value);
     let password = this.user.password;
-    // this.user.password  = sha('sha256').update({password}).digest('hex')
-    // console.log( this.user.password);
-    this.fileService.registerUser(this.user).subscribe(
-      (userRegistered) => {
-        alertify.success('User is registered successfully');
-        this.registerForm.reset();
-      },
-      (error) => {
-        console.log(error);
-        alertify.error('User registration failed' + error.message);
-      }
-    );
+    this.user.password = sha('sha256').update(password).digest('hex');
+    this.fileService
+      .registerUser(this.user)
+      .subscribe(
+        (userRegistered) => {
+          alertify.success('User is registered successfully');
+          this.registerForm.reset();
+        },
+        (error) => {
+          alertify.error(error.error);
+        }
+      );
   }
 
   login() {
@@ -137,7 +137,9 @@ export class HomeComponent implements OnInit {
       this.router.navigateByUrl('cust/shop');
     } else {
       this.user = Object.assign({}, this.loginForm.value);
-      // console.log(this.user);
+      let password = this.user.password;
+      this.user.password = sha('sha256').update(password).digest('hex');
+
       this.fileService.getToken(this.user).subscribe(
         (token) => {
           localStorage.setItem('token', JSON.stringify(token));
