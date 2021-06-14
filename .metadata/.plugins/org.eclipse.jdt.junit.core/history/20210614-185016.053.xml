@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="FlowersApplicationControllerTests" project="Flowers" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.online.flowers.FlowersApplicationControllerTests" time="0.058" displayname="FlowersApplicationControllerTests" uniqueid="[engine:junit-vintage]/[runner:com.online.flowers.FlowersApplicationControllerTests]">
+    <testcase name="registerUserTest" classname="com.online.flowers.FlowersApplicationControllerTests" time="0.058" displayname="registerUserTest" uniqueid="[engine:junit-vintage]/[runner:com.online.flowers.FlowersApplicationControllerTests]/[test:registerUserTest(com.online.flowers.FlowersApplicationControllerTests)]"/>
+  </testsuite>
+</testrun>

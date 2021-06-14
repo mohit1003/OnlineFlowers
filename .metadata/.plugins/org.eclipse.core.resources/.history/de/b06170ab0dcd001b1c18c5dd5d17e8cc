@@ -1,0 +1,78 @@
+package com.online.flowers;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.mock.web.MockMultipartFile;
+
+import com.online.flowers.dto.Customer;
+import com.online.flowers.dto.MaxMinSoldFlower;
+import com.online.flowers.dto.ReportingForChart;
+import com.online.flowers.model.CustomerModel;
+import com.online.flowers.model.FlowersModel;
+
+public class TestData {
+	static Customer customer;
+
+	static CustomerModel customerModel;
+
+	static Map<String, String> image;
+
+	static MockMultipartFile file;
+
+	static MaxMinSoldFlower flower;
+
+	static List<ReportingForChart> charts;
+
+	static ReportingForChart flowerReport;
+
+	static ReportingForChart flowerReport1;
+
+	static FlowersModel flowerModel;
+	
+	
+	public void SetUp() {
+		
+	}
+
+	public static Customer getCustomer() {
+		return customer;
+	}
+
+	public static CustomerModel getCustomerModel() {
+		return customerModel;
+	}
+
+	public static Map<String, String> getImage() {
+		return image;
+	}
+
+	public static MockMultipartFile getFile() {
+		return file;
+	}
+
+	public static MaxMinSoldFlower getFlower() {
+		return flower;
+	}
+
+	public static List<ReportingForChart> getCharts() {
+		return charts;
+	}
+
+	public static ReportingForChart getFlowerReport() {
+		return flowerReport;
+	}
+
+	public static ReportingForChart getFlowerReport1() {
+		return flowerReport1;
+	}
+
+	public static FlowersModel getFlowerModel() {
+		return flowerModel;
+	}
+	
+
+	
+	
+
+}

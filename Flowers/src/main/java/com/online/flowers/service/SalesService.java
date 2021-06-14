@@ -43,8 +43,11 @@ public class SalesService {
 	
 	@Autowired
 	private CategoryWiseReportsRepo _categoryWiseReportsRepo;
+	
+	private boolean testResult = true;
 
-	public void recordTransaction(Sales flowersPaymentDone) throws SQLException {
+	public boolean recordTransaction(Sales flowersPaymentDone) throws SQLException {
+	
 		// Record individual transaction
 		List<Integer> listToAdd = new ArrayList<>();
 		flowersPaymentDone.getFlowersModel().forEach(flower -> {
@@ -56,11 +59,14 @@ public class SalesService {
 			transaction.setCustomer(customer);
 			transaction.setQuantity(flower.getCount());
 			transaction.setFlower(flower);
-			_salesRepo.save(transaction);
+			SalesModel salesDone = _salesRepo.save(transaction);
+			if(salesDone == null) {
+				this.testResult = false;
+			}
+			salesDone = null;
 			transaction = null;
 			
 		});
-
 		//Record product sales
 		flowersPaymentDone.getFlowersModel().forEach(flower -> {
 			ReportsModel reportsModel = new ReportsModel();
@@ -71,14 +77,22 @@ public class SalesService {
 				reportsModel.setQuantity(quantity);
 				reportsModel.setPrice(String.valueOf(price));
 
-				_reportRepo.save(reportsModel);
+				ReportsModel reports = _reportRepo.save(reportsModel);
+				if(reports == null) {
+					this.testResult = false;
+				}
+				reports = null;
 				reportsModel = null;
 			} else {
 				reportsModel = new ReportsModel();
 				reportsModel.setFlower(flower);
 				reportsModel.setPrice(flower.getPrice());
 				reportsModel.setQuantity(flower.getCount());
-				_reportRepo.save(reportsModel);
+				ReportsModel reports = _reportRepo.save(reportsModel);
+				if(reports == null) {
+					this.testResult = false;
+				}
+				reports = null;
 				reportsModel = null;
 			}
 		});
@@ -93,7 +107,11 @@ public class SalesService {
 				dwmeportsModel.setQuantity(quantity);
 				dwmeportsModel.setPrice(String.valueOf(price));
 
-				_dwmReportRepo.save(dwmeportsModel);
+				DWMReportsModel dwmModel = _dwmReportRepo.save(dwmeportsModel);
+				if(dwmModel == null) {
+					this.testResult = false;
+				}
+				dwmModel = null;
 				dwmeportsModel = null;
 			} else {
 				dwmeportsModel = new DWMReportsModel();
@@ -101,7 +119,11 @@ public class SalesService {
 				dwmeportsModel.setPrice(flower.getPrice());
 				dwmeportsModel.setQuantity(flower.getCount());
 				dwmeportsModel.setDate(LocalDate.now());
-				_dwmReportRepo.save(dwmeportsModel);
+				DWMReportsModel dwmModel = _dwmReportRepo.save(dwmeportsModel);
+				if(dwmModel == null) {
+					this.testResult = false;
+				}
+				dwmModel = null;
 				dwmeportsModel = null;
 			}
 		});
@@ -116,7 +138,11 @@ public class SalesService {
 				categoryWiseModel.setQuantity(quantity);
 				categoryWiseModel.setPrice(String.valueOf(price));
 
-				_categoryWiseReportsRepo.save(categoryWiseModel);
+				CategoryWiseReportModel catModel = _categoryWiseReportsRepo.save(categoryWiseModel);
+				if(catModel == null) {
+					this.testResult = false;
+				}
+				catModel = null;
 				categoryWiseModel = null;
 			} else {
 				categoryWiseModel = new CategoryWiseReportModel();
@@ -124,10 +150,16 @@ public class SalesService {
 				categoryWiseModel.setFlower(flower);
 				categoryWiseModel.setPrice(flower.getPrice());
 				categoryWiseModel.setQuantity(flower.getCount());
-				_categoryWiseReportsRepo.save(categoryWiseModel);
+				CategoryWiseReportModel catModel = _categoryWiseReportsRepo.save(categoryWiseModel);
+				if(catModel == null) {
+					this.testResult = false;
+				}
+				catModel = null;
 				categoryWiseModel = null;
 			}
 		});
+		
+		return this.testResult;
 
 	}
 

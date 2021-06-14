@@ -36,19 +36,19 @@ public class FlowersModel {
 	private String description;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "flower", cascade = CascadeType.DETACH, orphanRemoval = true)
+	@OneToMany(mappedBy = "flower", cascade ={CascadeType.DETACH, CascadeType.REMOVE})
     private List<SalesModel> sales;
 	
 	@JsonIgnore
-	@OneToOne(mappedBy = "flower", cascade = CascadeType.DETACH, orphanRemoval = true)
+	@OneToOne(mappedBy = "flower",  cascade ={CascadeType.DETACH, CascadeType.REMOVE})
     private ReportsModel reports;
 	
 	@JsonIgnore
-	@OneToOne(mappedBy = "flower", cascade = CascadeType.DETACH, orphanRemoval = true)
+	@OneToOne(mappedBy = "flower", cascade ={CascadeType.DETACH, CascadeType.REMOVE})
     private DWMReportsModel dwmReports;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "flower", cascade = CascadeType.DETACH, orphanRemoval = true)
+	@OneToMany(mappedBy = "flower", cascade ={CascadeType.DETACH, CascadeType.REMOVE})
     private List<CategoryWiseReportModel> categoryReports;
 	
 	@Transient

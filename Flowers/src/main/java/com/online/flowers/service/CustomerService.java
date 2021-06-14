@@ -1,8 +1,6 @@
 package com.online.flowers.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +36,6 @@ public class CustomerService {
 
 	public List<CustomerRegionWiseReport> getCustomerRegionWiseData() {
 		List<CustomerRegionWiseReport> customersCityWise = _customerRepo.getCustomersGroupByCity();
-		
-		
 
 		return customersCityWise;
 

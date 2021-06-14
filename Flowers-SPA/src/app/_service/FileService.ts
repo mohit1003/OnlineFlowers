@@ -47,6 +47,7 @@ export class FileService {
   }
 
   public putPhotoWhthoutImage(flowerData: Flower): Observable<Object> {
+    console.log(flowerData);
     if (this.isLoggedIn()) {
       let header = new HttpHeaders();
       let token = JSON.parse(localStorage.getItem('token'));

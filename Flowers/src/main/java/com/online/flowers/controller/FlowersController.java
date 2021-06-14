@@ -84,7 +84,7 @@ public class FlowersController {
 	int loginFlag = 0;
 
 	@PostMapping(value = "/register")
-	public ResponseEntity<?> registerUser(@RequestBody CustomerModel customer) {
+	public ResponseEntity<String> registerUser(@RequestBody CustomerModel customer) {
 		Optional.ofNullable(customer).ifPresent(customerToSave -> {
 			if (_custRepo.existsById(customer.getEmail())) {
 				this.registerFlag = 2;
@@ -105,7 +105,7 @@ public class FlowersController {
 	}
 
 	@PostMapping(value = "/login")
-	public ResponseEntity<?> userLogin(@RequestBody CustomerModel customer) {
+	public ResponseEntity<String> userLogin(@RequestBody CustomerModel customer) {
 		Optional.ofNullable(customer).ifPresent(customerToSave -> {
 			if (_custRepo.existsById(customer.getEmail())) {
 				this.loginFlag = 1;
@@ -120,15 +120,18 @@ public class FlowersController {
 	}
 
 	@PostMapping(value = "/authenticate")
-	public String generateToken(@RequestBody AuthRequest authRequest) throws Exception {
+	public ResponseEntity<String> generateToken(@RequestBody AuthRequest authRequest) throws Exception {
 		try {
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
 		} catch (Exception e) {
 			throw new Exception("Invalid username/password");
 		}
-
-		return jwtutil.generateToken(authRequest.getEmail());
+		String token = jwtutil.generateToken(authRequest.getEmail());
+		if(token.isEmpty()) {
+			return new ResponseEntity<String>("Error generating token", HttpStatus.CONFLICT);
+		}
+		return new ResponseEntity<String>(token, HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/getUserByEmail")
@@ -138,7 +141,7 @@ public class FlowersController {
 	}
 
 	@PostMapping(value = "/add")
-	public ResponseEntity<?> saveFlowerImage(@RequestParam("flowerImage") MultipartFile flower,
+	public ResponseEntity<String> saveFlowerImage(@RequestParam("flowerImage") MultipartFile flower,
 			@RequestParam("name") String name, @RequestParam("description") String description,
 			@RequestParam("category") String category, @RequestParam("price") String price) {
 
@@ -151,7 +154,7 @@ public class FlowersController {
 	}
 
 	@PutMapping(value = "/update")
-	public ResponseEntity<?> updateFlower(@RequestParam("id") String id,
+	public ResponseEntity<String> updateFlower(@RequestParam("id") String id,
 			@RequestParam("flowerImage") MultipartFile flower, @RequestParam("name") String name,
 			@RequestParam("description") String description, @RequestParam("category") String category,
 			@RequestParam("price") String price) {
@@ -186,7 +189,7 @@ public class FlowersController {
 	}
 
 	@DeleteMapping(value = "/delete")
-	public ResponseEntity<?> delete(@RequestBody Map<String, String> id) {
+	public ResponseEntity<String> delete(@RequestBody Map<String, String> id) {
 		String flowerId = id.get("id");
 		if (!id.get("id").isEmpty()) {
 			try {
@@ -207,7 +210,7 @@ public class FlowersController {
 	}
 
 	@PostMapping(value = "/addShop")
-	public ResponseEntity<?> addShop(@RequestParam("shopImage") MultipartFile shopImage,
+	public ResponseEntity<String> addShop(@RequestParam("shopImage") MultipartFile shopImage,
 			@RequestParam("shopName") String shopName, @RequestParam("shopCity") String shopCity,
 			@RequestParam("shopCountry") String shopCountry, @RequestParam("shopAddress") String shopAddress,
 			@RequestParam("isOpen") String isOpen, @RequestParam("shopContact") String shopContact) {
@@ -238,7 +241,7 @@ public class FlowersController {
 	}
 
 	@PostMapping(value = "/pay")
-	public ResponseEntity<?> makeTransaction(@RequestBody Sales flowersPaymentDone) {
+	public ResponseEntity<String> makeTransaction(@RequestBody Sales flowersPaymentDone) {
 		try {
 			_salesService.recordTransaction(flowersPaymentDone);
 			return new ResponseEntity<String>("Payment Success", HttpStatus.CREATED);

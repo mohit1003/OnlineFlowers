@@ -1,0 +1,70 @@
+package com.online.flowers;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Map;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.online.flowers.controller.FlowersController;
+import com.online.flowers.dto.Customer;
+import com.online.flowers.dto.MaxMinSoldFlower;
+import com.online.flowers.dto.ReportingForChart;
+import com.online.flowers.model.CustomerModel;
+import com.online.flowers.model.FlowersModel;
+
+@SpringBootTest
+@RunWith(SpringRunner.class)
+public class FlowersApplicationControllerTest {
+
+	@MockBean
+	private FlowersController _controller;
+	
+	static Customer customer;
+
+	static CustomerModel customerModel;
+
+	static Map<String, String> image;
+
+	static MockMultipartFile file;
+
+	static MaxMinSoldFlower flower;
+
+	static List<ReportingForChart> charts;
+
+	static ReportingForChart flowerReport;
+
+	static ReportingForChart flowerReport1;
+
+	static FlowersModel flowerModel;
+
+
+	@BeforeAll
+	public static void setUp() {
+		
+	}
+
+	@Test
+	public void registerUserTest() {
+		when(_controller.registerUser(data.getCustomerModel()))
+				.thenReturn(new ResponseEntity<String>("User is registered", HttpStatus.CREATED));
+		assertEquals(new ResponseEntity<String>("User is registered", HttpStatus.CREATED), _controller.registerUser(data.getCustomerModel()));
+	}
+	
+	@AfterAll
+	public static void cleanUp() {
+		data.cleanUp();
+	}
+}

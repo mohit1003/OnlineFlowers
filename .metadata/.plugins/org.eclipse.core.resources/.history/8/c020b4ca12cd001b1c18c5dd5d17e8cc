@@ -1,0 +1,35 @@
+package com.online.flowers;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.mock.web.MockMultipartFile;
+
+import com.online.flowers.controller.FlowersController;
+import com.online.flowers.dto.Customer;
+import com.online.flowers.dto.MaxMinSoldFlower;
+import com.online.flowers.dto.ReportingForChart;
+import com.online.flowers.model.CustomerModel;
+import com.online.flowers.model.FlowersModel;
+
+public class TestData {
+private FlowersController _controller;
+	
+	static Customer customer;
+
+	static CustomerModel customerModel;
+
+	static Map<String, String> image;
+
+	static MockMultipartFile file;
+
+	static MaxMinSoldFlower flower;
+
+	static List<ReportingForChart> charts;
+
+	static ReportingForChart flowerReport;
+
+	static ReportingForChart flowerReport1;
+
+	static FlowersModel flowerModel;
+}

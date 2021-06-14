@@ -46,7 +46,7 @@
        </div>
       <div class="form-group">
         <label for="description"  required="required">Description</label>
-        <input type="text" [(ngModel)]="description" #descriptionFeild="ngModel" name="description" class="form-control" id="description" placeholder="describe image" required>
+        <input type="text" [(ngModel)]="description" [value]="flowerToEdit.description" #descriptionFeild="ngModel" name="description" class="form-control" id="description" placeholder="describe image" required>
         <small *ngIf="descriptionFeild.touched && !descriptionFeild.valid"> Enter description</small>
       </div>
       <div class="form-group">

@@ -32,6 +32,26 @@ public class Customer {
 	
 	@JsonIgnore
 	private String password;
+	
+	
+
+	public Customer() {
+		super();
+	}
+
+	public Customer(String email, String title, String firstName, String lastName, String address, String city,
+			String country, String contact, String password) {
+		super();
+		this.email = email;
+		this.title = title;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.city = city;
+		this.country = country;
+		this.contact = contact;
+		this.password = password;
+	}
 
 	public String getEmail() {
 		return email;

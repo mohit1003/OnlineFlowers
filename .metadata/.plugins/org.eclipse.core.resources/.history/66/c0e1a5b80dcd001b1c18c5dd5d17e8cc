@@ -1,0 +1,82 @@
+package com.online.flowers;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.mock.web.MockMultipartFile;
+
+import com.online.flowers.dto.Customer;
+import com.online.flowers.dto.MaxMinSoldFlower;
+import com.online.flowers.dto.ReportingForChart;
+import com.online.flowers.model.CustomerModel;
+import com.online.flowers.model.FlowersModel;
+
+public class TestData {
+	static Customer customer;
+
+	static CustomerModel customerModel;
+
+	static Map<String, String> image;
+
+	static MockMultipartFile file;
+
+	static MaxMinSoldFlower flower;
+
+	static List<ReportingForChart> charts;
+
+	static ReportingForChart flowerReport;
+
+	static ReportingForChart flowerReport1;
+
+	static FlowersModel flowerModel;
+	
+	
+	public void SetUp() {
+		customer = new Customer("1@2", "MR", "Mohit", "Kulkarni", "123, High street, Brentford, London", "London", "UK",
+				"$2a$10$KLQUgWpeYzNT8q48c226I.5BKJZ41TZaKkJU/4H.3FWyjSUEAeu0S", "9921918100");
+
+		customerModel = new CustomerModel("1@2", "MR", "Mohit", "Kulkarni", "123, High street, Brentford, London",
+				"London", "UK", "$2a$10$KLQUgWpeYzNT8q48c226I.5BKJZ41TZaKkJU/4H.3FWyjSUEAeu0S", "9921918100");
+	}
+
+	public static Customer getCustomer() {
+		return customer;
+	}
+
+	public static CustomerModel getCustomerModel() {
+		return customerModel;
+	}
+
+	public static Map<String, String> getImage() {
+		return image;
+	}
+
+	public static MockMultipartFile getFile() {
+		return file;
+	}
+
+	public static MaxMinSoldFlower getFlower() {
+		return flower;
+	}
+
+	public static List<ReportingForChart> getCharts() {
+		return charts;
+	}
+
+	public static ReportingForChart getFlowerReport() {
+		return flowerReport;
+	}
+
+	public static ReportingForChart getFlowerReport1() {
+		return flowerReport1;
+	}
+
+	public static FlowersModel getFlowerModel() {
+		return flowerModel;
+	}
+	
+
+	
+	
+
+}

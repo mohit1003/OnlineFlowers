@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="FlowersApplicationControllerTests" project="Flowers" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="com.online.flowers.FlowersApplicationControllerTests" time="0.045" displayname="FlowersApplicationControllerTests" uniqueid="[engine:junit-vintage]/[runner:com.online.flowers.FlowersApplicationControllerTests]">
+    <testcase name="generateTokenTest" classname="com.online.flowers.FlowersApplicationControllerTests" time="0.038" displayname="generateTokenTest" uniqueid="[engine:junit-vintage]/[runner:com.online.flowers.FlowersApplicationControllerTests]/[test:generateTokenTest(com.online.flowers.FlowersApplicationControllerTests)]"/>
+    <testcase name="registerUserTest" classname="com.online.flowers.FlowersApplicationControllerTests" time="0.003" displayname="registerUserTest" uniqueid="[engine:junit-vintage]/[runner:com.online.flowers.FlowersApplicationControllerTests]/[test:registerUserTest(com.online.flowers.FlowersApplicationControllerTests)]"/>
+    <testcase name="userLoginTest" classname="com.online.flowers.FlowersApplicationControllerTests" time="0.003" displayname="userLoginTest" uniqueid="[engine:junit-vintage]/[runner:com.online.flowers.FlowersApplicationControllerTests]/[test:userLoginTest(com.online.flowers.FlowersApplicationControllerTests)]"/>
+  </testsuite>
+</testrun>

@@ -100,6 +100,7 @@ export class CartComponent implements OnInit {
       this.fileService.makeTransaction(this.sales).subscribe(
         (data) => {
           alertify.success('Payment Successful');
+          localStorage.removeItem('cartTotal');
           this.flowersAddedIncart.forEach((flower) => {
             this.deleteFromCart(flower);
           });

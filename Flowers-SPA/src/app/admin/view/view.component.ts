@@ -10,23 +10,26 @@ import * as alertify from 'alertifyjs';
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
-  styleUrls: ['./view.component.css']
+  styleUrls: ['./view.component.css'],
 })
 export class ViewComponent implements OnInit {
-
-  constructor(private fileService: FileService,
-    private sanitizer: DomSanitizer, private dataService: DataService,
-    private modalService: BsModalService, private router: Router) { }
+  constructor(
+    private fileService: FileService,
+    private sanitizer: DomSanitizer,
+    private dataService: DataService,
+    private modalService: BsModalService,
+    private router: Router
+  ) {}
 
   flowers: Flower[] = [];
   flowersCopy: Flower[] = [];
   flowerToEdit!: Flower;
-  flowerImage!:File
+  flowerImage!: File;
   category!: string;
-  description!: string
-  price!:string;
-  name!:string;
-  id!:string;
+  description!: string;
+  price!: string;
+  name!: string;
+  id!: string;
 
   imageToBeDeletedId: string;
 
@@ -34,49 +37,50 @@ export class ViewComponent implements OnInit {
 
   modalRef!: BsModalRef;
 
-
   ngOnInit(): void {
     this.getAllPhotos();
   }
 
-  onFileChanged(event:any) {
+  onFileChanged(event: any) {
     this.flowerImage = event.target.files[0];
     // console.log(this.flowerImage);
   }
 
   getAllPhotos() {
-    this.fileService.getAllPhotos().subscribe((data) => {
-      this.flowers = Object.assign(data);
+    this.fileService.getAllPhotos().subscribe(
+      (data) => {
+        this.flowers = Object.assign(data);
 
-
-      // this.dataService.changeState(this.flowers);
-      // this.dataService.currentState.subscribe(flowers =>{
-      //  console.log(flowers);
-      // })
-    }, err => {
-      console.log(err);
-    })
+        // this.dataService.changeState(this.flowers);
+        // this.dataService.currentState.subscribe(flowers =>{
+        //  console.log(flowers);
+        // })
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   confirmDelete(id: string) {
-
-      this.fileService.delete(id).subscribe(data => {
+    this.fileService.delete(id).subscribe(
+      (data) => {
         window.location.reload();
         alertify.success('Deleted successfully');
-      }, err => {
-        if(err.status === 200){
+      },
+      (err) => {
+        if (err.status === 200) {
           alertify.success('Deleted successfully');
           window.location.reload();
           console.log(err);
-
-        }
-        else{
+        } else {
           alertify.error('Error deleting flower');
           console.log(err);
         }
-      })
+      }
+    );
 
-      this.modalRef.hide();
+    this.modalRef.hide();
   }
 
   declineDelete(): void {
@@ -92,57 +96,69 @@ export class ViewComponent implements OnInit {
 
     const flower = new FormData();
 
-    if(this.flowerImage !== undefined) {
-      flower.append('id', this.flowerToEdit.id);
+    if (this.flowerImage !== undefined) {
+      flower.append('id', this.id);
       flower.append('flowerImage', this.flowerImage, this.flowerImage.name);
-      flower.append('name', this.flowerToEdit.name);
-      flower.append('description', this.flowerToEdit.description);
-      flower.append('category', this.flowerToEdit.category);
-      flower.append('price', this.flowerToEdit.price);
+      flower.append('name', this.name);
+      flower.append('description', this.description);
+      flower.append('category', this.category);
+      flower.append('price', this.price);
       this.flagUpdateWithoutImage = false;
-    }
+    } else {
+      this.flowerToEdit[0].id = this.id;
 
+      this.flowerToEdit[0].name = this.name;
+      this.flowerToEdit[0].description = this.description;
+      this.flowerToEdit[0].category = this.category;
+      this.flowerToEdit[0].price = this.price;
+      this.flagUpdateWithoutImage = true;
+    }
 
     // console.log(this.price);
 
-    if(this.flagUpdateWithoutImage) {
-      this.fileService.putPhotoWhthoutImage(this.flowerToEdit).subscribe((data) =>{
-        console.log(data);
-        this.router.navigateByUrl('/view');
-      }, err=> {
-        console.log(err);
-      })
-    }
-    else if(!this.flagUpdateWithoutImage) {
-      this.fileService.putPhoto(flower).subscribe((data) =>{
-        console.log(data);
-      }, err=> {
-        console.log(err);
-      })
+    if (this.flagUpdateWithoutImage) {
+      this.fileService.putPhotoWhthoutImage(this.flowerToEdit[0]).subscribe(
+        (data) => {
+          console.log(data);
+          this.router.navigateByUrl('/view');
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else if (!this.flagUpdateWithoutImage) {
+      this.fileService.putPhoto(flower).subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     }
   }
 
-  openEditModel(template: TemplateRef<any>, id:string): void{
-    this.flowerToEdit = Object.assign(this.flowers.filter(flower => flower.id === id));
-    this.flowerToEdit = this.flowerToEdit[0];
+  openEditModel(template: TemplateRef<any>, id: string): void {
+    this.flowerToEdit = Object.assign(
+      this.flowers.filter((flower) => flower.id === id)
+    );
+    this.id = this.flowerToEdit[0].id;
     this.modalRef = this.modalService.show(template);
   }
 
-  openDeleteModal(template: TemplateRef<any>, imageId:string) {
+  openDeleteModal(template: TemplateRef<any>, imageId: string) {
     this.imageToBeDeletedId = null;
-    this.imageToBeDeletedId =imageId;
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    this.imageToBeDeletedId = imageId;
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
-
-
-  sort(key: string): void{
+  sort(key: string): void {
     this.flowersCopy = this.flowers;
-    if(key === 'price') {
+    if (key === 'price') {
       this.flowers = this.flowersCopy.sort(this.sortByPrice);
     }
 
-    if(key === 'category') {
+    if (key === 'category') {
       this.flowers = this.flowersCopy.sort(this.sortByCategory);
     }
   }
@@ -151,11 +167,9 @@ export class ViewComponent implements OnInit {
     return parseInt(flower1.price) - parseInt(flower2.price);
   }
 
-  sortByCategory(flower1: Flower, flower2: Flower) :number {
-    if(flower1.category > flower2.category) return 1;
-    else if(flower1.category === flower2.category) return 0;
+  sortByCategory(flower1: Flower, flower2: Flower): number {
+    if (flower1.category > flower2.category) return 1;
+    else if (flower1.category === flower2.category) return 0;
     else return -1;
   }
-
-
 }

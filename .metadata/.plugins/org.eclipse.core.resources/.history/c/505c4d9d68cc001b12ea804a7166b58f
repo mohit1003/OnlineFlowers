@@ -1,0 +1,40 @@
+package com.online.flowers;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.online.flowers.dto.Customer;
+import com.online.flowers.model.CustomerModel;
+import com.online.flowers.repo.CustomerRepo;
+import com.online.flowers.service.CustomerService;
+
+@SpringBootTest
+@RunWith(SpringRunner.class)
+class FlowersApplicationServiceTests {
+
+	@Autowired
+	private CustomerService customerService;
+	
+	@MockBean
+	private CustomerRepo _customerRepo;
+	
+	@Test
+	public void getAllUsersTest() {
+		when(_customerRepo.findAll()).thenReturn(Stream
+				.of(new CustomerModel("1@2","MR", "Mohit", "Kulkarni", "123, High street, Brentford, London", "London", "UK", "$2a$10$KLQUgWpeYzNT8q48c226I.5BKJZ41TZaKkJU/4H.3FWyjSUEAeu0S", "9921918100"),
+						new CustomerModel("1@3","MR", "Mavit", "Kulk", "123, High street, Kolkata", "Kolkata", "India", "$2a$10$KLQUgWpeYzNT8q48c226I.5BKJZ41TZaKkJU/4H.3FWyjSUEAeuU8", "8884888288"))
+				.collect(Collectors.toList()));
+		assertEquals(2, customerService.getAllCustomers().size());
+	}
+
+}
