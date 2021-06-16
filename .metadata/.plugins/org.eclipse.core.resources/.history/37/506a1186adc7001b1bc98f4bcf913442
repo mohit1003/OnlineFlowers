@@ -1,5 +1,0 @@
-package com.online.flowers.repo;
-
-public interface CategoryWiseReportsRepo {
-
-}

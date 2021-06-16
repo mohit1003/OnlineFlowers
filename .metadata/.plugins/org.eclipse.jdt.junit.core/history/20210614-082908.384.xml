@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="FlowersApplicationServiceTests" project="Flowers" tests="3" started="3" failures="0" errors="0" ignored="0">
-  <testsuite name="com.online.flowers.FlowersApplicationServiceTests" time="0.067" displayname="FlowersApplicationServiceTests" uniqueid="[engine:junit-jupiter]/[class:com.online.flowers.FlowersApplicationServiceTests]">
-    <testcase name="getAllUsersTest" classname="com.online.flowers.FlowersApplicationServiceTests" time="0.054" displayname="getAllUsersTest()" uniqueid="[engine:junit-jupiter]/[class:com.online.flowers.FlowersApplicationServiceTests]/[method:getAllUsersTest()]"/>
-    <testcase name="convertToCustomerDtoTest" classname="com.online.flowers.FlowersApplicationServiceTests" time="0.006" displayname="convertToCustomerDtoTest()" uniqueid="[engine:junit-jupiter]/[class:com.online.flowers.FlowersApplicationServiceTests]/[method:convertToCustomerDtoTest()]"/>
-    <testcase name="getCustomerRegionWiseDataTest" classname="com.online.flowers.FlowersApplicationServiceTests" time="0.004" displayname="getCustomerRegionWiseDataTest()" uniqueid="[engine:junit-jupiter]/[class:com.online.flowers.FlowersApplicationServiceTests]/[method:getCustomerRegionWiseDataTest()]"/>
-  </testsuite>
-</testrun>

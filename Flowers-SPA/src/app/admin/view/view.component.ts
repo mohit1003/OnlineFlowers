@@ -119,11 +119,10 @@ export class ViewComponent implements OnInit {
     if (this.flagUpdateWithoutImage) {
       this.fileService.putPhotoWhthoutImage(this.flowerToEdit[0]).subscribe(
         (data) => {
-          console.log(data);
-          this.router.navigateByUrl('/view');
+         alertify.success('Update Successful')
         },
         (err) => {
-          console.log(err);
+          alertify.error('Error updating')
         }
       );
     } else if (!this.flagUpdateWithoutImage) {
@@ -143,6 +142,10 @@ export class ViewComponent implements OnInit {
       this.flowers.filter((flower) => flower.id === id)
     );
     this.id = this.flowerToEdit[0].id;
+    this.name =  this.flowerToEdit[0].name;
+    this.description = this.flowerToEdit[0].description;
+    this.category =  this.flowerToEdit[0].category;
+    this.price =  this.flowerToEdit[0].price;
     this.modalRef = this.modalService.show(template);
   }
 
