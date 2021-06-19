@@ -62,6 +62,7 @@ export class AddFlowerComponent implements OnInit {
       this.fileService.postPhoto(flower).subscribe(
         (data) => {
           alertify.success('Uploaded successfully');
+          this.addForm.reset();
         },
         (err) => {
           alertify.error('Error uploading image');

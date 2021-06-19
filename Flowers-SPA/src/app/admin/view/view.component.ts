@@ -128,10 +128,11 @@ export class ViewComponent implements OnInit {
     } else if (!this.flagUpdateWithoutImage) {
       this.fileService.putPhoto(flower).subscribe(
         (data) => {
-          console.log(data);
+          alertify.success('Update Successful')
+          window.location.reload();
         },
         (err) => {
-          console.log(err);
+          alertify.error('Error updating info')
         }
       );
     }

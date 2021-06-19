@@ -1,11 +1,11 @@
 <body>
 
 
-  <app-nav [shoppingCartCount]="cartTotal"></app-nav>
+  <app-nav [shoppingCartCount]="cartCount"></app-nav>
 
-  <div class="container" *ngIf="!checkoutButtonClicked">
-    <h3 *ngIf="flowersAddedIncart.length === 0" class="p-md-5"> Quite loanly here!!</h3>
-    <table *ngIf="flowersAddedIncart.length > 0"class="table table-stripped" style="margin-bottom: 10%;">
+  <div class="container table-responsive" *ngIf="!checkoutButtonClicked">
+    <h3 *ngIf="flowersInCart.length === 0" class="p-md-5"> Quite loanly here!!</h3>
+    <table *ngIf="flowersInCart.length > 0" class="table table-stripped" style="margin-bottom: 10%;">
       <thead>
         <tr>
           <td>Image</td>
@@ -17,8 +17,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let image of flowersAddedIncart">
-          <td><img [src]="image.imageUrl" width="100" height="100" alt="flower"> <p *ngIf="image.count !== undefined">x {{image.count}}</p></td>
+        <tr *ngFor="let image of flowersInCart">
+          <td><img [src]="image.imageUrl" width="100" height="100" alt="flower">
+            <br><span *ngIf="image.count !== undefined">x {{image.count}}</span> 
+          </td>
           <td>{{image.name}}</td>
           <td>{{image.description}}</td>
           <td>{{image.price}}</td>
@@ -30,15 +32,12 @@
       </tbody>
     </table>
     <div>
-      <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
-        <a class="navbar-brand m-md-3">Your total --- Rs.  {{total}} </a>
-        <button class="navbar-toggler" type="button">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
+      <nav class="navbar fixed-bottom navbar-dark bg-dark">
+        <a class="navbar-brand m-md-3">Your total --- Rs. {{cartTotal}} </a>
+        <div>
+          <ul>
             <li>
-              <button class="btn btn-warning" style="margin-left: 100%" (click)="proceedBuy()"> Checkout</button>
+              <button *ngIf="cart.count !== 0" class="btn btn-warning m-3" (click)="proceedBuy()"> Checkout</button>
             </li>
           </ul>
         </div>
@@ -75,22 +74,22 @@
           <thead>
             <tr>
               <td>Item name</td>
-              <td >Item Quantity</td>
+              <td>Item Quantity</td>
               <td>Item total Rs.</td>
             </tr>
           </thead>
 
-            <tbody>
-              <tr *ngFor="let flower of flowersAddedIncart">
-                <td>{{flower.name}}</td>
-                <td>{{flower.count === undefined ? 1 : flower.count}}</td>
-                <td>{{flower.price}}</td>
-              </tr>
-              <tr>
-                <td colspan="2">Total</td>
-                <td>{{total}}</td>
-              </tr>
-            </tbody>
+          <tbody>
+            <tr *ngFor="let flower of flowersInCart">
+              <td>{{flower.name}}</td>
+              <td>{{flower.count === undefined ? 1 : flower.count}}</td>
+              <td>{{flower.price}}</td>
+            </tr>
+            <tr>
+              <td colspan="2">Total</td>
+              <td>{{cartTotal}}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -98,5 +97,4 @@
     <button class="btn btn-secondary m-sm-5" (click)="resetCheckout()">Back</button>
   </div>
 
-  </body>
-
+</body>

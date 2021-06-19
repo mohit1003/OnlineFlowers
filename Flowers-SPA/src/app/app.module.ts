@@ -12,7 +12,6 @@ import { AdminModule } from './admin/admin.module';
 
 import { AppComponent } from './app.component';
 import { CustomerModule } from './customer/customer.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CategoryFilter } from './_pipes/categoryFilter.pipe';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './customer/nav/nav.component';
@@ -31,7 +30,6 @@ import { NavComponent } from './customer/nav/nav.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FontAwesomeModule,
     ModalModule.forRoot(),
 
   ],

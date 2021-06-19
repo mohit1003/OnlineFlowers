@@ -12,7 +12,10 @@ import { Transaction } from '../_model/Transaction';
   providedIn: 'root',
 })
 export class FileService {
-  SERVER_URL: string = 'http://localhost:9191/';
+  SERVER_URL: string = 'http://localhost:9191/flowers/';
+  SERVER_URL_ADMIN: string = 'http://localhost:9191/admin/';
+  SERVER_URL_CUSTOMER: string = 'http://localhost:9191/customer/';
+
   redirectUrl: string;
 
   constructor(private httpClient: HttpClient, private router: Router) {}
@@ -24,7 +27,7 @@ export class FileService {
 
       header = header.append('Authorization', 'Bearer ' + token);
       console.log(header);
-      return this.httpClient.post(this.SERVER_URL + 'add', flowerData, {
+      return this.httpClient.post(this.SERVER_URL_ADMIN + 'add', flowerData, {
         headers: header,
         responseType: 'text',
       });
@@ -37,7 +40,7 @@ export class FileService {
       let header = new HttpHeaders();
       let token = JSON.parse(localStorage.getItem('token'));
       header = header.append('Authorization', 'Bearer ' + token);
-      return this.httpClient.post(this.SERVER_URL + 'addShop', shop, {
+      return this.httpClient.post(this.SERVER_URL_ADMIN + 'addShop', shop, {
         headers: header,
         responseType: 'text',
       });
@@ -53,7 +56,7 @@ export class FileService {
       let token = JSON.parse(localStorage.getItem('token'));
       header = header.append('Authorization', 'Bearer ' + token);
       return this.httpClient.put(
-        this.SERVER_URL + 'updateWithoutImage',
+        this.SERVER_URL_ADMIN + 'updateWithoutImage',
         flowerData,
         { headers: header, responseType: 'text' }
       );
@@ -66,7 +69,7 @@ export class FileService {
       let header = new HttpHeaders();
       let token = JSON.parse(localStorage.getItem('token'));
       header = header.append('Authorization', 'Bearer ' + token);
-      return this.httpClient.put(this.SERVER_URL + 'update', flowerData, {
+      return this.httpClient.put(this.SERVER_URL_ADMIN + 'update', flowerData, {
         headers: header,
         responseType: 'text',
       });
@@ -95,7 +98,7 @@ export class FileService {
           id: id,
         },
       };
-      return this.httpClient.delete(this.SERVER_URL + 'delete', options);
+      return this.httpClient.delete(this.SERVER_URL_ADMIN + 'delete', options);
     }
     return null;
   }
@@ -107,7 +110,6 @@ export class FileService {
   }
 
   public getToken(userToRegister: User): Observable<Object> {
-    console.log(userToRegister);
     return this.httpClient.post(
       this.SERVER_URL + 'authenticate',
       userToRegister,
@@ -126,7 +128,7 @@ export class FileService {
       let header = new HttpHeaders();
       let token = JSON.parse(localStorage.getItem('token'));
       header = header.append('Authorization', 'Bearer ' + token);
-      return this.httpClient.post(this.SERVER_URL + 'getUserByEmail', email, {
+      return this.httpClient.post(this.SERVER_URL_CUSTOMER + 'getUserByEmail', email, {
         headers: header,
         responseType: 'json',
       });
@@ -139,7 +141,7 @@ export class FileService {
       let header = new HttpHeaders();
       let token = JSON.parse(localStorage.getItem('token'));
       header = header.append('Authorization', 'Bearer ' + token);
-      return this.httpClient.post(this.SERVER_URL + 'pay', transaction, {
+      return this.httpClient.post(this.SERVER_URL_CUSTOMER + 'pay', transaction, {
         headers: header,
         responseType: 'text',
       });
@@ -152,7 +154,7 @@ export class FileService {
       let header = new HttpHeaders();
       let token = JSON.parse(localStorage.getItem('token'));
       header = header.append('Authorization', 'Bearer ' + token);
-      return this.httpClient.get(this.SERVER_URL + 'getMostSoldProduct', {
+      return this.httpClient.get(this.SERVER_URL_ADMIN + 'getMostSoldProduct', {
         headers: header,
       });
     }
@@ -164,7 +166,7 @@ export class FileService {
       let header = new HttpHeaders();
       let token = JSON.parse(localStorage.getItem('token'));
       header = header.append('Authorization', 'Bearer ' + token);
-      return this.httpClient.get(this.SERVER_URL + 'getLeastSoldProduct', {
+      return this.httpClient.get(this.SERVER_URL_ADMIN + 'getLeastSoldProduct', {
         headers: header,
       });
     }
@@ -176,7 +178,7 @@ export class FileService {
       let header = new HttpHeaders();
       let token = JSON.parse(localStorage.getItem('token'));
       header = header.append('Authorization', 'Bearer ' + token);
-      return this.httpClient.get(this.SERVER_URL + 'getTodaysSalesReport', {
+      return this.httpClient.get(this.SERVER_URL_ADMIN + 'getTodaysSalesReport', {
         headers: header,
       });
     }
@@ -188,7 +190,7 @@ export class FileService {
       let header = new HttpHeaders();
       let token = JSON.parse(localStorage.getItem('token'));
       header = header.append('Authorization', 'Bearer ' + token);
-      return this.httpClient.get(this.SERVER_URL + 'getLastWeekSalesReport', {
+      return this.httpClient.get(this.SERVER_URL_ADMIN + 'getLastWeekSalesReport', {
         headers: header,
       });
     }
@@ -200,7 +202,7 @@ export class FileService {
       let header = new HttpHeaders();
       let token = JSON.parse(localStorage.getItem('token'));
       header = header.append('Authorization', 'Bearer ' + token);
-      return this.httpClient.get(this.SERVER_URL + 'getMonthlySalesReport', {
+      return this.httpClient.get(this.SERVER_URL_ADMIN + 'getMonthlySalesReport', {
         headers: header,
       });
     }
@@ -213,7 +215,7 @@ export class FileService {
       let token = JSON.parse(localStorage.getItem('token'));
       header = header.append('Authorization', 'Bearer ' + token);
       return this.httpClient.get(
-        this.SERVER_URL + 'getFlowerCategoryWiseReport',
+        this.SERVER_URL_ADMIN + 'getFlowerCategoryWiseReport',
         {
           headers: header,
         }
@@ -227,7 +229,7 @@ export class FileService {
       let header = new HttpHeaders();
       let token = JSON.parse(localStorage.getItem('token'));
       header = header.append('Authorization', 'Bearer ' + token);
-      return this.httpClient.get(this.SERVER_URL + 'getAllCustomers', {
+      return this.httpClient.get(this.SERVER_URL_ADMIN + 'getAllCustomers', {
         headers: header,
       });
     }
@@ -239,7 +241,7 @@ export class FileService {
       let header = new HttpHeaders();
       let token = JSON.parse(localStorage.getItem('token'));
       header = header.append('Authorization', 'Bearer ' + token);
-      return this.httpClient.get(this.SERVER_URL + 'getCustomersCityWise', {
+      return this.httpClient.get(this.SERVER_URL_ADMIN + 'getCustomersCityWise', {
         headers: header,
       });
     }
@@ -277,11 +279,21 @@ export class FileService {
   public getEmailFromToken(): string {
     if (this.isLoggedIn()) {
       const token = JSON.parse(localStorage.getItem('token'));
-      console.log(atob(token.split('.')[1]).split(':')[1].split(',')[0]);
       return JSON.parse(atob(token.split('.')[1]).split(':')[1].split(',')[0]);
     }
     this.logout();
     alertify.errror('Invalid user Session!!');
     return null;
   }
+
+  public getScopesFromToken(): string {
+    if (this.isLoggedIn()) {
+      const token = JSON.parse(localStorage.getItem('token'));
+      return JSON.parse(atob(token.split('.')[1]).split(',')[1].split(':')[1]);
+    }
+    this.logout();
+    alertify.errror('Invalid user Session!!');
+    return null;
+  }
 }
+

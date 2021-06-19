@@ -12,8 +12,10 @@ import { CartComponent } from './customer/cart/cart.component';
 import { ShopsComponent } from './admin/shops/shops.component';
 import { ReportsComponent } from './admin/reports/reports.component';
 import { CustomerReportsComponent } from './admin/customer-reports/customer-reports.component';
+import { AdminGuard } from './_guards/adminGuard.service';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'locations', component: LocationsComponent },
@@ -22,7 +24,7 @@ const routes: Routes = [
   {
     path: 'admin',
     runGuardsAndResolvers: 'always',
-    canActivate: [LoginGuard],
+    canActivate: [AdminGuard],
     children: [
       { path: 'add', component: AddFlowerComponent },
       { path: 'view', component: ViewComponent},
@@ -35,7 +37,6 @@ const routes: Routes = [
   {
     path: 'cust',
     runGuardsAndResolvers: 'always',
-    // canActivate: [AuthGuard],
     children: [
       { path: 'cart', component: CartComponent, canActivate: [LoginGuard] },
       { path: 'shop', component: ShopComponent },

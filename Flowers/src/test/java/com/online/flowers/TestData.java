@@ -10,7 +10,7 @@ import java.util.Map;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 
-import com.online.flowers.controller.FlowersController;
+import com.online.flowers.controller.CustomerController;
 import com.online.flowers.dto.Customer;
 import com.online.flowers.dto.MaxMinSoldFlower;
 import com.online.flowers.dto.ReportingForChart;
@@ -22,7 +22,7 @@ import com.online.flowers.util.AuthRequest;
 
 public class TestData {
 
-	private FlowersController _controller;
+	private CustomerController _controller;
 
 	static Customer customer;
 
@@ -148,7 +148,7 @@ public class TestData {
 		sales.setFlowersModel(flowers);
 	}
 
-	public FlowersController get_controller() {
+	public CustomerController get_controller() {
 		return _controller;
 	}
 

@@ -6,6 +6,7 @@ import { FileService } from '../_service/FileService';
 import * as alertify from 'alertifyjs';
 import * as sha from 'sha.js';
 import { Router } from '@angular/router';
+import { Roles } from '../_model/Roles';
 
 @Component({
   selector: 'app-home',
@@ -118,17 +119,18 @@ export class HomeComponent implements OnInit {
     this.user = Object.assign({}, this.registerForm.value);
     let password = this.user.password;
     this.user.password = sha('sha256').update(password).digest('hex');
-    this.fileService
-      .registerUser(this.user)
-      .subscribe(
-        (userRegistered) => {
-          alertify.success('User is registered successfully');
-          this.registerForm.reset();
-        },
-        (error) => {
-          alertify.error(error.error);
-        }
-      );
+    let role = new Roles();
+    this.user.roles = [];
+    this.user.roles.push(role);
+    this.fileService.registerUser(this.user).subscribe(
+      (userRegistered) => {
+        alertify.success('User is registered successfully');
+        this.registerForm.reset();
+      },
+      (error) => {
+        alertify.error(error.error);
+      }
+    );
   }
 
   login() {
@@ -143,10 +145,16 @@ export class HomeComponent implements OnInit {
       this.fileService.getToken(this.user).subscribe(
         (token) => {
           localStorage.setItem('token', JSON.stringify(token));
+          let scopes = this.fileService.getScopesFromToken();
           if (this.fileService.redirectUrl !== undefined) {
             this.router.navigateByUrl(this.fileService.redirectUrl);
           } else {
-            this.router.navigateByUrl('cust/shop');
+            if (scopes === 'ROLE_ADMIN') {
+              console.log(scopes);
+              this.router.navigateByUrl('admin/add');
+            } else {
+              this.router.navigateByUrl('cust/shop');
+            }
           }
           alertify.success('Login success');
         },

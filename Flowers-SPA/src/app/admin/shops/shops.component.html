@@ -1,72 +1,81 @@
-<app-admin-nav></app-admin-nav>
-<div class="row">
-  <h2 style="margin-left:7%; margin-top: 2%;">Add a shop</h2>
-  <div class="col-sm-3 m-5">
-    <form (ngSubmit)="onShopManageClicked()" #addShopForm="ngForm">
-      <div class="form-group">
-        <label for="name"> Name</label>
-        <input type="text" [(ngModel)]="shopName" #nameFeild="ngModel" name="name" class="form-control" id="name" placeholder="Enter shop name" required>
-         <small *ngIf="nameFeild.touched && !nameFeild.valid"> Enter Shop name</small>
-      </div>
-      <div class="form-group">
-       <label for="price"> City</label>
-       <input type="text" [(ngModel)]="shopCity" #cityFeild="ngModel" name="city" class="form-control" id="city" placeholder="Enter shop city" required>
-       <small *ngIf="cityFeild.touched && !cityFeild.valid"> Enter shop city</small>
-       </div>
-      <div class="form-group">
-        <label for="description"  required="required">Country</label>
-        <input type="text" [(ngModel)]="shopCountry" #countryFeild="ngModel" name="country" class="form-control" id="country" placeholder="Enter shop country" required>
-        <small *ngIf="countryFeild.touched && !countryFeild.valid"> Enter shop country</small>
-      </div>
+<body>
+  <app-admin-nav></app-admin-nav>
 
-      <div class="form-group">
-        <label for="description"  required="required">Address</label>
-        <input type="text" [(ngModel)]="shopAddress" #addressFeild="ngModel" name="address" class="form-control" id="address" placeholder="enter shop address" required>
-        <small *ngIf="addressFeild.touched && !addressFeild.valid"> Enter shop address</small>
-      </div>
+  <div class="row">
+    <h2 style="margin-left:7%; margin-top: 2%;">Add a shop</h2>
+    <div class="col-sm-12 col-md-3 m-sm-3 m-md-5">
+      <form (ngSubmit)="onShopManageClicked()" #addShopForm="ngForm">
+        <div class="form-group">
+          <label for="name"> Name</label>
+          <input type="text" [(ngModel)]="shopName" #nameFeild="ngModel" name="name" class="form-control" id="name"
+            placeholder="Enter shop name" required>
+          <small *ngIf="nameFeild.touched && !nameFeild.valid"> Enter Shop name</small>
+        </div>
+        <div class="form-group">
+          <label for="price"> City</label>
+          <input type="text" [(ngModel)]="shopCity" #cityFeild="ngModel" name="city" class="form-control" id="city"
+            placeholder="Enter shop city" required>
+          <small *ngIf="cityFeild.touched && !cityFeild.valid"> Enter shop city</small>
+        </div>
+        <div class="form-group">
+          <label for="description" required="required">Country</label>
+          <input type="text" [(ngModel)]="shopCountry" #countryFeild="ngModel" name="country" class="form-control"
+            id="country" placeholder="Enter shop country" required>
+          <small *ngIf="countryFeild.touched && !countryFeild.valid"> Enter shop country</small>
+        </div>
 
-      <div class="form-group">
-        <label for="description"  required="required">Contact</label>
-        <input type="number" (input)="contactChanged($event)" [(ngModel)]="shopContact" maxlength="10" #contactFeild="ngModel" name="contact" maxlength="10" class="form-control" id="contact" placeholder="enter shop contact" required>
-        <small *ngIf="contactFeild.touched && !contactFeild.valid"> Enter shop contact</small>
-        <small *ngIf="contactFeild.touched && !contactInvalid"> Enter valid contact</small>
-      </div>
+        <div class="form-group">
+          <label for="description" required="required">Address</label>
+          <input type="text" [(ngModel)]="shopAddress" #addressFeild="ngModel" name="address" class="form-control"
+            id="address" placeholder="enter shop address" required>
+          <small *ngIf="addressFeild.touched && !addressFeild.valid"> Enter shop address</small>
+        </div>
 
-      <div class="form-group">
-        <label for="categoty">Is shop open</label>
-        <select [(ngModel)]="isOpen" #isOpenFeild="ngModel" placeholder="select" class="form-control" id="isOpen" name="isOpen" required>
-         <option value="">Please select if shop is Open</option>
-          <option value="open">Open</option>
-          <option value="closed">Closed</option>
-        </select>
-        <small *ngIf="isOpenFeild.touched && !isOpenFeild.valid"> Enter this category</small>
-      </div>
-      <div class="form-group mt-3">
-        <label class="mr-2">Upload shop photo:</label>
-        <input (change)="onFileChanged($event)" type="file" accept="image/*" name="file">
-      </div>
-      <hr>
-      <button [disabled]="!addShopForm.valid" type="submit" class="btn btn-primary">Manage</button>
-    </form>
-  </div>
+        <div class="form-group">
+          <label for="description" required="required">Contact</label>
+          <input type="number" (input)="contactChanged($event)" [(ngModel)]="shopContact" maxlength="10"
+            #contactFeild="ngModel" name="contact" maxlength="10" class="form-control" id="contact"
+            placeholder="enter shop contact" required>
+          <small *ngIf="contactFeild.touched && !contactFeild.valid"> Enter shop contact</small>
+          <small *ngIf="contactFeild.touched && !contactInvalid"> Enter valid contact</small>
+        </div>
 
-  <div class="col-md-7 mt-5">
-    <div class="row">
-      <div class="col " *ngFor="let shop of shops">
-        <div class="card mb-3" style="width: 18rem;" >
-          <img class="card-img-top" width="150" height="250"
-            [src]="shop.imageUrl" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title"> {{shop.shopName}}</h5>
-            <p class="card-text">{{shop.shopAddress}}</p>
-            <p class="card-text">{{shop.shopCity}}</p>
-          </div>
-          <div class="card-body">
-            <a href="#" class="card-link">{{shop.shopContact}}</a>
+        <div class="form-group">
+          <label for="categoty">Is shop open</label>
+          <select [(ngModel)]="isOpen" #isOpenFeild="ngModel" placeholder="select" class="form-control" id="isOpen"
+            name="isOpen" required>
+            <option value="">Please select if shop is Open</option>
+            <option value="open">Open</option>
+            <option value="closed">Closed</option>
+          </select>
+          <small *ngIf="isOpenFeild.touched && !isOpenFeild.valid"> Enter this category</small>
+        </div>
+        <div class="form-group mt-3">
+          <label class="mr-2">Upload shop photo:</label>
+          <input (change)="onFileChanged($event)" type="file" accept="image/*" name="file">
+        </div>
+        <hr>
+        <button [disabled]="!addShopForm.valid" type="submit" class="btn btn-primary">Manage</button>
+      </form>
+    </div>
+
+    <div class="col-md-7 col-sm-12 m-5">
+      <div class="row">
+        <div class="col " *ngFor="let shop of shops">
+          <div class="card mb-3" style="width: 18rem;">
+            <img class="card-img-top" width="150" height="250" [src]="shop.imageUrl" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"> {{shop.shopName}}</h5>
+              <p class="card-text">{{shop.shopAddress}}</p>
+              <p class="card-text">{{shop.shopCity}}</p>
+            </div>
+            <div class="card-body">
+              <a href="#" class="card-link">{{shop.shopContact}}</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-</div>
+  </div>
+</body>

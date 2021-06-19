@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -40,12 +39,12 @@ public class FlowersModel {
     private List<SalesModel> sales;
 	
 	@JsonIgnore
-	@OneToOne(mappedBy = "flower",  cascade ={CascadeType.DETACH, CascadeType.REMOVE})
-    private ReportsModel reports;
+	@OneToMany(mappedBy = "flower",  cascade ={CascadeType.DETACH, CascadeType.REMOVE})
+    private List<ReportsModel> reports;
 	
 	@JsonIgnore
-	@OneToOne(mappedBy = "flower", cascade ={CascadeType.DETACH, CascadeType.REMOVE})
-    private DWMReportsModel dwmReports;
+	@OneToMany(mappedBy = "flower", cascade ={CascadeType.DETACH, CascadeType.REMOVE})
+    private List<DWMReportsModel> dwmReports;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "flower", cascade ={CascadeType.DETACH, CascadeType.REMOVE})
@@ -175,25 +174,28 @@ public class FlowersModel {
 
 
 
-	public ReportsModel getReports() {
+	
+
+
+	public List<ReportsModel> getReports() {
 		return reports;
 	}
 
 
 
-	public void setReports(ReportsModel reports) {
+	public void setReports(List<ReportsModel> reports) {
 		this.reports = reports;
 	}
 
 
 
-	public DWMReportsModel getDwmReports() {
+	public List<DWMReportsModel> getDwmReports() {
 		return dwmReports;
 	}
 
 
 
-	public void setDwmReports(DWMReportsModel dwmReports) {
+	public void setDwmReports(List<DWMReportsModel> dwmReports) {
 		this.dwmReports = dwmReports;
 	}
 

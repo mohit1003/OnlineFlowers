@@ -1,35 +1,23 @@
 package com.online.flowers.service;
 
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.zip.DataFormatException;
-import java.util.zip.Deflater;
-import java.util.zip.Inflater;
 
 import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.online.flowers.dto.Message;
 import com.online.flowers.model.FlowersModel;
-import com.online.flowers.model.ShopModel;
 import com.online.flowers.repo.CategoryWiseReportsRepo;
-import com.online.flowers.repo.CustomerRepo;
 import com.online.flowers.repo.DWMReportRepo;
 import com.online.flowers.repo.FlowersRepo;
 import com.online.flowers.repo.ReportRepo;
 import com.online.flowers.repo.SalesRepo;
-import com.online.flowers.repo.ShopRepo;
 
 @Service
 public class FlowersService {

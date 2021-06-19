@@ -1,5 +1,7 @@
+import { Flower } from "./Flower";
+
 export class CartModel {
-  id: string;
-  count: number = 1;
-  origPrice: number = 1;
+  count: number = 0;
+  total: number = 0;
+  flowers: Flower[] = [];
 }

@@ -11,9 +11,14 @@ import { FileService } from 'src/app/_service/FileService';
 })
 export class AdminNavComponent implements OnInit {
   modalRef!: BsModalRef;
+  isNavbarExpanded: boolean = false;
   constructor(private fileService: FileService) { }
 
   ngOnInit(): void {
+  }
+
+  navbarToggler() {
+    this.isNavbarExpanded = !this.isNavbarExpanded
   }
 
   logout(){

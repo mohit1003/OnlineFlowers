@@ -4,13 +4,11 @@ import { CartModel } from './../../_model/CartModel';
 import { Observable } from 'rxjs/Observable';
 import { Flower } from './../../_model/Flower';
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import * as FlowerActions from '../../_actions/Flower.action';
-import { DataService } from 'src/app/_service/CartService';
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { FileService } from 'src/app/_service/FileService';
 import { HttpResponse } from '@angular/common/http';
 import * as alertify from 'alertifyjs';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule, FaIconLibrary  } from '@fortawesome/angular-fontawesome';
 
 interface AppState {
   flower: Flower[];
@@ -23,10 +21,14 @@ interface AppState {
 })
 export class CartComponent implements OnInit {
   flower: Observable<Flower[]>;
-  flowersAddedIncart: Flower[];
+  cart: CartModel;
+  flowersInCart: Flower[] = [];
   cartModelForDuplicates: CartModel[] = [];
   filteredFlowersToAddCount: Flower[] = [];
   flowerToAdd: Flower;
+
+  faPlus = faPlus;
+  faMinus = faMinus;
 
   cartTotal: number = 0;
 
@@ -36,52 +38,29 @@ export class CartComponent implements OnInit {
 
   customer: User;
 
-  total: number = 0;
+  cartCount: number = 0;
 
-  constructor(
-    private store: Store<AppState>,
-    private dataService: DataService,
-    private fileService: FileService
-  ) {
-    // this.flower = store.select('flower');
+  constructor(private fileService: FileService, library: FaIconLibrary) {
+    library.addIcons(faPlus);
+    library.addIcons(faMinus)
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem('cartItem') !== null) {
-      this.flowersAddedIncart = JSON.parse(localStorage.getItem('cartItem'));
-      this.flowersAddedIncart.forEach((flower) => {
-        if (localStorage.getItem(flower.id) !== null) {
-          this.cartModelForDuplicates = JSON.parse(
-            localStorage.getItem(flower.id)
-          );
-          this.cartModelForDuplicates.forEach((incrementFactorFlower) => {
-            if (incrementFactorFlower.id === flower.id) {
-              flower.count = incrementFactorFlower.count;
-              this.flowerToAdd = Object.assign(flower);
 
-              var price: number = incrementFactorFlower.origPrice;
-              this.flowerToAdd.price = (
-                incrementFactorFlower.count * price
-              ).toString();
-              this.filteredFlowersToAddCount.push(this.flowerToAdd);
-            } else {
-              this.filteredFlowersToAddCount.push(flower);
-            }
-          });
-        }
-      });
+    this.resetCartTotal();
+    if (localStorage.getItem('cartItem')) {
+      this.cart = JSON.parse(localStorage.getItem('cartItem'));
+      if(this.cart.count < 0) {
+        this.resetCartTotal();
+        localStorage.removeItem('cartItem')
+      }
+      this.cartTotal = this.cart.total;
+      this.flowersInCart = Object.assign(this.cart.flowers);
+      this.cartCount = this.cart.count;
+      this.proceedBuy();
     }
-    this.calculateTotal();
-    this.proceedBuy();
-    this.checkoutButtonClicked = false;
-  }
 
-  calculateTotal() {
-    this.flowersAddedIncart.forEach((flowers) => {
-      this.total += +flowers.price;
-      this.cartTotal += flowers.count;
-    });
-    localStorage.setItem('cartTotal', this.cartTotal.toString());
+    this.checkoutButtonClicked = false;
   }
 
   proceedBuy() {
@@ -101,14 +80,14 @@ export class CartComponent implements OnInit {
         (data) => {
           alertify.success('Payment Successful');
           localStorage.removeItem('cartTotal');
-          this.flowersAddedIncart.forEach((flower) => {
+          this.flowersInCart.forEach((flower) => {
             this.deleteFromCart(flower);
           });
         },
         (err) => {
           if (err.status === 201) {
             alertify.success('Payment Successful');
-            this.flowersAddedIncart.forEach((flower) => {
+            this.flowersInCart.forEach((flower) => {
               this.deleteFromCart(flower);
             });
           } else {
@@ -117,14 +96,19 @@ export class CartComponent implements OnInit {
         }
       );
     }
+    this.resetCartTotal();
+  }
+
+  resetCartTotal() {
+    if(this.cartTotal < 0){
+      this.cartTotal = 0;
+    }
   }
 
   buildTransaction() {
     this.sales = new Transaction();
     this.sales.customerModel = this.customer;
-    this.sales.flowersModel = this.flowersAddedIncart;
-
-    console.log(this.sales);
+    this.sales.flowersModel = this.flowersInCart;
   }
 
   resetCheckout() {
@@ -132,11 +116,17 @@ export class CartComponent implements OnInit {
   }
 
   deleteFromCart(flower: Flower) {
-    localStorage.removeItem(flower.id);
-    this.flowersAddedIncart = this.flowersAddedIncart.filter(
+    this.flowersInCart = this.flowersInCart.filter(
       (flowerToRemove) => flowerToRemove.id !== flower.id
     );
-    this.total -= +flower.price;
-    this.dataService.changeState(this.flowersAddedIncart);
+
+    this.cart.total -= +flower.price;
+    this.cart.count -= flower.count;
+    this.cartCount -= flower.count;
+    this.cartTotal = this.cart.total;
+    this.cart.flowers = this.flowersInCart;
+    this.resetCartTotal();
+    localStorage.setItem('cartItem', JSON.stringify(this.cart));
   }
+
 }

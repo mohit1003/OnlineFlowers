@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light container">
   <a class="navbar-brand"[routerLink]="['admin/add']">Flowers | Admin</a>
-  <button class="navbar-toggler" type="button">
+  <button class="navbar-toggler" (click)="navbarToggler()" type="button">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <div class="collapse navbar-collapse" id="navbarNav" [ngClass]= "{'show' : isNavbarExpanded }">
     <ul class="navbar-nav container">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" [routerLink]="['/admin/add']" [routerLinkActive]="['active']" >Add</a>
       </li>
       <li class="nav-item">

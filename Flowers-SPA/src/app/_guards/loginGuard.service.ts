@@ -5,7 +5,7 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+
 import { FileService } from '../_service/FileService';
 
 import * as alertify from 'alertifyjs';

@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { flowerReducer } from '../_reducers/Flower.reducer';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -32,7 +34,9 @@ import { flowerReducer } from '../_reducers/Flower.reducer';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     RouterModule,
+    TabsModule.forRoot(),
     StoreModule.forRoot({
       flower: flowerReducer
     })

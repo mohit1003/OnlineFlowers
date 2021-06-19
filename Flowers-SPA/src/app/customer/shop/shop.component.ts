@@ -23,7 +23,7 @@ export class ShopComponent implements OnInit {
 
   flowers: Flower[];
   flowersInCategory: Flower[];
-  flowersInCart: Flower[] = [];
+  flowersInCart: CartModel;
   filteredFlowersForDuplicateCheck: Flower[] = [];
 
   cartModelForDuplicates: CartModel[] = [];
@@ -32,6 +32,9 @@ export class ShopComponent implements OnInit {
   cartCount: number = 0;
 
   flower: Observable<Flower[]>;
+
+  isSideNavOpen:boolean = false;
+  classForSideNav:string = 'mySidenavClosed';
 
   constructor(
     private fileService: FileService,
@@ -44,8 +47,21 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    localStorage.getItem('cartTotal') ? this.cartCount = +localStorage.getItem('cartTotal') : this.cartCount = 0;
+    if(localStorage.getItem('cartItem')){
+      let cart = Object.assign({}, JSON.parse(localStorage.getItem('cartItem')));
+      this.cartCount = cart.count;
+
+    }
     this.getAllFlowers();
+  }
+
+
+  openNav() {
+    document.getElementById("shopFilterNav").style.width = "250px";
+  }
+
+  closeNav() {
+    document.getElementById("shopFilterNav").style.width = "0";
   }
 
   getBirthdayFlowers() {
@@ -53,6 +69,7 @@ export class ShopComponent implements OnInit {
     this.flowersInCategory = this.flowersInCategory.filter(
       (flower) => flower.category === 'birthday'
     );
+    this.closeNav();
   }
 
   getGrandOpeningFlowers() {
@@ -60,6 +77,7 @@ export class ShopComponent implements OnInit {
     this.flowersInCategory = this.flowersInCategory.filter(
       (flower) => flower.category === 'grandOpening'
     );
+    this.closeNav();
   }
 
   getSympathyFlowers() {
@@ -67,6 +85,7 @@ export class ShopComponent implements OnInit {
     this.flowersInCategory = this.flowersInCategory.filter(
       (flower) => flower.category === 'sympathy'
     );
+    this.closeNav();
   }
 
   getLoveFlowers() {
@@ -74,6 +93,7 @@ export class ShopComponent implements OnInit {
     this.flowersInCategory = this.flowersInCategory.filter(
       (flower) => flower.category === 'love'
     );
+    this.closeNav();
   }
 
   getMarriageFlowers() {
@@ -81,6 +101,7 @@ export class ShopComponent implements OnInit {
     this.flowersInCategory = this.flowersInCategory.filter(
       (flower) => flower.category === 'marriage'
     );
+    this.closeNav();
   }
 
   getAllFlowers() {
@@ -89,6 +110,7 @@ export class ShopComponent implements OnInit {
         this.flowers = Object.assign(data);
         this.flowersInCategory = this.flowers;
         // console.log(this.flowers);
+        this.closeNav();
       },
       (err) => {
         console.log(err);
@@ -103,58 +125,36 @@ export class ShopComponent implements OnInit {
       this.router.navigateByUrl('cust/cart');
     }
     if(localStorage.getItem('cartItem')){
-      this.flowersInCart = Object.assign([], JSON.parse(localStorage.getItem('cartItem')))
+      this.flowersInCart = Object.assign({}, JSON.parse(localStorage.getItem('cartItem')))
     }
-    this.filteredFlowersForDuplicateCheck = this.flowersInCart.filter(
-      (cartFlower) => cartFlower.id == flower.id
-    );
-    if (this.filteredFlowersForDuplicateCheck.length > 0) {
-      this.filteredFlowersForDuplicateCheck.forEach((filteredFlower) => {
-        if (localStorage.getItem(filteredFlower.id) === null) {
-          this.cartModelItem = null;
-          this.cartModelItem = new CartModel();
-          this.cartModelItem.id = filteredFlower.id;
-          this.cartModelItem.count = 2;
-          this.cartCount += 1;
-          this.cartModelItem.origPrice = +flower.price;
-          this.cartModelForDuplicates.push(this.cartModelItem);
-          localStorage.setItem(
-            flower.id,
-            JSON.stringify(this.cartModelForDuplicates)
-          );
-
-        } else if (localStorage.getItem(filteredFlower.id) !== null) {
-          this.cartModelItem = null;
-          this.cartModelItem = new CartModel();
-          this.cartModelItem = Object.assign(JSON.parse(
-            localStorage.getItem(filteredFlower.id)
-          ));
-          this.cartModelItem[0].count += 1;
-          this.cartCount += 1;
-          this.cartModelItem[0].origPrice = +flower.price;
-          this.cartModelForDuplicates.push(this.cartModelItem);
-          localStorage.setItem(
-            filteredFlower.id,
-            JSON.stringify(this.cartModelForDuplicates[0])
-          );
-
-        } else {
-          alertify.error('Error in cart data');
-        }
-      });
-    } else {
-      this.cartCount += 1;
-      this.flowersInCart.push(flower);
+    // Flower does not present in the cart and need to add as a new one
+    if(this.flowersInCart === undefined) {
+      this.flowersInCart = new CartModel();
+      flower.count = 1;
+      this.flowersInCart.flowers.push(flower);
+    }
+    //Flower already there in cart and needed to be updated
+    else if(this.flowersInCart.flowers !== undefined && this.flowersInCart.flowers.some(flowerInCart => flowerInCart.id === flower.id)){
+      let flowerToEdit:Flower = this.flowersInCart.flowers.find(flowerInCart => flowerInCart.id === flower.id);
+      flowerToEdit.count += 1;
+      flowerToEdit.price = (parseInt(flowerToEdit.price) + parseInt(flower.price)).toString();
+      let index:number = this.flowersInCart.flowers.findIndex(flowerToFind => flowerToFind.id === flower.id);
+      this.flowersInCart.flowers[index] = Object.assign({}, flowerToEdit);
+      this.flowersInCart = Object.assign({}, this.flowersInCart);
+    }
+    // New flower to be added and cart is not empty
+    else {
+      flower.count = 1;
+      this.flowersInCart.flowers.push(flower);
     }
 
-    localStorage.setItem('cartItem', JSON.stringify(this.flowersInCart));
-    // this.dataService.changeState(this.flowersInCart);
-    alertify.success("Added to cart")
-    setTimeout(() => {
-      this.showLoader = false;
-    }, 1500);
+    this.flowersInCart.total = parseInt(flower.price) + this.flowersInCart.total;
+    this.flowersInCart.count += 1;
+    let flowerToAdd  = JSON.stringify(this.flowersInCart);
+    this.cartCount = this.flowersInCart.count;
+    localStorage.setItem('cartItem', flowerToAdd);
 
-    //this.store.dispatch(new FlowerActions.AddtoCart(this.flowersInCart));
+    this.showLoader = false;
     }
 
 }

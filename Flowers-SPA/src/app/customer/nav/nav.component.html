@@ -1,16 +1,14 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light">
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Toggle button -->
-    <button
-      class="navbar-toggler"
-      type="button">
-      <i class="fas fa-bars"></i>
+    <button class="float-right" class="navbar-toggler float-right" (click)="navbarToggler()" type="button">
+      <span class="navbar-toggler-icon"></span>
     </button>
 
     <!-- Collapsible wrapper -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]= "{'show' : isNavbarExpanded }">
       <!-- Navbar brand -->
       <a class="navbar-brand mt-2 mt-lg-0" href="#">
        Flowers
@@ -19,10 +17,10 @@
       <ul class="navbar-nav mr-auto">
         <li class="list-inline-item">
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/cust/shop']" routerLinkActive="router-link-active text-bold" >Shop</a>
+            <a class="nav-link" [routerLink]="['/cust/shop']" [routerLinkActive]="['active']" >Shop</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/cust/cart']" routerLinkActive="router-link-active text-bold" >Cart<a style="margin: 0px; padding: 0px" *ngIf="shoppingCartCount !== undefined"> ({{shoppingCartCount}})</a></a>
+            <a class="nav-link" [routerLink]="['/cust/cart']" [routerLinkActive]="['active']" >Cart<a style="margin: 0px; padding: 0px" *ngIf="shoppingCartCount !== undefined"> ({{shoppingCartCount}})</a></a>
           </li>
       </ul>
       <ul class="navbar-nav" *ngIf="isLoggedIn">
@@ -41,16 +39,15 @@
 
       <!-- Notifications -->
 
-        <img *ngIf="isLoggedIn"
+        <!-- <img *ngIf="isLoggedIn"
           src="https://mdbootstrap.com/img/new/avatars/2.jpg"
           class="rounded-circle"
           height="25"
           alt=""
           loading="lazy"
-        />
+        /> -->
       <ul
         class="dropdown-menu dropdown-menu-end"
-        aria-labelledby="navbarDropdownMenuLink"
       >
         <li>
           <a class="dropdown-item" href="#">My profile</a>

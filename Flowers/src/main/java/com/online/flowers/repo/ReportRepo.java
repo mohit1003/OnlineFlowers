@@ -11,13 +11,13 @@ public interface ReportRepo extends JpaRepository<ReportsModel, Integer> {
 	@Query(value = "SELECT * FROM reports_model WHERE flower_id_fk = ?1", nativeQuery = true)
 	public ReportsModel findByFlowerId(int flowerId);
 	
-	@Query(value = "SELECT * , SUM(quantity) AS total "
+	@Query(value = "SELECT * , SUM(price) AS total "
 			+ "FROM reports_model "
 			+ "GROUP BY id "
 			+ "ORDER BY total DESC LIMIT 1 ", nativeQuery = true)
 	public ReportsModel findMostSoldProduct();
 	
-	@Query(value = "SELECT * , SUM(quantity) AS total "
+	@Query(value = "SELECT * , SUM(price) AS total "
 			+ "FROM reports_model "
 			+ "GROUP BY id "
 			+ "ORDER BY total LIMIT 1 ", nativeQuery = true)
