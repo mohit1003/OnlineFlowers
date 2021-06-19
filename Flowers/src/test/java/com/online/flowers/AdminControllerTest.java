@@ -7,16 +7,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.online.flowers.controller.AdminController;
 
+@SpringBootTest
+@RunWith(SpringRunner.class)
 public class AdminControllerTest {
 	
 	@MockBean
 	private AdminController _adminController;
+	
+	@BeforeAll
+	public static void setUp() {
+		TestData.setUp();
+	}
+
 	
 	@Test
 	public void saveFlowerImage() {
@@ -58,5 +71,10 @@ public class AdminControllerTest {
 		
 		assertEquals(new ResponseEntity<String>("Shop added successfully", HttpStatus.CREATED), _adminController.addShop(TestData.getFile(), "deligho", "India", "India", "123, east lane", "open", "9373774634"));
 	}
-
+	
+	@AfterAll
+	public static void cleanUp() {
+		TestData.cleanUp();
+	}
 }
+

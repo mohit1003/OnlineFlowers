@@ -4,16 +4,29 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.online.flowers.controller.NoAuthController;
 
+@SpringBootTest
+@RunWith(SpringRunner.class)
 public class NoAuthControllerTest {
 	
 	@MockBean
 	private NoAuthController _noAuthController;
+	
+	@BeforeAll
+	public static void setUp() {
+		TestData.setUp();
+	}
+
 	
 	@Test
 	public void registerUserTest() {
@@ -46,4 +59,9 @@ public class NoAuthControllerTest {
 		assertEquals(TestData.getShopList(), _noAuthController.getShop());
 	}
 
+	@AfterAll
+	public static void cleanUp() {
+		TestData.cleanUp();
+	}
 }
+
